@@ -5,7 +5,6 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -84,6 +83,7 @@ public class HomePage extends Page {
         VBox coursesPane = new VBox();
         Text coursesBanner = new Text("My Courses:");
         coursesBanner.setFont(Font.font("AnjaliOldLipi", FontWeight.BOLD, FontPosture.REGULAR, 20));
+
 
         coursesPane.getChildren().add(coursesBanner);
 

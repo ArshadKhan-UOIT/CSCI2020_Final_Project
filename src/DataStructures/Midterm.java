@@ -8,7 +8,7 @@ public class Midterm implements Runnable {
     private String weight;
     private double mark;
 
-    public Midterm() {
+    public Midterm(String[] strings) {
 
     }
 

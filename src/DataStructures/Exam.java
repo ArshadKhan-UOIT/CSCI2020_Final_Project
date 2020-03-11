@@ -8,7 +8,7 @@ public class Exam implements Runnable {
     private String weight;
     private double mark;
 
-    public Exam() {
+    public Exam(String[] strings) {
 
     }
 

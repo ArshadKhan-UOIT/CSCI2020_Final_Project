@@ -5,9 +5,10 @@ public class Assignment implements Runnable {
 
     private String name;
     private String dueDate;
+
     private double mark;
 
-    public Assignment() {
+    public Assignment(String[] strings) {
 
     }
 
