@@ -1,3 +1,4 @@
+import CSV.CSVChanger;
 import javafx.animation.FadeTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -13,6 +14,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class startup extends Application {
 
@@ -38,6 +42,11 @@ public class startup extends Application {
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(titleBox,300, 300, Color.BLACK));
         primaryStage.show();
+
+        CSVChanger.read("courses.csv");
+        List<Object[]> data = new ArrayList<>();
+        data.add(new Object[]{"Software Systems", "Mario", "CSCI2020, Monday and Tuesday,3:40-5pm"});
+        CSVChanger.write("courses.csv",data);
 
         //text fade in then out
         FadeTransition ft = new FadeTransition(Duration.millis(3000), banner);
