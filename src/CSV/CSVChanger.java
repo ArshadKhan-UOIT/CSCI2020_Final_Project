@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CSVChanger {
 
-        public static List<String[]> read(String fileName, int numArgs) {
+        public static List<String[]> read(String fileName) {
             List<String[]> data = null;
             try {
                 Reader read = Files.newBufferedReader(Paths.get("DataFiles/" + fileName));
@@ -22,18 +22,7 @@ public class CSVChanger {
                 Iterable<CSVRecord> info = CSVFormat.DEFAULT.parse(read);
 
                 for (CSVRecord record : info) {
-                    if (numArgs == 5) {//for courses
-                        data.add(new String[]{record.get(0), record.get(1), record.get(2),record.get(3),record.get(4)});
-
-                    }
-                    else if (numArgs == 4) { //for assignments
-                        data.add(new String[]{record.get(0), record.get(1), record.get(2),record.get(3),record.get(4)});
-
-                    }
-                    else if (numArgs == 6) { //for assignments
-                        data.add(new String[]{record.get(0), record.get(1), record.get(2),record.get(3),record.get(4),record.get(5)});
-
-                    }
+                    data.add(new String[]{record.get(0), record.get(1), record.get(2),record.get(3),record.get(4),record.get(5)});
                 }
 
             } catch (IOException e) {
