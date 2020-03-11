@@ -17,12 +17,15 @@ public class CoursesPage extends Page {
         for (int i=0; i< Window.courses.length;i++) {
             b[i] = new Button(Window.courses[i].getCourseName());
             buttons.getChildren().add(b[i]);
+            System.out.println(Window.courses[i]);
+
         }
 
 
             mainPane.add(buttons,0,0);
     }
 
-
+    public static void main(String[] args) {
+    }
 
 }
