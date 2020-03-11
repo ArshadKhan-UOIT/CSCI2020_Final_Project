@@ -1,5 +1,7 @@
 package Pages;
 
+import DataStructures.Course;
+import Windows.Window;
 import javafx.geometry.Pos;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -12,6 +14,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class HomePage extends Page {
@@ -72,6 +76,25 @@ public class HomePage extends Page {
         VBox schedulePane = new VBox();
         Text scheduleBanner = new Text("Schedule:");
         scheduleBanner.setFont(Font.font("AnjaliOldLipi", FontWeight.BOLD, FontPosture.REGULAR, 20));
+
+
+        // Find the day from the local date
+        LocalDate date = LocalDate.now();
+        DayOfWeek dayOfWeek= DayOfWeek.from(date);
+
+//        System.out.println(dayOfWeek);
+
+        //Find courses with date equal to current day of the week
+        for (Course c: Window.courses) {
+            String courseDays = c.getDays();
+            String currentDay = String.valueOf(dayOfWeek);
+            for (int i=0;i< courseDays.length();i++) {
+                if (currentDay.equalsIgnoreCase(String.valueOf(courseDays.charAt(i)))) {
+                    Text entry = new Text(c.getCourseName()+ " " + c.getTime());
+                }
+            }
+
+        }
 
         schedulePane.getChildren().add(scheduleBanner);
         return schedulePane;

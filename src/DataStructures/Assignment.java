@@ -11,8 +11,8 @@ public class Assignment {
         courseCode = code;
         assignmentName = name;
         dueDate = date;
-        weight = weight;
-        mark = mark;
+        this.weight = weight;
+        this.mark = mark;
     }
 
     @Override

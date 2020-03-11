@@ -1,10 +1,7 @@
 package Windows;
 
 import CSV.CSVChanger;
-import DataStructures.Assignment;
 import DataStructures.Course;
-import DataStructures.Exam;
-import DataStructures.Midterm;
 import javafx.animation.FadeTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -20,6 +17,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
 import java.util.List;
 /*
  * The Windows.startup class is for loading all the required information for when the window is displayed.
@@ -60,10 +58,10 @@ public class startup extends Application {
         ft.setAutoReverse(true);
         ft.play();
 
-        Thread.sleep(4000);
+//        Thread.sleep(4000);
 
         //initialize courses from csv
-        List<String[]> data = CSVChanger.read("courses.csv",5);
+        List<String[]> data = CSVChanger.read("courses.csv");
         Course[] courses = new Course[data.size()];
         for (int i=0; i < data.size(); i++) {
             courses[i] = new Course(data.get(i));

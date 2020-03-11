@@ -18,6 +18,7 @@ public class Course {
     private String courseCode;
     private String days;
     private String time;
+    private  String location;
 
     private List<Assignment> assignments;
     private List<Midterm> midterms;
@@ -29,6 +30,7 @@ public class Course {
         this.courseCode = course[2];
         this.days = course[3];
         this.time = course[4];
+        this.location = course[5];
         assignments = makeAssignments();
         midterms = makeMidterms();
         exam = makeExam();
@@ -143,6 +145,7 @@ public class Course {
                 ", courseCode='" + courseCode + '\'' +
                 ", days='" + days + '\'' +
                 ", time='" + time + '\'' +
+                ", location='" + location + '\'' +
                 ", \nassignments=" + assignments +
                 ", \nmidterms=" + midterms +
                 ", \nexam=" + exam +
