@@ -31,12 +31,12 @@ public class HomePage extends Page {
 
         //(0,0) = To do
         //(0,1) = Schedule
-        //(1,0) = My Classes
+        //(1,0) = My Courses
         //(1,1) = My Grades
         //add everything to the main pane
         mainPane.add(createToDo(),0,0);
         mainPane.add(createSchedule(),0,1);
-        mainPane.add(createMyClasses(),1,0);
+        mainPane.add(createMyCourses(),1,0);
         mainPane.add(createMyGrades(),1,1);
 
 
@@ -78,16 +78,16 @@ public class HomePage extends Page {
     }
 
 
-    //method to initialize My Classes section
-    public Pane createMyClasses() {
-        //My Classes pane
-        VBox classesPane = new VBox();
-        Text classesBanner = new Text("My Classes:");
-        classesBanner.setFont(Font.font("AnjaliOldLipi", FontWeight.BOLD, FontPosture.REGULAR, 20));
+    //method to initialize My Courses section
+    public Pane createMyCourses() {
+        //My Courses pane
+        VBox coursesPane = new VBox();
+        Text coursesBanner = new Text("My Courses:");
+        coursesBanner.setFont(Font.font("AnjaliOldLipi", FontWeight.BOLD, FontPosture.REGULAR, 20));
 
-        classesPane.getChildren().add(classesBanner);
+        coursesPane.getChildren().add(coursesBanner);
 
-        return classesPane;
+        return coursesPane;
     }
 
 
@@ -131,7 +131,7 @@ public class HomePage extends Page {
     }
 
     public void getGrades() throws FileNotFoundException {
-        //open file, get grades, return grades and classes
+        //open file, get grades, return grades and courses
         File gradeFile = new File("DataFiles/grades.csv");
         Scanner input;
         if (gradeFile.exists()) {

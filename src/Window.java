@@ -1,3 +1,4 @@
+import DataStructures.Course;
 import Pages.GradesPage;
 import Pages.HomePage;
 import javafx.application.Application;
@@ -12,13 +13,18 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /*
- * This Class is for the main window that will be displayed on screen at all times.
+ * This class is for the main window that will be displayed on screen at all times.
  * When a button is pressed the window its does not change but the center of the border pane is changed to the page
  * corresponding to the button
  */
 public class Window extends Application {
 
     public static void main(String[] args) {
+//        Runnable c1 = new Course();
+        //create threads for each course specified in courses.csv file
+//        Thread course1 = new Thread(c1);
+
+
         launch(args);
     }
 
@@ -30,9 +36,8 @@ public class Window extends Application {
         HBox topPane = new HBox();
 //        mainPane.setPadding(new Insets(screen.getHeight()*0.1,screen.getWidth()*0.05,screen.getHeight()*0.05,screen.getWidth()*0.05));
 
-        //TODO: make buttons into array
         Button b1 = new Button("Home");
-        Button b2 = new Button("My Classes");
+        Button b2 = new Button("My Courses");
         Button b3 = new Button("Schedule");
         Button b4 = new Button("To Do");
         Button b5 = new Button("My Grades");
@@ -45,7 +50,7 @@ public class Window extends Application {
         b1.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Home"));
 
         b2.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
-        b2.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Classes"));
+        b2.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Courses"));
 
         b3.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
         b3.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Schedule"));
@@ -91,8 +96,8 @@ public class Window extends Application {
             pane.setCenter(home.getMainPane());
 
         }
-        else if (page.equals("Classes")) {
-            stage.setTitle("My Classes");
+        else if (page.equals("Courses")) {
+            stage.setTitle("My Courses");
             //
             pane.setCenter(new TextArea());
 

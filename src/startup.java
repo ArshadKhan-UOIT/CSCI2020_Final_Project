@@ -28,8 +28,6 @@ public class startup extends Application {
         banner.setUnderline(true);
         banner.setFont(Font.font("AnjaliOldLipi", FontWeight.BOLD, FontPosture.REGULAR, 50));
 
-
-
         primaryStage.setTitle("Course Content");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(titleBox,300, 300));
@@ -42,12 +40,5 @@ public class startup extends Application {
         ft.setCycleCount(Timeline.INDEFINITE);
         ft.setAutoReverse(true);
         ft.play();
-
-        //wait while everything is loading the
-        //close this window and open homepage
-//        Thread.sleep(4000);
-//        Homepage home = new Homepage();
-//        home.start(new Stage());
-
     }
 }
