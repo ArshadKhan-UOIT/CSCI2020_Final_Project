@@ -25,15 +25,15 @@ import javafx.stage.Stage;
  */
 public class Window extends Application {
     public static Course[] courses;
-    public Assignment[] assignments;
-    public Midterm[] midterms;
-    public Exam[] exams;
+//    public Assignment[] assignments;
+//    public Midterm[] midterms;
+//    public Exam[] exams;
 
-    public Window(Course[] c, Assignment[] a,Midterm[] m,Exam[] e) {
+    public Window(Course[] c) {
         courses = c;
-        assignments = a;
-        midterms = m;
-        exams = e;
+//        assignments = a;
+//        midterms = m;
+//        exams = e;
     }
 
 

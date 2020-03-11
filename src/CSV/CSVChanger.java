@@ -3,7 +3,6 @@ package CSV;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
@@ -29,6 +28,10 @@ public class CSVChanger {
                     }
                     else if (numArgs == 4) { //for assignments
                         data.add(new String[]{record.get(0), record.get(1), record.get(2),record.get(3),record.get(4)});
+
+                    }
+                    else if (numArgs == 6) { //for assignments
+                        data.add(new String[]{record.get(0), record.get(1), record.get(2),record.get(3),record.get(4),record.get(5)});
 
                     }
                 }

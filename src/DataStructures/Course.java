@@ -1,21 +1,27 @@
 package DataStructures;
 
-import CSV.CSVChanger;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
 
-import java.util.Arrays;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Course implements Runnable {
+
+
+public class Course {
     private String courseName;
     private String teacher;
     private String courseCode;
-
     private String days;
     private String time;
 
-//    private Assignment[] assignments;
-//    private Midterm[] midterms;
-//    private Exam exam;
+    private List<Assignment> assignments;
+    private List<Midterm> midterms;
+    private List<Exam> exam;
 
     public Course (String[] course) {
         this.courseName = course[0];
@@ -23,48 +29,109 @@ public class Course implements Runnable {
         this.courseCode = course[2];
         this.days = course[3];
         this.time = course[4];
+        assignments = makeAssignments();
+        midterms = makeMidterms();
+        exam = makeExam();
+
 
     }
 
     public String getCourseName() {
         return courseName;
     }
-
     public String getCourseCode() {
         return courseCode;
     }
-
     public String getDays() {
         return days;
     }
-
     public String getTeacher() {
         return teacher;
     }
-
     public String getTime() {
         return time;
     }
 
-    @Override
-    public void run() {
-        getAssignments();
-        getMidterms();
-        getExam();
+    public double getGrade() {
+        //calculate grades based off of assignment, midterms, etc
+        double grade = 0.0;
+
+        return grade;
     }
 
-    private void getAssignments() {
+    private List<Assignment> makeAssignments() {
         //find assignments with matching course code or name
+        //
 
+        List<Assignment> data = null;
+        try {
+            Reader read = Files.newBufferedReader(Paths.get("DataFiles/assignments.csv"));
+            data = new ArrayList<>();
+
+            Iterable<CSVRecord> info = CSVFormat.DEFAULT.parse(read);
+
+            for (CSVRecord record : info) {
+
+                if (record.get(0).equals(courseCode))
+                data.add(new Assignment(record.get(0),record.get(1),record.get(2),Double.parseDouble(record.get(3)),Double.parseDouble(record.get(4))));
+
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return data;
     }
 
-    private void getMidterms() {
+    private List<Midterm> makeMidterms() {
         //find midterms with matching course code or name
 
+        List<Midterm> data = null;
+        try {
+            Reader read = Files.newBufferedReader(Paths.get("DataFiles/midterms.csv"));
+            data = new ArrayList<>();
+
+            Iterable<CSVRecord> info = CSVFormat.DEFAULT.parse(read);
+
+            for (CSVRecord record : info) {
+                String checkCode = record.get(0);
+                if (checkCode.equals(courseCode))
+                    data.add(new Midterm(record.get(0),record.get(1),record.get(2),record.get(3),Double.parseDouble(record.get(4)),Double.parseDouble(record.get(5))));
+
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return data;
+
     }
 
-    private void getExam() {
+    private List<Exam> makeExam() {
         //find exams with matching course code or name
+
+
+        List<Exam> data = null;
+        try {
+            Reader read = Files.newBufferedReader(Paths.get("DataFiles/exams.csv"));
+            data = new ArrayList<>();
+
+            Iterable<CSVRecord> info = CSVFormat.DEFAULT.parse(read);
+
+            for (CSVRecord record : info) {
+
+                if (record.get(0).equals(courseCode))
+                    data.add(new Exam(record.get(0),record.get(1),record.get(2),record.get(3),Double.parseDouble(record.get(4)),Double.parseDouble(record.get(5))));
+
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return data;
 
     }
 
@@ -76,9 +143,9 @@ public class Course implements Runnable {
                 ", courseCode='" + courseCode + '\'' +
                 ", days='" + days + '\'' +
                 ", time='" + time + '\'' +
-//                ", assignments=" + Arrays.toString(assignments) +
-//                ", midterms=" + Arrays.toString(midterms) +
-//                ", exam=" + exam +
+                ", \nassignments=" + assignments +
+                ", \nmidterms=" + midterms +
+                ", \nexam=" + exam +
                 '}';
     }
 }

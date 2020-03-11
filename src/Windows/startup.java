@@ -60,36 +60,18 @@ public class startup extends Application {
         ft.setAutoReverse(true);
         ft.play();
 
+        Thread.sleep(4000);
+
         //initialize courses from csv
         List<String[]> data = CSVChanger.read("courses.csv",5);
         Course[] courses = new Course[data.size()];
         for (int i=0; i < data.size(); i++) {
             courses[i] = new Course(data.get(i));
         }
-        data = CSVChanger.read("assignments.csv",4);
-        Assignment[] assignments = new Assignment[data.size()];
-        for (int i=0; i < data.size(); i++) {
-            assignments[i] = new Assignment(data.get(i));
-        }
-        data = CSVChanger.read("midterms.csv",5);
-        Midterm[] midterms = new Midterm[data.size()];
-        for (int i=0; i < data.size(); i++) {
-            midterms[i] = new Midterm(data.get(i));
-        }
-        data = CSVChanger.read("exams.csv",5);
-        Exam[] exams = new Exam[data.size()];
-        for (int i=0; i < data.size(); i++) {
-            exams[i] = new Exam(data.get(i));
-        }
 
         primaryStage.close();
-//        System.out.println(courses[1]);
 
-//        data.add(new String[]{"Software Systems", "Arshad", "CSCI2020", "Monday and Tuesday","3:40-5pm"});
-//        System.out.println(String.valueOf(data.get(0)[1]));
-//        CSVChanger.write("courses.csv",data);
-
-        Window win = new Window(courses,assignments,midterms,exams);
+        Window win = new Window(courses);
         win.start(new Stage());
 
 
