@@ -1,38 +1,49 @@
 package DataStructures;
 
-import java.io.*;
-//import org.apache.commons.csv.*;
+import CSV.CSVChanger;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class Course implements Runnable {
     private String courseName;
     private String teacher;
     private String courseCode;
 
-    private String[] days;
+    private String days;
     private String time;
 
-    private Assignment[] assignments;
-    private Midterm[] midterms;
-    private Exam exam;
+//    private Assignment[] assignments;
+//    private Midterm[] midterms;
+//    private Exam exam;
 
-    public Course () {
-        //gather information for the course through the files
-        //uses csv thing from labs
-//        try {
-//            Reader in = new FileReader("data.csv");
-//            Iterable<CSVRecord> records =
-//                    CSVFormat.DEFAULT.withHeader("First Name", "Last Name", "SID",
-//                            "Grade").parse(in);
-//            for (CSVRecord record: records) {
-//                String lastName = record.get("Last Name");
-//                String firstName = record.get("First Name");
-//                String grade = record.get("Grade");
-//                System.out.println(firstName + " " + lastName + " (" +
-//                        grade + ")");
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+    public Course (String[] course) {
+        this.courseName = course[0];
+        this.teacher = course[1];
+        this.courseCode = course[2];
+        this.days = course[3];
+        this.time = course[4];
+
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public String getDays() {
+        return days;
+    }
+
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     @Override
@@ -44,6 +55,7 @@ public class Course implements Runnable {
 
     private void getAssignments() {
         //find assignments with matching course code or name
+
     }
 
     private void getMidterms() {
@@ -54,5 +66,19 @@ public class Course implements Runnable {
     private void getExam() {
         //find exams with matching course code or name
 
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseName='" + courseName + '\'' +
+                ", teacher='" + teacher + '\'' +
+                ", courseCode='" + courseCode + '\'' +
+                ", days='" + days + '\'' +
+                ", time='" + time + '\'' +
+//                ", assignments=" + Arrays.toString(assignments) +
+//                ", midterms=" + Arrays.toString(midterms) +
+//                ", exam=" + exam +
+                '}';
     }
 }

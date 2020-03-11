@@ -1,4 +1,10 @@
+package Windows;
+
+import DataStructures.Assignment;
 import DataStructures.Course;
+import DataStructures.Exam;
+import DataStructures.Midterm;
+import Pages.CoursesPage;
 import Pages.GradesPage;
 import Pages.HomePage;
 import javafx.application.Application;
@@ -18,14 +24,22 @@ import javafx.stage.Stage;
  * corresponding to the button
  */
 public class Window extends Application {
+    public static Course[] courses;
+    public Assignment[] assignments;
+    public Midterm[] midterms;
+    public Exam[] exams;
 
-    public static void main(String[] args) {
-//        Runnable c1 = new Course();
-        //create threads for each course specified in courses.csv file
-//        Thread course1 = new Thread(c1);
+    public Window(Course[] c, Assignment[] a,Midterm[] m,Exam[] e) {
+        courses = c;
+        assignments = a;
+        midterms = m;
+        exams = e;
+    }
 
 
+    public void makeWindow(String[] args) {
         launch(args);
+
     }
 
     @Override
@@ -98,9 +112,8 @@ public class Window extends Application {
         }
         else if (page.equals("Courses")) {
             stage.setTitle("My Courses");
-            //
-            pane.setCenter(new TextArea());
-
+            CoursesPage cPage = new CoursesPage();
+            pane.setCenter(cPage.getMainPane());
         }
         else if (page.equals("Schedule")) {
             stage.setTitle("Schedule");

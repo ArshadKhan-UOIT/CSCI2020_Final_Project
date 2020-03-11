@@ -9,30 +9,37 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CSVChanger {
 
-        public static void read(String fileName) {
+        public static List<String[]> read(String fileName, int numArgs) {
+            List<String[]> data = null;
             try {
                 Reader read = Files.newBufferedReader(Paths.get("DataFiles/" + fileName));
+                data = new ArrayList<>();
 
                 Iterable<CSVRecord> info = CSVFormat.DEFAULT.parse(read);
 
                 for (CSVRecord record : info) {
-                    System.out.println("Class: " + record.get(0));
-                    System.out.println("Name: " + record.get(1));
-                    System.out.println("Course Code: " + record.get(2));
-                    System.out.println("Days: " + record.get(3));
-                    System.out.println("Time: " + record.get(4));
+                    if (numArgs == 5) {//for courses
+                        data.add(new String[]{record.get(0), record.get(1), record.get(2),record.get(3),record.get(4)});
+
+                    }
+                    else if (numArgs == 4) { //for assignments
+                        data.add(new String[]{record.get(0), record.get(1), record.get(2),record.get(3),record.get(4)});
+
+                    }
                 }
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            return data;
         }
 
-        public static void write(String fileName, List<Object[]> data) {
+        public static void write(String fileName, List<String[]> data) {
             try {
                 Writer write = Files.newBufferedWriter(Paths.get("DataFiles/"+fileName));
 
