@@ -58,7 +58,7 @@ public class startup extends Application {
         ft.setAutoReverse(true);
         ft.play();
 
-//        Thread.sleep(4000);
+        Thread.sleep(3000);
 
         //initialize courses from csv
         List<String[]> data = CSVChanger.read("courses.csv");
