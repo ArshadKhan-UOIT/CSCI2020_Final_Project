@@ -15,6 +15,15 @@ public class Assignment {
         this.mark = mark;
     }
 
+
+    public double getMark() {
+        return mark;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
     @Override
     public String toString() {
         return "Assignment{" +

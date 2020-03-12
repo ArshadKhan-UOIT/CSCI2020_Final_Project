@@ -18,7 +18,7 @@ public class Course implements Runnable{
     private String courseCode;
     private String days;
     private String time;
-    private  String location;
+    private String location;
 
     private List<Assignment> assignments;
     private List<Midterm> midterms;
@@ -31,7 +31,9 @@ public class Course implements Runnable{
         this.days = course[3];
         this.time = course[4];
         this.location = course[5];
-
+        this.assignments = makeAssignments();
+        this.midterms = makeMidterms();
+        this.exam = makeExam();
 
 
     }
@@ -55,9 +57,7 @@ public class Course implements Runnable{
 
     @Override
     public void run() {
-        this.assignments = makeAssignments();
-        this.midterms = makeMidterms();
-        this.exam = makeExam();
+
 
     }
 
@@ -91,6 +91,18 @@ public class Course implements Runnable{
         }
 
         return data;
+    }
+
+    public List<Assignment> getAssignments() {
+        return assignments;
+    }
+
+    public List<Midterm> getMidterms() {
+        return midterms;
+    }
+
+    public List<Exam> getExam() {
+        return exam;
     }
 
     private List<Midterm> makeMidterms() {
