@@ -17,6 +17,14 @@ public class Midterm {
         mark = parseDouble1;
     }
 
+    public double getWeight() {
+        return weight;
+    }
+
+    public double getMark() {
+        return mark;
+    }
+
     @Override
     public String toString() {
         return "Midterm{" +
@@ -28,4 +36,5 @@ public class Midterm {
                 ", mark=" + mark +
                 '}';
     }
+
 }

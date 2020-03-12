@@ -50,11 +50,11 @@ public class Window extends Application {
         Button b1 = new Button("Home");
         Button b2 = new Button("My Courses");
         Button b3 = new Button("Schedule");
-        Button b4 = new Button("To Do");
+//        Button b4 = new Button("To Do");
         Button b5 = new Button("My Grades");
-        Button b6 = new Button("Assignments");
-        Button b7 = new Button("Midterms");
-        Button b8 = new Button("Final Exams");
+//        Button b6 = new Button("Assignments");
+//        Button b7 = new Button("Midterms");
+//        Button b8 = new Button("Final Exams");
         Button b9 = new Button("Add Info");
 
         b1.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
@@ -85,7 +85,7 @@ public class Window extends Application {
         b9.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "AddInfo"));
 
         //add buttons
-        topPane.getChildren().addAll(b1,b2,b3,b4,b5,b6,b7,b8,b9);
+        topPane.getChildren().addAll(b1,b2,b3,b5,b9);
         topPane.setAlignment(Pos.CENTER);
         mainPane.setTop(topPane);
         HomePage home = new HomePage();

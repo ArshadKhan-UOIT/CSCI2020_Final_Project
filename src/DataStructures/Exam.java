@@ -17,6 +17,14 @@ public class Exam {
         mark = parseDouble1;
     }
 
+    public double getMark() {
+        return mark;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
     @Override
     public String toString() {
         return "Exam{" +

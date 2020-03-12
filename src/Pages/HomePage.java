@@ -1,12 +1,12 @@
 package Pages;
 
+import DataStructures.Assignment;
 import DataStructures.Course;
+import DataStructures.Exam;
+import DataStructures.Midterm;
 import Windows.Window;
 import javafx.geometry.Pos;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class HomePage extends Page {
@@ -92,7 +93,7 @@ public class HomePage extends Page {
         //Find courses with date equal to current day of the week
         for (Course c: Window.courses) {
             String courseDays = c.getDays();
-            String currentDay = "Friday";//String.valueOf(dayOfWeek);
+            String currentDay = String.valueOf(dayOfWeek);
 
             for (int i=0;i< courseDays.length();i++) {
                 if (currentDay.equalsIgnoreCase("thursday") && courseDays.charAt(i)=='R')
@@ -156,29 +157,73 @@ public class HomePage extends Page {
 
         Text gradeBanner = new Text("My Grades:");
         gradeBanner.setFont(Font.font("AnjaliOldLipi", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        //create 3 series
+        XYChart.Series<String, Number> aSeries = new XYChart.Series<>();
+        aSeries.setName("Assignments");
+        XYChart.Series<String, Number> mSeries = new XYChart.Series<>();
+        mSeries.setName("Midterms");
+        XYChart.Series<String, Number> eSeries = new XYChart.Series<>();
+        eSeries.setName("Exams");
 
+
+
+        for (Course c: Window.courses) {
+            double asmnt=0;
+            double asmntTotal=0;
+            double mid=0;
+            double midTotal=0;
+            double exam=0;
+            double examTotal=0;
+
+            List<Assignment> assignmentList = c.getAssignments();
+
+            for (Assignment a: assignmentList) {
+                asmnt+=a.getMark()*a.getWeight()/100;
+                asmntTotal+=a.getWeight();
+            }
+            List<Midterm> midtermList = c.getMidterms();
+
+            for (Midterm m: midtermList) {
+                mid+=m.getMark()*m.getWeight()/100;
+                midTotal+=m.getWeight();
+            }
+            List<Exam> examList = c.getExam();
+
+            for (Exam e: examList) {
+                exam+=e.getMark()*e.getWeight()/100;
+                examTotal+=e.getWeight();
+            }
+//            System.out.println(asmntTotal);
+//            System.out.println(midTotal);
+//            System.out.println(examTotal);
+
+            //make data and add it to the chart
+            aSeries.getData().add(new XYChart.Data<String, Number>(c.getCourseCode(), asmnt));
+            aSeries.getData().add(new XYChart.Data<String, Number>(c.getCourseCode()+" Total", asmntTotal));
+            mSeries.getData().add(new XYChart.Data<String, Number>(c.getCourseCode(), mid));
+            mSeries.getData().add(new XYChart.Data<String, Number>(c.getCourseCode()+" Total", midTotal));
+            eSeries.getData().add(new XYChart.Data<String, Number>(c.getCourseCode(), exam));
+            eSeries.getData().add(new XYChart.Data<String, Number>(c.getCourseCode()+" Total", examTotal));
+
+        }
+        
         //add banner to pane
-//        try {
-//            getGrades();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
         gradePane.add(gradeBanner,0,0);
 
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         yAxis.setAutoRanging(false);
         yAxis.setUpperBound(100); // making 100% the max value of the chart
-        BarChart<String, Number> gradeChart = new BarChart<>(xAxis,yAxis);
+        StackedBarChart<String, Number> gradeChart = new StackedBarChart<>(xAxis,yAxis);
 
         gradeChart.setAnimated(false);
         gradeChart.setCategoryGap(0);
         xAxis.setLabel("Class");
         yAxis.setLabel("Grade (%)");
 
-        XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+
 //        series1.getData().add(new XYChart.Data<>("blah", 125));
-        gradeChart.getData().addAll(series1);
+        gradeChart.getData().addAll(aSeries,mSeries,eSeries);
         //add bar chart to pane
         gradePane.add(gradeChart,0,1);
 
