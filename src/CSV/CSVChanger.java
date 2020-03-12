@@ -3,6 +3,8 @@ package CSV;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
+
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
@@ -33,7 +35,7 @@ public class CSVChanger {
 
         public static void write(String fileName, List<String[]> data) {
             try {
-                Writer write = Files.newBufferedWriter(Paths.get("DataFiles/"+fileName));
+                FileWriter write = new FileWriter(String.valueOf(Paths.get("DataFiles/"+fileName)),true);
 
                 CSVPrinter printer = CSVFormat.DEFAULT.print(write);
 

@@ -7,6 +7,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -16,6 +17,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class HomePage extends Page {
@@ -76,27 +78,56 @@ public class HomePage extends Page {
         VBox schedulePane = new VBox();
         Text scheduleBanner = new Text("Schedule:");
         scheduleBanner.setFont(Font.font("AnjaliOldLipi", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        schedulePane.getChildren().add(scheduleBanner);
 
 
         // Find the day from the local date
         LocalDate date = LocalDate.now();
         DayOfWeek dayOfWeek= DayOfWeek.from(date);
+        Text dow = new Text(String.valueOf(dayOfWeek));
+        schedulePane.getChildren().add(dow);
 
 //        System.out.println(dayOfWeek);
-
+        ArrayList<Course> list = new ArrayList<>();
         //Find courses with date equal to current day of the week
         for (Course c: Window.courses) {
             String courseDays = c.getDays();
-            String currentDay = String.valueOf(dayOfWeek);
+            String currentDay = "Monday";//String.valueOf(dayOfWeek);
+
             for (int i=0;i< courseDays.length();i++) {
-                if (currentDay.equalsIgnoreCase(String.valueOf(courseDays.charAt(i)))) {
-                    Text entry = new Text(c.getCourseName()+ " " + c.getTime());
+                if (currentDay.equalsIgnoreCase("thursday") && courseDays.charAt(i)=='R')
+                {
+                    list.add(c);
+                }
+                else if (currentDay.equalsIgnoreCase("thursday") && courseDays.charAt(i) == 'T') {
+
+                }
+                else if (currentDay.charAt(0) == courseDays.charAt(i) ) {
+                    list.add(c);
+
                 }
             }
 
         }
 
-        schedulePane.getChildren().add(scheduleBanner);
+        for (int i=0; i< list.size(); i++) {
+            for (int j=i; j< list.size(); j++) {
+                if(Integer.parseInt(list.get(i).getTime().substring(0,2)) > Integer.parseInt(list.get(j).getTime().substring(0,2))) {
+                    Course temp = list.get(i);
+
+                    list.set(i,list.get(j));
+                    list.set(j,temp);
+                }
+            }
+
+        }
+        for (Course c: list) {
+            Text entry = new Text("- " + c.getCourseName()+ ", " + c.getTime() + ", " + c.getLocation());
+            schedulePane.getChildren().add(entry);
+
+        }
+
+
         return schedulePane;
     }
 

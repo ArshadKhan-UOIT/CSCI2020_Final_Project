@@ -54,6 +54,8 @@ public class Course {
         return time;
     }
 
+    public String getLocation() { return this.location; }
+
     public double getGrade() {
         //calculate grades based off of assignment, midterms, etc
         double grade = 0.0;
