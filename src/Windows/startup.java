@@ -67,6 +67,9 @@ public class startup extends Application {
             courses[i] = new Course(data.get(i));
         }
 
+        //use this to write to the csv files when adding new lines
+        //CSVChanger.write("assignments.csv",data);
+
         primaryStage.close();
 
         Window win = new Window(courses);
