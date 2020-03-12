@@ -7,6 +7,7 @@ import DataStructures.Midterm;
 import Pages.CoursesPage;
 import Pages.GradesPage;
 import Pages.HomePage;
+import Pages.SchedulePage;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -117,7 +118,7 @@ public class Window extends Application {
         }
         else if (page.equals("Schedule")) {
             stage.setTitle("Schedule");
-            //
+            SchedulePage sPage = new SchedulePage();
             pane.setCenter(new TextArea());
 
         }

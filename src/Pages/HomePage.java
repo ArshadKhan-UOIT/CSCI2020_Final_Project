@@ -82,7 +82,7 @@ public class HomePage extends Page {
         LocalDate date = LocalDate.now();
         DayOfWeek dayOfWeek= DayOfWeek.from(date);
 
-//        System.out.println(dayOfWeek);
+        System.out.println(dayOfWeek);
 
         //Find courses with date equal to current day of the week
         for (Course c: Window.courses) {
