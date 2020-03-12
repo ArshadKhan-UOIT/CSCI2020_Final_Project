@@ -62,7 +62,6 @@ public class startup extends Application {
         ft.play();
 
 
-        ExecutorService executor = Executors.newCachedThreadPool();
 
         //initialize courses from csv
         List<String[]> data = CSVChanger.read("courses.csv");
@@ -71,7 +70,6 @@ public class startup extends Application {
 
         for (int i=0; i< data.size();i++) {
             courses[i] = new Course(data.get(i));
-//            executor.execute(new Course(datum));
         }
 
 
@@ -79,12 +77,16 @@ public class startup extends Application {
         //use this to write to the csv files when adding new lines
         //CSVChanger.write("assignments.csv",data);
 
-        primaryStage.close();
-        executor.shutdown();
+        banner.setText("Click Here");
+        //multithreading
+        Runnable win = new Window(courses);
+        Thread window = new Thread(win);
 
-        Window win = new Window(courses);
-        win.start(new Stage());
-
+        //when scene is pressed run window and close startup
+        titleBox.setOnMouseClicked( e -> {
+            window.run();
+            primaryStage.close();
+        });
 
     }
 }

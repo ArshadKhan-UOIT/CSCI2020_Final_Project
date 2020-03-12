@@ -20,22 +20,19 @@ import javafx.stage.Stage;
  * When a button is pressed the window its does not change but the center of the border pane is changed to the page
  * corresponding to the button
  */
-public class Window extends Application {
+public class Window extends Application implements Runnable{
     public static Course[] courses;
-//    public Assignment[] assignments;
-//    public Midterm[] midterms;
-//    public Exam[] exams;
+
 
     public Window(Course[] c) {
         courses = c;
-//        assignments = a;
-//        midterms = m;
-//        exams = e;
+
     }
 
+    @Override
+    public void run() {
 
-    public void makeWindow(String[] args) {
-        launch(args);
+        start(new Stage());
 
     }
 
@@ -99,6 +96,7 @@ public class Window extends Application {
         primaryStage.show();
 
     }
+
     public void changePage(Stage stage, BorderPane pane, String page) {
 
         if (page.equals("Home")) {
