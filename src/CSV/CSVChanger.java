@@ -12,40 +12,44 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CSVChanger {
+public class CSVChanger implements Runnable {
 
-        public static List<String[]> read(String fileName) {
-            List<String[]> data = null;
-            try {
-                Reader read = Files.newBufferedReader(Paths.get("DataFiles/" + fileName));
-                data = new ArrayList<>();
+    @Override
+    public void run() {
 
-                Iterable<CSVRecord> info = CSVFormat.DEFAULT.parse(read);
+    }
 
-                for (CSVRecord record : info) {
-                    data.add(new String[]{record.get(0), record.get(1), record.get(2),record.get(3),record.get(4),record.get(5)});
-                }
+    public static List<String[]> read(String fileName) {
+        List<String[]> data = null;
+        try {
+            Reader read = Files.newBufferedReader(Paths.get("DataFiles/" + fileName));
+            data = new ArrayList<>();
 
-            } catch (IOException e) {
-                e.printStackTrace();
+            Iterable<CSVRecord> info = CSVFormat.DEFAULT.parse(read);
+
+            for (CSVRecord record : info) {
+                data.add(new String[]{record.get(0), record.get(1), record.get(2),record.get(3),record.get(4),record.get(5)});
             }
-            return data;
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return data;
+    }
 
-        public static void write(String fileName, List<String[]> data) {
-            try {
-                FileWriter write = new FileWriter(String.valueOf(Paths.get("DataFiles/"+fileName)),true);
+    public static void write(String fileName, List<String[]> data) {
+        try {
+            FileWriter write = new FileWriter(String.valueOf(Paths.get("DataFiles/"+fileName)),true);
+            CSVPrinter printer = CSVFormat.DEFAULT.print(write);
 
-                CSVPrinter printer = CSVFormat.DEFAULT.print(write);
+            printer.printRecords(data);
 
-                printer.printRecords(data);
+            printer.flush();
 
-                printer.flush();
+            write.close();
 
-                write.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
 }

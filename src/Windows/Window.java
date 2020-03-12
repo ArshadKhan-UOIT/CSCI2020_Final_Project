@@ -23,7 +23,6 @@ import javafx.stage.Stage;
 public class Window extends Application implements Runnable{
     public static Course[] courses;
 
-
     public Window(Course[] c) {
         courses = c;
 
