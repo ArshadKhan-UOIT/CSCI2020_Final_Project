@@ -14,6 +14,13 @@ public class Assignment {
         this.weight = weight;
         this.mark = mark;
     }
+    public Assignment(String[] a) {
+        courseCode = a[0];
+        assignmentName = a[1];
+        dueDate = a[2];
+        this.weight = Double.parseDouble(a[3]);
+        this.mark = Double.parseDouble(a[4]);
+    }
 
 
     public double getMark() {

@@ -7,7 +7,7 @@ import javafx.scene.layout.VBox;
 public class CoursesPage extends Page {
 
     public CoursesPage() {
-        System.out.println("Pages.CoursesPage created");
+//        System.out.println("Pages.CoursesPage created");
 
         VBox buttons = new VBox();
         //display courses as buttons

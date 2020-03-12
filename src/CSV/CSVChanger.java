@@ -19,16 +19,24 @@ public class CSVChanger implements Runnable {
 
     }
 
-    public static List<String[]> read(String fileName) {
+    public static List<String[]> read(String fileName, int size) {
         List<String[]> data = null;
         try {
             Reader read = Files.newBufferedReader(Paths.get("DataFiles/" + fileName));
             data = new ArrayList<>();
 
+            String[] str;
+
             Iterable<CSVRecord> info = CSVFormat.DEFAULT.parse(read);
 
             for (CSVRecord record : info) {
-                data.add(new String[]{record.get(0), record.get(1), record.get(2),record.get(3),record.get(4),record.get(5)});
+                str = new String[size];
+                for (int i=0; i<size; i++)
+                {
+                    str[i] = record.get(i);
+                }
+
+                data.add(str);
             }
 
         } catch (IOException e) {
