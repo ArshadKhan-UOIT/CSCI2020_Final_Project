@@ -16,6 +16,15 @@ public class Midterm {
         weight = parseDouble;
         mark = parseDouble1;
     }
+    public Midterm(String[] m) {
+        courseCode = m[0];
+        date = m[1];
+        time = m[2];
+        location = m[3];
+        this.weight = Double.parseDouble(m[4]);
+        this.mark = Double.parseDouble(m[5]);
+    }
+
 
     public double getWeight() {
         return weight;

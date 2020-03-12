@@ -58,8 +58,7 @@ public class startup extends Application {
 
 
         //initialize courses from csv
-
-        List<String[]> data = CSVChanger.read("courses.csv");
+        List<String[]> data = CSVChanger.read("courses.csv",6);
 
         Course[] courses = new Course[data.size()];
 

@@ -17,6 +17,15 @@ public class Exam {
         mark = parseDouble1;
     }
 
+    public Exam(String[] e) {
+        courseCode = e[0];
+        date = e[1];
+        time = e[2];
+        location = e[3];
+        this.weight = Double.parseDouble(e[4]);
+        this.mark = Double.parseDouble(e[5]);
+    }
+
     public double getMark() {
         return mark;
     }

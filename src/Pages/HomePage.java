@@ -63,6 +63,12 @@ public class HomePage extends Page {
 
         toDoPane.getChildren().add(toDoBanner);
 
+
+
+
+
+
+
         //call method to get to do list
 //        Text[] list = getToDo(); // getToDo() will return array of Text objects with text formatted "- blahblah (Date)"
 //        for (Text x: list) {
@@ -165,8 +171,6 @@ public class HomePage extends Page {
         XYChart.Series<String, Number> eSeries = new XYChart.Series<>();
         eSeries.setName("Exams");
 
-
-
         for (Course c: Window.courses) {
             double asmnt=0;
             double asmntTotal=0;
@@ -175,27 +179,24 @@ public class HomePage extends Page {
             double exam=0;
             double examTotal=0;
 
-            List<Assignment> assignmentList = c.getAssignments();
+            Assignment[] assignmentList = c.getAssignments();
 
             for (Assignment a: assignmentList) {
                 asmnt+=a.getMark()*a.getWeight()/100;
                 asmntTotal+=a.getWeight();
             }
-            List<Midterm> midtermList = c.getMidterms();
+            Midterm[] midtermList = c.getMidterms();
 
             for (Midterm m: midtermList) {
                 mid+=m.getMark()*m.getWeight()/100;
                 midTotal+=m.getWeight();
             }
-            List<Exam> examList = c.getExam();
+            Exam[] examList = c.getExam();
 
             for (Exam e: examList) {
                 exam+=e.getMark()*e.getWeight()/100;
                 examTotal+=e.getWeight();
             }
-//            System.out.println(asmntTotal);
-//            System.out.println(midTotal);
-//            System.out.println(examTotal);
 
             //make data and add it to the chart
             aSeries.getData().add(new XYChart.Data<String, Number>(c.getCourseCode(), asmnt));
