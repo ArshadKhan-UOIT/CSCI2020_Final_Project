@@ -28,12 +28,6 @@ import java.util.concurrent.Executors;
  * Then it will send the information to window where the rest of the program can use it
  */
 public class startup extends Application {
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-
     @Override
     public void start(Stage primaryStage) throws InterruptedException {
         //class to handle Windows.startup window before homepage window appears
@@ -64,6 +58,7 @@ public class startup extends Application {
 
 
         //initialize courses from csv
+
         List<String[]> data = CSVChanger.read("courses.csv");
 
         Course[] courses = new Course[data.size()];
@@ -71,8 +66,6 @@ public class startup extends Application {
         for (int i=0; i< data.size();i++) {
             courses[i] = new Course(data.get(i));
         }
-
-
 
         //use this to write to the csv files when adding new lines
         //CSVChanger.write("assignments.csv",data);

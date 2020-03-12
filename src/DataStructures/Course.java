@@ -24,13 +24,13 @@ public class Course implements Runnable{
     private List<Midterm> midterms;
     private List<Exam> exam;
 
-    public Course (String[] course) {
-        this.courseName = course[0];
-        this.teacher = course[1];
-        this.courseCode = course[2];
-        this.days = course[3];
-        this.time = course[4];
-        this.location = course[5];
+    public Course (String[] courseInfo) {
+        this.courseName = courseInfo[0];
+        this.teacher = courseInfo[1];
+        this.courseCode = courseInfo[2];
+        this.days = courseInfo[3];
+        this.time = courseInfo[4];
+        this.location = courseInfo[5];
         this.assignments = makeAssignments();
         this.midterms = makeMidterms();
         this.exam = makeExam();
@@ -71,7 +71,6 @@ public class Course implements Runnable{
     private List<Assignment> makeAssignments() {
         //find assignments with matching course code or name
         //
-
         List<Assignment> data = null;
         try {
             Reader read = Files.newBufferedReader(Paths.get("DataFiles/assignments.csv"));
@@ -107,7 +106,6 @@ public class Course implements Runnable{
 
     private List<Midterm> makeMidterms() {
         //find midterms with matching course code or name
-
         List<Midterm> data = null;
         try {
             Reader read = Files.newBufferedReader(Paths.get("DataFiles/midterms.csv"));
