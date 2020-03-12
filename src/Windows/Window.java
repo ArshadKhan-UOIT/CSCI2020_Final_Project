@@ -119,7 +119,7 @@ public class Window extends Application {
         else if (page.equals("Schedule")) {
             stage.setTitle("Schedule");
             SchedulePage sPage = new SchedulePage();
-            pane.setCenter(new TextArea());
+            pane.setCenter(sPage.getMainPane());
 
         }
         else if (page.equals("ToDo")) {
