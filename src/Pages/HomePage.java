@@ -92,7 +92,7 @@ public class HomePage extends Page {
         //Find courses with date equal to current day of the week
         for (Course c: Window.courses) {
             String courseDays = c.getDays();
-            String currentDay = "Monday";//String.valueOf(dayOfWeek);
+            String currentDay = "Friday";//String.valueOf(dayOfWeek);
 
             for (int i=0;i< courseDays.length();i++) {
                 if (currentDay.equalsIgnoreCase("thursday") && courseDays.charAt(i)=='R')

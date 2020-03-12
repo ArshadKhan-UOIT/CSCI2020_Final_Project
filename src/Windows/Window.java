@@ -1,9 +1,6 @@
 package Windows;
 
-import DataStructures.Assignment;
 import DataStructures.Course;
-import DataStructures.Exam;
-import DataStructures.Midterm;
 import Pages.CoursesPage;
 import Pages.GradesPage;
 import Pages.HomePage;
@@ -69,20 +66,20 @@ public class Window extends Application {
         b3.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
         b3.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Schedule"));
 
-        b4.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
-        b4.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "ToDo"));
+//        b4.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
+//        b4.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "ToDo"));
 
         b5.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
         b5.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Grades"));
 
-        b6.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
-        b6.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Assignments"));
-
-        b7.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
-        b7.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Midterms"));
-
-        b8.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
-        b8.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "FinalExams"));
+//        b6.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
+//        b6.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Assignments"));
+//
+//        b7.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
+//        b7.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Midterms"));
+//
+//        b8.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
+//        b8.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "FinalExams"));
 
         b9.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
         b9.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "AddInfo"));
