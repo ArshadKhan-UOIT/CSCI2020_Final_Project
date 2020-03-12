@@ -12,7 +12,7 @@ import java.util.List;
 
 
 
-public class Course {
+public class Course implements Runnable{
     private String courseName;
     private String teacher;
     private String courseCode;
@@ -31,9 +31,7 @@ public class Course {
         this.days = course[3];
         this.time = course[4];
         this.location = course[5];
-        assignments = makeAssignments();
-        midterms = makeMidterms();
-        exam = makeExam();
+
 
 
     }
@@ -53,8 +51,15 @@ public class Course {
     public String getTime() {
         return time;
     }
-
     public String getLocation() { return this.location; }
+
+    @Override
+    public void run() {
+        this.assignments = makeAssignments();
+        this.midterms = makeMidterms();
+        this.exam = makeExam();
+
+    }
 
     public double getGrade() {
         //calculate grades based off of assignment, midterms, etc

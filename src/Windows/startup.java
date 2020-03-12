@@ -19,6 +19,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /*
  * The Windows.startup class is for loading all the required information for when the window is displayed.
  * This class will open a loading window and create multiple threads to retrieve each category of information
@@ -27,9 +30,9 @@ import java.util.List;
 public class startup extends Application {
 
     public static void main(String[] args) {
-
         launch(args);
     }
+
 
     @Override
     public void start(Stage primaryStage) throws InterruptedException {
@@ -58,19 +61,26 @@ public class startup extends Application {
         ft.setAutoReverse(true);
         ft.play();
 
-//        Thread.sleep(4000);
+
+        ExecutorService executor = Executors.newCachedThreadPool();
 
         //initialize courses from csv
         List<String[]> data = CSVChanger.read("courses.csv");
+
         Course[] courses = new Course[data.size()];
-        for (int i=0; i < data.size(); i++) {
+
+        for (int i=0; i< data.size();i++) {
             courses[i] = new Course(data.get(i));
+//            executor.execute(new Course(datum));
         }
+
+
 
         //use this to write to the csv files when adding new lines
         //CSVChanger.write("assignments.csv",data);
 
         primaryStage.close();
+        executor.shutdown();
 
         Window win = new Window(courses);
         win.start(new Stage());
