@@ -12,10 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
+import javafx.scene.text.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -32,7 +29,8 @@ public class startup extends Application {
     public void start(Stage primaryStage) {
         //class to handle Windows.startup window before homepage window appears
         VBox titleBox = new VBox();
-        Text banner = new Text("Loading...");
+        Text banner = new Text("Click To\nStart");
+        banner.setTextAlignment(TextAlignment.CENTER);
         Image bannerImage = new Image("file:DataFiles/CourseContent.png");
         ImageView imageView1 = new ImageView(bannerImage);
         titleBox.getChildren().add(imageView1);
@@ -54,7 +52,6 @@ public class startup extends Application {
         ft.setAutoReverse(true);
         ft.play();
 
-
         //initialize courses from csv
         List<String[]> data = CSVChanger.read("courses.csv", 6);
 
@@ -64,10 +61,7 @@ public class startup extends Application {
             courses[i] = new Course(data.get(i));
         }
 
-        //use this to write to the csv files when adding new lines
-        //CSVChanger.write("assignments.csv",data);
 
-        banner.setText("Click Here");
         //multithreading
         Runnable win = new Window(courses);
         Thread window = new Thread(win);
