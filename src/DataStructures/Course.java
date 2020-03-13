@@ -93,7 +93,7 @@ public class Course implements Runnable {
 
     private Midterm[] makeMidterms() {
         //find midterms with matching course code or name
-        List<String[]> data = CSVChanger.read("midterms.csv", 6);
+        List<String[]> data = CSVChanger.read("midterms.csv", 7);
         for (int i = 0; i < data.size(); i++) {
             String[] str = (data.get(i));
 
@@ -113,7 +113,7 @@ public class Course implements Runnable {
 
     private Exam[] makeExam() {
         //find exams with matching course code or name
-        List<String[]> data = CSVChanger.read("exams.csv", 6);
+        List<String[]> data = CSVChanger.read("exams.csv", 7);
         for (int i = 0; i < data.size(); i++) {
             String[] str = (data.get(i));
 
