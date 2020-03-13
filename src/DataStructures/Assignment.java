@@ -23,6 +23,11 @@ public class Assignment {
         this.mark = Double.parseDouble(a[4]);
     }
 
+    public String getCourseCode() { return courseCode; }
+    public String getAssignmentName() { return assignmentName; }
+    public String getDueDate() { return dueDate; }
+
+
 
     public double getMark() {
         return mark;
