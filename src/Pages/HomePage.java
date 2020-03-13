@@ -104,9 +104,7 @@ public class HomePage extends Page {
             for (int i = 0; i < courseDays.length(); i++) {
                 if (currentDay.equalsIgnoreCase("thursday") && courseDays.charAt(i) == 'R') {
                     list.add(c);
-                } else if (currentDay.equalsIgnoreCase("thursday") && courseDays.charAt(i) == 'T') {
-
-                } else if (currentDay.charAt(0) == courseDays.charAt(i)) {
+                } else if (currentDay.charAt(0) == courseDays.charAt(i) && !(currentDay.equalsIgnoreCase("thursday") && courseDays.charAt(i) == 'T')) {
                     list.add(c);
 
                 }
