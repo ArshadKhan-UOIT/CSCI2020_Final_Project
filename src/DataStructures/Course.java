@@ -133,16 +133,29 @@ public class Course implements Runnable {
 
     @Override
     public String toString() {
-        return "Course{" +
+        String str = "Course{" +
                 "courseName='" + courseName + '\'' +
                 ", teacher='" + teacher + '\'' +
                 ", courseCode='" + courseCode + '\'' +
                 ", days='" + days + '\'' +
                 ", time='" + time + '\'' +
-                ", location='" + location + '\'' +
-                ", \nassignments=" + assignments +
-                ", \nmidterms=" + midterms +
-                ", \nexam=" + exam +
-                '}';
+                ", location='" + location + '\'';
+//                ", \nassignments=" + assignments +
+//                ", \nmidterms=" + midterms +
+//                ", \nexam=" + exam +
+//                '}';
+        for (Assignment a : assignments) {
+            str += a;
+        }
+        for (Midterm m : midterms) {
+            str += m;
+        }
+        for (Exam e : exam) {
+            str += e;
+        }
+        str += "}";
+
+        return str;
     }
+
 }
