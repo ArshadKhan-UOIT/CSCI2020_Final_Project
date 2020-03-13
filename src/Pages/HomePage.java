@@ -6,6 +6,7 @@ import DataStructures.Course;
 import DataStructures.Exam;
 import DataStructures.Midterm;
 import Windows.Window;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -33,26 +34,25 @@ public class HomePage extends Page {
         column.setPercentWidth(50);
         mainPane.getColumnConstraints().addAll(column, column); // each get 50% of width
         RowConstraints row = new RowConstraints();
-        row.setPercentHeight(50);
-        mainPane.getRowConstraints().addAll(row, row); // each get 50% of width
+        row.setPercentHeight(100);
+        mainPane.getRowConstraints().addAll(row); // each get 50% of height
 
         //(0,0) = To do
         //(0,1) = Schedule
         //(1,0) = My Courses
         //(1,1) = My Grades
         //add everything to the main pane
-        mainPane.add(createToDo(), 0, 0);
-        mainPane.add(createSchedule(), 0, 1);
-        mainPane.add(createMyCourses(), 1, 0);
-        mainPane.add(createMyGrades(), 1, 1);
 
+        VBox left = new VBox();
+        left.setSpacing(20);
+        left.setPadding(new Insets(10, 10, 10, 10));
+        left.getChildren().addAll(createToDo(), createSchedule());
 
-        //        mainPane.add(new ButtonBar(""),0,1);
-
-    }
-
-    public static void main(String[] args) {
-
+//        mainPane.add(createToDo(), 0, 0);
+//        mainPane.add(createSchedule(), 0, 1);
+//        mainPane.add(createMyCourses(), 1, 0);
+        mainPane.add(left, 0, 0);
+        mainPane.add(createMyGrades(), 1, 0);
     }
 
     //method to initialize To Do section
@@ -94,7 +94,6 @@ public class HomePage extends Page {
         Text dow = new Text(String.valueOf(dayOfWeek));
         schedulePane.getChildren().add(dow);
 
-//        System.out.println(dayOfWeek);
         ArrayList<Course> list = new ArrayList<>();
         //Find courses with date equal to current day of the week
         for (Course c : Window.courses) {
@@ -129,27 +128,25 @@ public class HomePage extends Page {
         return schedulePane;
     }
 
-
     //method to initialize My Courses section
-    public Pane createMyCourses() {
-        //My Courses pane
-        VBox coursesPane = new VBox();
-        Text coursesBanner = new Text("My Courses:");
-        coursesBanner.setFont(Font.font("AnjaliOldLipi", FontWeight.BOLD, FontPosture.REGULAR, 30));
-
-
-        coursesPane.getChildren().add(coursesBanner);
-
-        return coursesPane;
-    }
-
+//    public Pane createMyCourses() {
+//        //My Courses pane
+//        VBox coursesPane = new VBox();
+//        Text coursesBanner = new Text("My Courses:");
+//        coursesBanner.setFont(Font.font("AnjaliOldLipi", FontWeight.BOLD, FontPosture.REGULAR, 30));
+//
+//
+//        coursesPane.getChildren().add(coursesBanner);
+//
+//        return coursesPane;
+//    }
 
     //method to initialize My Grades section
     public Pane createMyGrades() {
 
         //My Grades Pane
         GridPane gradePane = new GridPane();
-        gradePane.setGridLinesVisible(true);
+        gradePane.setGridLinesVisible(false);
         gradePane.setAlignment(Pos.CENTER);
 
         Text gradeBanner = new Text("My Grades:");
@@ -207,13 +204,10 @@ public class HomePage extends Page {
         yAxis.setUpperBound(100); // making 100% the max value of the chart
         StackedBarChart<String, Number> gradeChart = new StackedBarChart<>(xAxis, yAxis);
 
-//        gradeChart.setAnimated(false);
-        gradeChart.setCategoryGap(0);
+        gradeChart.setCategoryGap(5);
         xAxis.setLabel("Class");
         yAxis.setLabel("Grade (%)");
 
-
-//        series1.getData().add(new XYChart.Data<>("blah", 125));
         gradeChart.getData().addAll(aSeries, mSeries, eSeries);
         //add bar chart to pane
         gradePane.add(gradeChart, 0, 1);
