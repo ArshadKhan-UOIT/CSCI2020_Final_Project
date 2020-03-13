@@ -12,12 +12,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CSVChanger implements Runnable {
-
-    @Override
-    public void run() {
-
-    }
+public class CSVChanger {
 
     public static List<String[]> read(String fileName, int size) {
         List<String[]> data = null;
@@ -48,7 +43,7 @@ public class CSVChanger implements Runnable {
         try {
             FileWriter write = new FileWriter(String.valueOf(Paths.get("DataFiles/" + fileName)), true);
             CSVPrinter printer = CSVFormat.DEFAULT.print(write);
-
+            printer.println();
             printer.printRecords(data);
 
             printer.flush();

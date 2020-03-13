@@ -42,11 +42,7 @@ public class Window extends Application implements Runnable {
         Button b1 = new Button("Home");
         Button b2 = new Button("My Courses");
         Button b3 = new Button("Schedule");
-//        Button b4 = new Button("To Do");
         Button b5 = new Button("My Grades");
-//        Button b6 = new Button("Assignments");
-//        Button b7 = new Button("Midterms");
-//        Button b8 = new Button("Final Exams");
         MenuButton b9 = new MenuButton("Add Info");
 
         b1.setPrefSize(screen.getWidth() / 5, screen.getHeight() * 0.05);
@@ -65,13 +61,31 @@ public class Window extends Application implements Runnable {
         MenuItem course = new MenuItem("Add Course");
         course.setOnAction(e -> {
             //start new thread to open window
-            Runnable addInfo = new AddCoursePage();
-            Thread addInfoThread = new Thread(addInfo);
-            addInfoThread.run();
+            Runnable addCourse = new AddCoursePage();
+            Thread addCourseThread = new Thread(addCourse);
+            addCourseThread.run();
         });
         MenuItem assignment = new MenuItem("Add Assignment");
+        assignment.setOnAction(e -> {
+            //start new thread to open window
+            Runnable addAssignment = new AddAssignmentPage();
+            Thread addAssignmentThread = new Thread(addAssignment);
+            addAssignmentThread.run();
+        });
         MenuItem midterm = new MenuItem("Add Midterm");
+        midterm.setOnAction(e -> {
+            //start new thread to open window
+            Runnable addMidterm = new AddMidtermPage();
+            Thread addMidtermThread = new Thread(addMidterm);
+            addMidtermThread.run();
+        });
         MenuItem exam = new MenuItem("Add Exam");
+        exam.setOnAction(e -> {
+            //start new thread to open window
+            Runnable addExam = new AddExamPage();
+            Thread addExamThread = new Thread(addExam);
+            addExamThread.run();
+        });
 
         b9.getItems().addAll(course, assignment, midterm, exam);
 
