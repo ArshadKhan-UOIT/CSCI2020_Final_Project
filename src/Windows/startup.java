@@ -29,9 +29,8 @@ import java.util.List;
  */
 public class startup extends Application {
     @Override
-    public void start(Stage primaryStage) throws InterruptedException {
+    public void start(Stage primaryStage) {
         //class to handle Windows.startup window before homepage window appears
-        Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
         VBox titleBox = new VBox();
         Text banner = new Text("Loading...");
         Image bannerImage = new Image("file:DataFiles/CourseContent.png");

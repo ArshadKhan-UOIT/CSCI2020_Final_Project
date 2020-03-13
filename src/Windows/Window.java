@@ -25,14 +25,11 @@ public class Window extends Application implements Runnable {
 
     public Window(Course[] c) {
         courses = c;
-
     }
 
     @Override
     public void run() {
-
         start(new Stage());
-
     }
 
     @Override
@@ -41,7 +38,6 @@ public class Window extends Application implements Runnable {
         Rectangle2D screen = Screen.getPrimary().getVisualBounds();
         BorderPane mainPane = new BorderPane();
         HBox topPane = new HBox();
-//        mainPane.setPadding(new Insets(screen.getHeight()*0.1,screen.getWidth()*0.05,screen.getHeight()*0.05,screen.getWidth()*0.05));
 
         Button b1 = new Button("Home");
         Button b2 = new Button("My Courses");
@@ -97,51 +93,60 @@ public class Window extends Application implements Runnable {
     }
 
     public void changePage(Stage stage, BorderPane pane, String page) {
+        switch (page) {
+            case "Home":
+                stage.setTitle("Home");
+                HomePage home = new HomePage();
+                pane.setCenter(home.getMainPane());
 
-        if (page.equals("Home")) {
-            stage.setTitle("Home");
-            HomePage home = new HomePage();
-            pane.setCenter(home.getMainPane());
+                break;
+            case "Courses":
+                stage.setTitle("My Courses");
+                CoursesPage cPage = new CoursesPage();
+                pane.setCenter(cPage.getMainPane());
+                break;
+            case "Schedule":
+                stage.setTitle("Schedule");
+                //
+                pane.setCenter(new TextArea());
 
-        } else if (page.equals("Courses")) {
-            stage.setTitle("My Courses");
-            CoursesPage cPage = new CoursesPage();
-            pane.setCenter(cPage.getMainPane());
-        } else if (page.equals("Schedule")) {
-            stage.setTitle("Schedule");
-            //
-            pane.setCenter(new TextArea());
+                break;
+            case "ToDo":
+                stage.setTitle("To Do");
+                //
+                pane.setCenter(new TextArea());
 
-        } else if (page.equals("ToDo")) {
-            stage.setTitle("To Do");
-            //
-            pane.setCenter(new TextArea());
+                break;
+            case "Grades":
+                stage.setTitle("Grades");
+                GradesPage gPage = new GradesPage();
+                pane.setCenter(gPage.getMainPane());
 
-        } else if (page.equals("Grades")) {
-            stage.setTitle("Grades");
-            GradesPage gPage = new GradesPage();
-            pane.setCenter(gPage.getMainPane());
+                break;
+            case "Assignments":
+                stage.setTitle("Assignments");
+                //
+                pane.setCenter(new TextArea());
 
-        } else if (page.equals("Assignments")) {
-            stage.setTitle("Assignments");
-            //
-            pane.setCenter(new TextArea());
+                break;
+            case "Midterms":
+                stage.setTitle("Midterms");
+                //
+                pane.setCenter(new TextArea());
 
-        } else if (page.equals("Midterms")) {
-            stage.setTitle("Midterms");
-            //
-            pane.setCenter(new TextArea());
+                break;
+            case "FinalExams":
+                stage.setTitle("Final Exams");
+                //
+                pane.setCenter(new TextArea());
 
-        } else if (page.equals("FinalExams")) {
-            stage.setTitle("Final Exams");
-            //
-            pane.setCenter(new TextArea());
+                break;
+            case "AddInfo":
+                stage.setTitle("Add Info");
+                //
+                pane.setCenter(new TextArea());
 
-        } else if (page.equals("AddInfo")) {
-            stage.setTitle("Add Info");
-            //
-            pane.setCenter(new TextArea());
-
+                break;
         }
     }
 }

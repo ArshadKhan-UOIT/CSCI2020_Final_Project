@@ -71,13 +71,6 @@ public class Course implements Runnable {
 
     }
 
-    public double getGrade() {
-        //calculate grades based off of assignment, midterms, etc
-        double grade = 0.0;
-
-        return grade;
-    }
-
     private Assignment[] makeAssignments() {
         //find assignments with matching course code or name
         List<String[]> data = CSVChanger.read("assignments.csv", 5);
