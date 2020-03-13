@@ -12,15 +12,15 @@ public class CoursesPage extends Page {
         VBox buttons = new VBox();
         //display courses as buttons
 
-        Button[] b =new Button[Window.courses.length];
+        Button[] b = new Button[Window.courses.length];
 
-        for (int i=0; i< Window.courses.length;i++) {
+        for (int i = 0; i < Window.courses.length; i++) {
             b[i] = new Button(Window.courses[i].getCourseName());
             buttons.getChildren().add(b[i]);
 //            System.out.println(Window.courses[i]); //test to make sure has the correct info
 
         }
-            mainPane.add(buttons,0,0);
+        mainPane.add(buttons, 0, 0);
     }
 
     public static void main(String[] args) {

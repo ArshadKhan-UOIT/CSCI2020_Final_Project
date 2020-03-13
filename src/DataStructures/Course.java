@@ -1,19 +1,11 @@
 package DataStructures;
 
 import CSV.CSVChanger;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVRecord;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 
-
-public class Course implements Runnable{
+public class Course implements Runnable {
     private String courseName;
     private String teacher;
     private String courseCode;
@@ -25,7 +17,7 @@ public class Course implements Runnable{
     private Midterm[] midterms;
     private Exam[] exam;
 
-    public Course (String[] courseInfo) {
+    public Course(String[] courseInfo) {
         this.courseName = courseInfo[0];
         this.teacher = courseInfo[1];
         this.courseCode = courseInfo[2];
@@ -40,25 +32,35 @@ public class Course implements Runnable{
     public String getCourseName() {
         return courseName;
     }
+
     public String getCourseCode() {
         return courseCode;
     }
+
     public String getDays() {
         return days;
     }
+
     public String getTeacher() {
         return teacher;
     }
+
     public String getTime() {
         return time;
     }
-    public String getLocation() { return this.location; }
+
+    public String getLocation() {
+        return this.location;
+    }
+
     public Assignment[] getAssignments() {
         return assignments;
     }
+
     public Midterm[] getMidterms() {
         return midterms;
     }
+
     public Exam[] getExam() {
         return exam;
     }
@@ -78,9 +80,9 @@ public class Course implements Runnable{
 
     private Assignment[] makeAssignments() {
         //find assignments with matching course code or name
-        List<String[]> data = CSVChanger.read("assignments.csv",5);
+        List<String[]> data = CSVChanger.read("assignments.csv", 5);
 
-        for (int i=0; i< data.size();i++) {
+        for (int i = 0; i < data.size(); i++) {
             String[] str = (data.get(i));
 
             if (!str[0].equalsIgnoreCase(this.courseCode)) {
@@ -90,7 +92,7 @@ public class Course implements Runnable{
         }
 
         Assignment[] a = new Assignment[data.size()];
-        for (int i=0; i< data.size();i++) {
+        for (int i = 0; i < data.size(); i++) {
             a[i] = new Assignment(data.get(i));
         }
         return a;
@@ -98,8 +100,8 @@ public class Course implements Runnable{
 
     private Midterm[] makeMidterms() {
         //find midterms with matching course code or name
-        List<String[]> data = CSVChanger.read("midterms.csv",6);
-        for (int i=0; i< data.size();i++) {
+        List<String[]> data = CSVChanger.read("midterms.csv", 6);
+        for (int i = 0; i < data.size(); i++) {
             String[] str = (data.get(i));
 
             if (!str[0].equalsIgnoreCase(this.courseCode)) {
@@ -109,17 +111,17 @@ public class Course implements Runnable{
         }
 
         Midterm[] m = new Midterm[data.size()];
-        for (int i=0; i< data.size();i++) {
+        for (int i = 0; i < data.size(); i++) {
             m[i] = new Midterm(data.get(i));
         }
 
         return m;
     }
 
-    private Exam[]makeExam() {
+    private Exam[] makeExam() {
         //find exams with matching course code or name
-        List<String[]> data = CSVChanger.read("exams.csv",6);
-        for (int i=0; i< data.size();i++) {
+        List<String[]> data = CSVChanger.read("exams.csv", 6);
+        for (int i = 0; i < data.size(); i++) {
             String[] str = (data.get(i));
 
             if (!str[0].equalsIgnoreCase(this.courseCode)) {
@@ -129,7 +131,7 @@ public class Course implements Runnable{
         }
 
         Exam[] e = new Exam[data.size()];
-        for (int i=0; i< data.size();i++) {
+        for (int i = 0; i < data.size(); i++) {
             e[i] = new Exam(data.get(i));
         }
 

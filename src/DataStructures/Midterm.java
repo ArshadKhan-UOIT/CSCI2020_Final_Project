@@ -16,6 +16,7 @@ public class Midterm {
         weight = parseDouble;
         mark = parseDouble1;
     }
+
     public Midterm(String[] m) {
         courseCode = m[0];
         date = m[1];
