@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package Pages;
 
 import javafx.application.Application;
@@ -12,3 +13,15 @@ public class GradesPage extends Page{
     }
 
 }
+=======
+package Pages;
+
+public class GradesPage extends Page {
+
+    public GradesPage() {
+//        System.out.println("Pages.GradesPage created");
+
+    }
+
+}
+>>>>>>> origin/Arshad

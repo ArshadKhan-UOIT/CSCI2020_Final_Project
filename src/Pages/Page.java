@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package Pages;
 
 import javafx.application.Application;
@@ -27,3 +28,17 @@ public abstract class Page {
         return this.mainPane;
     }
 }
+=======
+package Pages;
+
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+
+public abstract class Page {
+    protected GridPane mainPane = new GridPane();
+
+    public Pane getMainPane() {
+        return this.mainPane;
+    }
+}
+>>>>>>> origin/Arshad

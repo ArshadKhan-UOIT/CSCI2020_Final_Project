@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.GridPane?>
 
@@ -5,4 +6,9 @@
 <?import javafx.scene.control.Label?>
 <GridPane fx:controller="Controller"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+=======
+<?import javafx.scene.layout.GridPane?>
+<GridPane fx:controller="Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+>>>>>>> origin/Arshad
 </GridPane>
