@@ -14,6 +14,7 @@ public class Assignment {
         this.weight = weight;
         this.mark = mark;
     }
+
     public Assignment(String[] a) {
         courseCode = a[0];
         assignmentName = a[1];

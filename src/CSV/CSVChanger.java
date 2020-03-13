@@ -31,8 +31,7 @@ public class CSVChanger implements Runnable {
 
             for (CSVRecord record : info) {
                 str = new String[size];
-                for (int i=0; i<size; i++)
-                {
+                for (int i = 0; i < size; i++) {
                     str[i] = record.get(i);
                 }
 
@@ -47,7 +46,7 @@ public class CSVChanger implements Runnable {
 
     public static void write(String fileName, List<String[]> data) {
         try {
-            FileWriter write = new FileWriter(String.valueOf(Paths.get("DataFiles/"+fileName)),true);
+            FileWriter write = new FileWriter(String.valueOf(Paths.get("DataFiles/" + fileName)), true);
             CSVPrinter printer = CSVFormat.DEFAULT.print(write);
 
             printer.printRecords(data);

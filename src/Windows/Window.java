@@ -20,7 +20,7 @@ import javafx.stage.Stage;
  * When a button is pressed the window its does not change but the center of the border pane is changed to the page
  * corresponding to the button
  */
-public class Window extends Application implements Runnable{
+public class Window extends Application implements Runnable {
     public static Course[] courses;
 
     public Window(Course[] c) {
@@ -53,19 +53,19 @@ public class Window extends Application implements Runnable{
 //        Button b8 = new Button("Final Exams");
         Button b9 = new Button("Add Info");
 
-        b1.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
+        b1.setPrefSize(screen.getWidth() / 9, screen.getHeight() * 0.05);
         b1.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Home"));
 
-        b2.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
+        b2.setPrefSize(screen.getWidth() / 9, screen.getHeight() * 0.05);
         b2.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Courses"));
 
-        b3.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
+        b3.setPrefSize(screen.getWidth() / 9, screen.getHeight() * 0.05);
         b3.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Schedule"));
 
 //        b4.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
 //        b4.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "ToDo"));
 
-        b5.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
+        b5.setPrefSize(screen.getWidth() / 9, screen.getHeight() * 0.05);
         b5.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Grades"));
 
 //        b6.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
@@ -77,11 +77,11 @@ public class Window extends Application implements Runnable{
 //        b8.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
 //        b8.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "FinalExams"));
 
-        b9.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
+        b9.setPrefSize(screen.getWidth() / 9, screen.getHeight() * 0.05);
         b9.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "AddInfo"));
 
         //add buttons
-        topPane.getChildren().addAll(b1,b2,b3,b5,b9);
+        topPane.getChildren().addAll(b1, b2, b3, b5, b9);
         topPane.setAlignment(Pos.CENTER);
         mainPane.setTop(topPane);
         HomePage home = new HomePage();
@@ -89,9 +89,9 @@ public class Window extends Application implements Runnable{
 
         //final window setup
         primaryStage.setTitle("Course Content");
-        primaryStage.setMinWidth(screen.getWidth()/2);
-        primaryStage.setMinHeight(screen.getHeight()/2);
-        primaryStage.setScene(new Scene(mainPane,screen.getWidth()*0.66, screen.getHeight()*0.66));
+        primaryStage.setMinWidth(screen.getWidth() / 2);
+        primaryStage.setMinHeight(screen.getHeight() / 2);
+        primaryStage.setScene(new Scene(mainPane, screen.getWidth() * 0.66, screen.getHeight() * 0.66));
         primaryStage.show();
 
     }
@@ -103,49 +103,41 @@ public class Window extends Application implements Runnable{
             HomePage home = new HomePage();
             pane.setCenter(home.getMainPane());
 
-        }
-        else if (page.equals("Courses")) {
+        } else if (page.equals("Courses")) {
             stage.setTitle("My Courses");
             CoursesPage cPage = new CoursesPage();
             pane.setCenter(cPage.getMainPane());
-        }
-        else if (page.equals("Schedule")) {
+        } else if (page.equals("Schedule")) {
             stage.setTitle("Schedule");
             //
             pane.setCenter(new TextArea());
 
-        }
-        else if (page.equals("ToDo")) {
+        } else if (page.equals("ToDo")) {
             stage.setTitle("To Do");
             //
             pane.setCenter(new TextArea());
 
-        }
-        else if (page.equals("Grades")) {
+        } else if (page.equals("Grades")) {
             stage.setTitle("Grades");
             GradesPage gPage = new GradesPage();
             pane.setCenter(gPage.getMainPane());
 
-        }
-        else if (page.equals("Assignments")) {
+        } else if (page.equals("Assignments")) {
             stage.setTitle("Assignments");
             //
             pane.setCenter(new TextArea());
 
-        }
-        else if (page.equals("Midterms")) {
+        } else if (page.equals("Midterms")) {
             stage.setTitle("Midterms");
             //
             pane.setCenter(new TextArea());
 
-        }
-        else if (page.equals("FinalExams")) {
+        } else if (page.equals("FinalExams")) {
             stage.setTitle("Final Exams");
             //
             pane.setCenter(new TextArea());
 
-        }
-        else if (page.equals("AddInfo")) {
+        } else if (page.equals("AddInfo")) {
             stage.setTitle("Add Info");
             //
             pane.setCenter(new TextArea());
