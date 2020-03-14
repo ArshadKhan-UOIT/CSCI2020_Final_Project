@@ -21,43 +21,119 @@ import java.util.List;
 
 
 public class CoursesPage extends Page {
-   
+    TableView<Course> courseTableView;
+    TableView<Exam> examTableView;
+    TableView<Midterm> midtermTableView;
+    TableView<Assignment> assignmentTableView;
+    String[] courseCodes = {"MATH2050","CSCI2160","CSCI2040","CSCI2072","CSCI2020"};
     public CoursesPage() {
-        //Assignmets: course code, assignment, due date, weight , mark
-        //what we want when we click a certain course name
-        //assignment, due date, weight , mark
+        courseTableView = new TableView();
+        examTableView = new TableView();
+        midtermTableView = new TableView();
+        assignmentTableView = new TableView();
         System.out.println("Pages.CoursesPage created");
-        //assignment stuff
-        TableView<Assignment> asmtTable = new TableView();
-//        asmtTable.setMaxWidth(502);
-        TableColumn<Assignment, String> asmtCol = new TableColumn("Type");
-        asmtCol.setMinWidth(200);
-        TableColumn<Assignment, String> asmtDueDateCol = new TableColumn("Due Date");
-        asmtDueDateCol.setMinWidth(100);
-        TableColumn<Assignment, Double> asmtWightCol = new TableColumn("Weight (%)");
-        asmtWightCol.setMinWidth(100);
-        TableColumn<Assignment, Double> asmtMarkCol = new TableColumn("Mark (%)");
-        asmtMarkCol.setMinWidth(100);
-        //midterm stuff
-        //CSCI2160, Feb, 5pm, UP1501, 15, 90
-        //String courseCode, String midterm, String date, String time, String location, double weight, double mark;
-        TableView<Midterm> midTable = new TableView();
-//        midTable.setMaxWidth(502);
-        TableColumn<Midterm, String> midCol = new TableColumn("Type");
-        midCol.setMinWidth(200);
-        TableColumn<Midterm, String> midDueDateCol = new TableColumn("Date");
-        midDueDateCol.setMinWidth(100);
-        TableColumn<Midterm, String> midTimeCol = new TableColumn("Time");
-        midTimeCol.setMinWidth(100);
-        TableColumn<Midterm, String> midLocationCol = new TableColumn("Location");
-        midLocationCol.setMinWidth(100);
-        TableColumn<Midterm, Double> midWightCol = new TableColumn("Weight (%)");
-        midWightCol.setMinWidth(100);
-        TableColumn<Midterm, Double> midMarkCol = new TableColumn("Mark (%)");
-        midMarkCol.setMinWidth(100);
-        //  Exam -  String courseCode,String exam,String date,String time,String location,double weight,double mark;
-        TableView<Exam> examTable = new TableView();
-//        midTable.setMaxWidth(502);
+        HBox buttons = new HBox();
+
+        Button[] b =new Button[Window.courses.length];
+
+
+        for (int i=0; i< Window.courses.length;i++) {
+            b[i] = new Button(Window.courses[i].getCourseName());
+            buttons.getChildren().add(b[i]);
+//            System.out.println(Window.courses[i]); //test to make sure has the correct info
+            int index = i;
+//            b[i].setOnMouseClicked(e->{
+//                courseTableView.getItems().clear();
+//                examTableView.getItems().clear();
+//                midtermTableView.getItems().clear();
+//                assignmentTableView.getItems().clear();
+//                courseTableView.refresh();
+//                examTableView.refresh();
+//                midtermTableView.refresh();
+//                assignmentTableView.refresh();
+//                getTableColumn0();
+//            });
+        }
+        b[0].setOnMouseClicked(e-> {
+            courseTableView.getItems().clear();
+            examTableView.getItems().clear();
+            midtermTableView.getItems().clear();
+            assignmentTableView.getItems().clear();
+//            courseTableView.refresh();
+//            examTableView.refresh();
+//            midtermTableView.refresh();
+//            assignmentTableView.refresh();
+            getTableColumn0();
+        });
+        b[1].setOnMouseClicked(e-> {
+            courseTableView.getItems().clear();
+            examTableView.getItems().clear();
+            midtermTableView.getItems().clear();
+            assignmentTableView.getItems().clear();
+//            courseTableView.refresh();
+//            examTableView.refresh();
+//            midtermTableView.refresh();
+//            assignmentTableView.refresh();
+            getTableColumn1();
+        });
+        b[2].setOnMouseClicked(e-> {
+            courseTableView.getItems().clear();
+            examTableView.getItems().clear();
+            midtermTableView.getItems().clear();
+            assignmentTableView.getItems().clear();
+//            courseTableView.refresh();
+//            examTableView.refresh();
+//            midtermTableView.refresh();
+//            assignmentTableView.refresh();
+            getTableColumn2();
+        });
+        b[3].setOnMouseClicked(e-> {
+            courseTableView.getItems().clear();
+            examTableView.getItems().clear();
+            midtermTableView.getItems().clear();
+            assignmentTableView.getItems().clear();
+//            courseTableView.refresh();
+//            examTableView.refresh();
+//            midtermTableView.refresh();
+//            assignmentTableView.refresh();
+            getTableColumn3();
+        });
+        b[4].setOnMouseClicked(e-> {
+            courseTableView.getItems().clear();
+            examTableView.getItems().clear();
+            midtermTableView.getItems().clear();
+            assignmentTableView.getItems().clear();
+//            courseTableView.refresh();
+//            examTableView.refresh();
+//            midtermTableView.refresh();
+//            assignmentTableView.refresh();
+            getTableColumn4();
+        });
+        mainPane.add(buttons,0,0);
+
+    }
+
+
+
+    private void getTableColumn0() {
+        TableColumn<Course, String> courseCodeCol = new TableColumn("Course Code");
+        courseCodeCol.setMinWidth(200);
+        TableColumn<Course, String> courseProfCol = new TableColumn("Prof");
+        courseProfCol.setMinWidth(100);
+        TableColumn<Course, String> courseDaysCol = new TableColumn("Days");
+        courseDaysCol.setMinWidth(100);
+        TableColumn<Course, String> courseTimeCol = new TableColumn("Times");
+        courseTimeCol.setMinWidth(100);
+        TableColumn<Course, String> courseLocationCol = new TableColumn("Location");
+        courseLocationCol.setMinWidth(100);
+        courseCodeCol.setCellValueFactory(new PropertyValueFactory<>("courseCode"));
+        courseProfCol.setCellValueFactory(new PropertyValueFactory<>("teacher"));
+        courseDaysCol.setCellValueFactory(new PropertyValueFactory<>("days"));
+        courseTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        courseLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        courseTableView.setItems(getCourseData0());
+        courseTableView.getColumns().addAll(courseCodeCol, courseProfCol, courseDaysCol, courseTimeCol, courseLocationCol);
+
         TableColumn<Exam, String> examCol = new TableColumn("Type");
         examCol.setMinWidth(200);
         TableColumn<Exam, String> examDueDateCol = new TableColumn("Date");
@@ -70,10 +146,58 @@ public class CoursesPage extends Page {
         examWightCol.setMinWidth(100);
         TableColumn<Exam, Double> examMarkCol = new TableColumn("Mark (%)");
         examMarkCol.setMinWidth(100);
-        //private String courseName;
-        //Course - String courseName, String teacher,String courseCode,String days,String time,String location;
-        TableView<Course> courseTable = new TableView();
-//        midTable.setMaxWidth(502);
+        examCol.setCellValueFactory(new PropertyValueFactory<>("exam"));
+        examDueDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        examTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        examLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        examWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        examMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
+        examTableView.setItems(getExamData0());
+        examTableView.getColumns().addAll(examCol, examDueDateCol, examTimeCol, examLocationCol, examWightCol, examMarkCol);
+
+        TableColumn<Midterm, String> midCol = new TableColumn("Type");
+        midCol.setMinWidth(200);
+        TableColumn<Midterm, String> midDueDateCol = new TableColumn("Date");
+        midDueDateCol.setMinWidth(100);
+        TableColumn<Midterm, String> midTimeCol = new TableColumn("Time");
+        midTimeCol.setMinWidth(100);
+        TableColumn<Midterm, String> midLocationCol = new TableColumn("Location");
+        midLocationCol.setMinWidth(100);
+        TableColumn<Midterm, Double> midWightCol = new TableColumn("Weight (%)");
+        midWightCol.setMinWidth(100);
+        TableColumn<Midterm, Double> midMarkCol = new TableColumn("Mark (%)");
+        midMarkCol.setMinWidth(100);
+        midCol.setCellValueFactory(new PropertyValueFactory<>("midterm"));
+        midDueDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        midTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        midLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        midWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        midMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
+        midtermTableView.setItems(getMidtermData0());
+        midtermTableView.getColumns().addAll(midCol, midDueDateCol, midTimeCol, midLocationCol, midWightCol, midMarkCol);
+
+        TableColumn<Assignment, String> asmtCol = new TableColumn("Type");
+        asmtCol.setMinWidth(200);
+        TableColumn<Assignment, String> asmtDueDateCol = new TableColumn("Due Date");
+        asmtDueDateCol.setMinWidth(100);
+        TableColumn<Assignment, Double> asmtWightCol = new TableColumn("Weight (%)");
+        asmtWightCol.setMinWidth(100);
+        TableColumn<Assignment, Double> asmtMarkCol = new TableColumn("Mark (%)");
+        asmtMarkCol.setMinWidth(100);
+        asmtCol.setCellValueFactory(new PropertyValueFactory<>("assignmentName"));
+        asmtDueDateCol.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+        asmtWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        asmtMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
+        assignmentTableView.setItems(getAssignmentData0());
+        assignmentTableView.getColumns().addAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
+
+        mainPane.add(courseTableView,0,1);
+        mainPane.add(examTableView,0,2);
+        mainPane.add(midtermTableView,0,3);
+        mainPane.add(assignmentTableView,0,4);
+
+    }
+    private void getTableColumn1() {
         TableColumn<Course, String> courseCodeCol = new TableColumn("Course Code");
         courseCodeCol.setMinWidth(200);
         TableColumn<Course, String> courseProfCol = new TableColumn("Prof");
@@ -84,107 +208,541 @@ public class CoursesPage extends Page {
         courseTimeCol.setMinWidth(100);
         TableColumn<Course, String> courseLocationCol = new TableColumn("Location");
         courseLocationCol.setMinWidth(100);
+        courseCodeCol.setCellValueFactory(new PropertyValueFactory<>("courseCode"));
+        courseProfCol.setCellValueFactory(new PropertyValueFactory<>("teacher"));
+        courseDaysCol.setCellValueFactory(new PropertyValueFactory<>("days"));
+        courseTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        courseLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        courseTableView.setItems(getCourseData1());
+        courseTableView.getColumns().addAll(courseCodeCol, courseProfCol, courseDaysCol, courseTimeCol, courseLocationCol);
 
-//        ObservableList<Assignment> ObList = FXCollections.observableArrayList();
-//        ObservableList<Assignment> dueDateObList = FXCollections.observableArrayList();
-//        ObservableList<Assignment> weightObList = FXCollections.observableArrayList();
-//        ObservableList<Assignment> markObList = FXCollections.observableArrayList();
-        //List<Assignment> assignmentList = c.getAssignments();
-//        assignmentList[i].getCourseCode()
-        HBox buttons = new HBox();
-        //display courses as buttons
-
-        Button[] b =new Button[Window.courses.length];
-
-
-        for (int i=0; i< Window.courses.length;i++) {
-            b[i] = new Button(Window.courses[i].getCourseName());
-            buttons.getChildren().add(b[i]);
-            System.out.println(Window.courses[i]); //test to make sure has the correct info
-        }
-        //assignment
-        asmtCol.setCellValueFactory(new PropertyValueFactory<>("assignmentName"));
-        asmtDueDateCol.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
-        asmtWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
-        asmtMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
-        asmtTable.setItems(getAssignmentData());
-        asmtTable.getColumns().addAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
-        //midterm, String courseCode, String midterm, String date, String time, String location, double weight, double mark;
-        midCol.setCellValueFactory(new PropertyValueFactory<>("midterm"));
-        midDueDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
-        midTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
-        midLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
-        midWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
-        midMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
-        midTable.setItems(getMidtermData());
-        midTable.getColumns().addAll(midCol, midDueDateCol, midTimeCol, midLocationCol, midWightCol, midMarkCol);
-        //  Exam -  String courseCode,String exam,String date,String time,String location,double weight,double mark;
+        TableColumn<Exam, String> examCol = new TableColumn("Type");
+        examCol.setMinWidth(200);
+        TableColumn<Exam, String> examDueDateCol = new TableColumn("Date");
+        examDueDateCol.setMinWidth(100);
+        TableColumn<Exam, String> examTimeCol = new TableColumn("Time");
+        examTimeCol.setMinWidth(100);
+        TableColumn<Exam, String> examLocationCol = new TableColumn("Location");
+        examLocationCol.setMinWidth(100);
+        TableColumn<Exam, Double> examWightCol = new TableColumn("Weight (%)");
+        examWightCol.setMinWidth(100);
+        TableColumn<Exam, Double> examMarkCol = new TableColumn("Mark (%)");
+        examMarkCol.setMinWidth(100);
         examCol.setCellValueFactory(new PropertyValueFactory<>("exam"));
         examDueDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
         examTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
         examLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         examWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         examMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
-        examTable.setItems(getExamData());
-        examTable.getColumns().addAll(examCol, examDueDateCol, examTimeCol, examLocationCol, examWightCol, examMarkCol);
-        //Course - String courseName, String teacher,String courseCode,String days,String time,String location;
+        examTableView.setItems(getExamData1());
+        examTableView.getColumns().addAll(examCol, examDueDateCol, examTimeCol, examLocationCol, examWightCol, examMarkCol);
+
+        TableColumn<Midterm, String> midCol = new TableColumn("Type");
+        midCol.setMinWidth(200);
+        TableColumn<Midterm, String> midDueDateCol = new TableColumn("Date");
+        midDueDateCol.setMinWidth(100);
+        TableColumn<Midterm, String> midTimeCol = new TableColumn("Time");
+        midTimeCol.setMinWidth(100);
+        TableColumn<Midterm, String> midLocationCol = new TableColumn("Location");
+        midLocationCol.setMinWidth(100);
+        TableColumn<Midterm, Double> midWightCol = new TableColumn("Weight (%)");
+        midWightCol.setMinWidth(100);
+        TableColumn<Midterm, Double> midMarkCol = new TableColumn("Mark (%)");
+        midMarkCol.setMinWidth(100);
+        midCol.setCellValueFactory(new PropertyValueFactory<>("midterm"));
+        midDueDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        midTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        midLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        midWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        midMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
+        midtermTableView.setItems(getMidtermData1());
+        midtermTableView.getColumns().addAll(midCol, midDueDateCol, midTimeCol, midLocationCol, midWightCol, midMarkCol);
+
+        TableColumn<Assignment, String> asmtCol = new TableColumn("Type");
+        asmtCol.setMinWidth(200);
+        TableColumn<Assignment, String> asmtDueDateCol = new TableColumn("Due Date");
+        asmtDueDateCol.setMinWidth(100);
+        TableColumn<Assignment, Double> asmtWightCol = new TableColumn("Weight (%)");
+        asmtWightCol.setMinWidth(100);
+        TableColumn<Assignment, Double> asmtMarkCol = new TableColumn("Mark (%)");
+        asmtMarkCol.setMinWidth(100);
+        asmtCol.setCellValueFactory(new PropertyValueFactory<>("assignmentName"));
+        asmtDueDateCol.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+        asmtWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        asmtMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
+        assignmentTableView.setItems(getAssignmentData1());
+        assignmentTableView.getColumns().addAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
+
+        mainPane.add(courseTableView,0,1);
+        mainPane.add(examTableView,0,2);
+        mainPane.add(midtermTableView,0,3);
+        mainPane.add(assignmentTableView,0,4);
+
+    }
+    private void getTableColumn2() {
+        TableColumn<Course, String> courseCodeCol = new TableColumn("Course Code");
+        courseCodeCol.setMinWidth(200);
+        TableColumn<Course, String> courseProfCol = new TableColumn("Prof");
+        courseProfCol.setMinWidth(100);
+        TableColumn<Course, String> courseDaysCol = new TableColumn("Days");
+        courseDaysCol.setMinWidth(100);
+        TableColumn<Course, String> courseTimeCol = new TableColumn("Times");
+        courseTimeCol.setMinWidth(100);
+        TableColumn<Course, String> courseLocationCol = new TableColumn("Location");
+        courseLocationCol.setMinWidth(100);
         courseCodeCol.setCellValueFactory(new PropertyValueFactory<>("courseCode"));
         courseProfCol.setCellValueFactory(new PropertyValueFactory<>("teacher"));
         courseDaysCol.setCellValueFactory(new PropertyValueFactory<>("days"));
         courseTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
         courseLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
-        courseTable.setItems(getCourseData());
-        courseTable.getColumns().addAll(courseCodeCol, courseProfCol, courseDaysCol, courseTimeCol, courseLocationCol);
+        courseTableView.setItems(getCourseData2());
+        courseTableView.getColumns().addAll(courseCodeCol, courseProfCol, courseDaysCol, courseTimeCol, courseLocationCol);
 
+        TableColumn<Exam, String> examCol = new TableColumn("Type");
+        examCol.setMinWidth(200);
+        TableColumn<Exam, String> examDueDateCol = new TableColumn("Date");
+        examDueDateCol.setMinWidth(100);
+        TableColumn<Exam, String> examTimeCol = new TableColumn("Time");
+        examTimeCol.setMinWidth(100);
+        TableColumn<Exam, String> examLocationCol = new TableColumn("Location");
+        examLocationCol.setMinWidth(100);
+        TableColumn<Exam, Double> examWightCol = new TableColumn("Weight (%)");
+        examWightCol.setMinWidth(100);
+        TableColumn<Exam, Double> examMarkCol = new TableColumn("Mark (%)");
+        examMarkCol.setMinWidth(100);
+        examCol.setCellValueFactory(new PropertyValueFactory<>("exam"));
+        examDueDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        examTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        examLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        examWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        examMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
+        examTableView.setItems(getExamData2());
+        examTableView.getColumns().addAll(examCol, examDueDateCol, examTimeCol, examLocationCol, examWightCol, examMarkCol);
 
+        TableColumn<Midterm, String> midCol = new TableColumn("Type");
+        midCol.setMinWidth(200);
+        TableColumn<Midterm, String> midDueDateCol = new TableColumn("Date");
+        midDueDateCol.setMinWidth(100);
+        TableColumn<Midterm, String> midTimeCol = new TableColumn("Time");
+        midTimeCol.setMinWidth(100);
+        TableColumn<Midterm, String> midLocationCol = new TableColumn("Location");
+        midLocationCol.setMinWidth(100);
+        TableColumn<Midterm, Double> midWightCol = new TableColumn("Weight (%)");
+        midWightCol.setMinWidth(100);
+        TableColumn<Midterm, Double> midMarkCol = new TableColumn("Mark (%)");
+        midMarkCol.setMinWidth(100);
+        midCol.setCellValueFactory(new PropertyValueFactory<>("midterm"));
+        midDueDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        midTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        midLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        midWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        midMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
+        midtermTableView.setItems(getMidtermData2());
+        midtermTableView.getColumns().addAll(midCol, midDueDateCol, midTimeCol, midLocationCol, midWightCol, midMarkCol);
 
-        mainPane.add(buttons,0,0);
-        mainPane.add(courseTable,0,1);
-        mainPane.add(examTable,0,2);
-        mainPane.add(midTable,0,3);
-        mainPane.add(asmtTable,0,4);
+        TableColumn<Assignment, String> asmtCol = new TableColumn("Type");
+        asmtCol.setMinWidth(200);
+        TableColumn<Assignment, String> asmtDueDateCol = new TableColumn("Due Date");
+        asmtDueDateCol.setMinWidth(100);
+        TableColumn<Assignment, Double> asmtWightCol = new TableColumn("Weight (%)");
+        asmtWightCol.setMinWidth(100);
+        TableColumn<Assignment, Double> asmtMarkCol = new TableColumn("Mark (%)");
+        asmtMarkCol.setMinWidth(100);
+        asmtCol.setCellValueFactory(new PropertyValueFactory<>("assignmentName"));
+        asmtDueDateCol.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+        asmtWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        asmtMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
+        assignmentTableView.setItems(getAssignmentData2());
+        assignmentTableView.getColumns().addAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
+
+        mainPane.add(courseTableView,0,1);
+        mainPane.add(examTableView,0,2);
+        mainPane.add(midtermTableView,0,3);
+        mainPane.add(assignmentTableView,0,4);
+
     }
-    public ObservableList<Assignment> getAssignmentData() {
+    private void getTableColumn3() {
+        TableColumn<Course, String> courseCodeCol = new TableColumn("Course Code");
+        courseCodeCol.setMinWidth(200);
+        TableColumn<Course, String> courseProfCol = new TableColumn("Prof");
+        courseProfCol.setMinWidth(100);
+        TableColumn<Course, String> courseDaysCol = new TableColumn("Days");
+        courseDaysCol.setMinWidth(100);
+        TableColumn<Course, String> courseTimeCol = new TableColumn("Times");
+        courseTimeCol.setMinWidth(100);
+        TableColumn<Course, String> courseLocationCol = new TableColumn("Location");
+        courseLocationCol.setMinWidth(100);
+        courseCodeCol.setCellValueFactory(new PropertyValueFactory<>("courseCode"));
+        courseProfCol.setCellValueFactory(new PropertyValueFactory<>("teacher"));
+        courseDaysCol.setCellValueFactory(new PropertyValueFactory<>("days"));
+        courseTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        courseLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        courseTableView.setItems(getCourseData3());
+        courseTableView.getColumns().addAll(courseCodeCol, courseProfCol, courseDaysCol, courseTimeCol, courseLocationCol);
+
+        TableColumn<Exam, String> examCol = new TableColumn("Type");
+        examCol.setMinWidth(200);
+        TableColumn<Exam, String> examDueDateCol = new TableColumn("Date");
+        examDueDateCol.setMinWidth(100);
+        TableColumn<Exam, String> examTimeCol = new TableColumn("Time");
+        examTimeCol.setMinWidth(100);
+        TableColumn<Exam, String> examLocationCol = new TableColumn("Location");
+        examLocationCol.setMinWidth(100);
+        TableColumn<Exam, Double> examWightCol = new TableColumn("Weight (%)");
+        examWightCol.setMinWidth(100);
+        TableColumn<Exam, Double> examMarkCol = new TableColumn("Mark (%)");
+        examMarkCol.setMinWidth(100);
+        examCol.setCellValueFactory(new PropertyValueFactory<>("exam"));
+        examDueDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        examTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        examLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        examWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        examMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
+        examTableView.setItems(getExamData3());
+        examTableView.getColumns().addAll(examCol, examDueDateCol, examTimeCol, examLocationCol, examWightCol, examMarkCol);
+
+        TableColumn<Midterm, String> midCol = new TableColumn("Type");
+        midCol.setMinWidth(200);
+        TableColumn<Midterm, String> midDueDateCol = new TableColumn("Date");
+        midDueDateCol.setMinWidth(100);
+        TableColumn<Midterm, String> midTimeCol = new TableColumn("Time");
+        midTimeCol.setMinWidth(100);
+        TableColumn<Midterm, String> midLocationCol = new TableColumn("Location");
+        midLocationCol.setMinWidth(100);
+        TableColumn<Midterm, Double> midWightCol = new TableColumn("Weight (%)");
+        midWightCol.setMinWidth(100);
+        TableColumn<Midterm, Double> midMarkCol = new TableColumn("Mark (%)");
+        midMarkCol.setMinWidth(100);
+        midCol.setCellValueFactory(new PropertyValueFactory<>("midterm"));
+        midDueDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        midTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        midLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        midWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        midMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
+        midtermTableView.setItems(getMidtermData3());
+        midtermTableView.getColumns().addAll(midCol, midDueDateCol, midTimeCol, midLocationCol, midWightCol, midMarkCol);
+
+        TableColumn<Assignment, String> asmtCol = new TableColumn("Type");
+        asmtCol.setMinWidth(200);
+        TableColumn<Assignment, String> asmtDueDateCol = new TableColumn("Due Date");
+        asmtDueDateCol.setMinWidth(100);
+        TableColumn<Assignment, Double> asmtWightCol = new TableColumn("Weight (%)");
+        asmtWightCol.setMinWidth(100);
+        TableColumn<Assignment, Double> asmtMarkCol = new TableColumn("Mark (%)");
+        asmtMarkCol.setMinWidth(100);
+        asmtCol.setCellValueFactory(new PropertyValueFactory<>("assignmentName"));
+        asmtDueDateCol.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+        asmtWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        asmtMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
+        assignmentTableView.setItems(getAssignmentData3());
+        assignmentTableView.getColumns().addAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
+
+        mainPane.add(courseTableView,0,1);
+        mainPane.add(examTableView,0,2);
+        mainPane.add(midtermTableView,0,3);
+        mainPane.add(assignmentTableView,0,4);
+
+    }
+    private void getTableColumn4() {
+        TableColumn<Course, String> courseCodeCol = new TableColumn("Course Code");
+        courseCodeCol.setMinWidth(200);
+        TableColumn<Course, String> courseProfCol = new TableColumn("Prof");
+        courseProfCol.setMinWidth(100);
+        TableColumn<Course, String> courseDaysCol = new TableColumn("Days");
+        courseDaysCol.setMinWidth(100);
+        TableColumn<Course, String> courseTimeCol = new TableColumn("Times");
+        courseTimeCol.setMinWidth(100);
+        TableColumn<Course, String> courseLocationCol = new TableColumn("Location");
+        courseLocationCol.setMinWidth(100);
+        courseCodeCol.setCellValueFactory(new PropertyValueFactory<>("courseCode"));
+        courseProfCol.setCellValueFactory(new PropertyValueFactory<>("teacher"));
+        courseDaysCol.setCellValueFactory(new PropertyValueFactory<>("days"));
+        courseTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        courseLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        courseTableView.setItems(getCourseData4());
+        courseTableView.getColumns().addAll(courseCodeCol, courseProfCol, courseDaysCol, courseTimeCol, courseLocationCol);
+
+        TableColumn<Exam, String> examCol = new TableColumn("Type");
+        examCol.setMinWidth(200);
+        TableColumn<Exam, String> examDueDateCol = new TableColumn("Date");
+        examDueDateCol.setMinWidth(100);
+        TableColumn<Exam, String> examTimeCol = new TableColumn("Time");
+        examTimeCol.setMinWidth(100);
+        TableColumn<Exam, String> examLocationCol = new TableColumn("Location");
+        examLocationCol.setMinWidth(100);
+        TableColumn<Exam, Double> examWightCol = new TableColumn("Weight (%)");
+        examWightCol.setMinWidth(100);
+        TableColumn<Exam, Double> examMarkCol = new TableColumn("Mark (%)");
+        examMarkCol.setMinWidth(100);
+        examCol.setCellValueFactory(new PropertyValueFactory<>("exam"));
+        examDueDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        examTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        examLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        examWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        examMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
+        examTableView.setItems(getExamData4());
+        examTableView.getColumns().addAll(examCol, examDueDateCol, examTimeCol, examLocationCol, examWightCol, examMarkCol);
+
+        TableColumn<Midterm, String> midCol = new TableColumn("Type");
+        midCol.setMinWidth(200);
+        TableColumn<Midterm, String> midDueDateCol = new TableColumn("Date");
+        midDueDateCol.setMinWidth(100);
+        TableColumn<Midterm, String> midTimeCol = new TableColumn("Time");
+        midTimeCol.setMinWidth(100);
+        TableColumn<Midterm, String> midLocationCol = new TableColumn("Location");
+        midLocationCol.setMinWidth(100);
+        TableColumn<Midterm, Double> midWightCol = new TableColumn("Weight (%)");
+        midWightCol.setMinWidth(100);
+        TableColumn<Midterm, Double> midMarkCol = new TableColumn("Mark (%)");
+        midMarkCol.setMinWidth(100);
+        midCol.setCellValueFactory(new PropertyValueFactory<>("midterm"));
+        midDueDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        midTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        midLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        midWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        midMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
+        midtermTableView.setItems(getMidtermData4());
+        midtermTableView.getColumns().addAll(midCol, midDueDateCol, midTimeCol, midLocationCol, midWightCol, midMarkCol);
+
+        TableColumn<Assignment, String> asmtCol = new TableColumn("Type");
+        asmtCol.setMinWidth(200);
+        TableColumn<Assignment, String> asmtDueDateCol = new TableColumn("Due Date");
+        asmtDueDateCol.setMinWidth(100);
+        TableColumn<Assignment, Double> asmtWightCol = new TableColumn("Weight (%)");
+        asmtWightCol.setMinWidth(100);
+        TableColumn<Assignment, Double> asmtMarkCol = new TableColumn("Mark (%)");
+        asmtMarkCol.setMinWidth(100);
+        asmtCol.setCellValueFactory(new PropertyValueFactory<>("assignmentName"));
+        asmtDueDateCol.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+        asmtWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        asmtMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
+        assignmentTableView.setItems(getAssignmentData4());
+        assignmentTableView.getColumns().addAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
+
+        mainPane.add(courseTableView,0,1);
+        mainPane.add(examTableView,0,2);
+        mainPane.add(midtermTableView,0,3);
+        mainPane.add(assignmentTableView,0,4);
+
+    }
+
+    public ObservableList<Assignment> getAssignmentData0() {
         ObservableList<Assignment> asmtObList = FXCollections.observableArrayList();
         for (Course c: Window.courses) {
-//            List<Assignment> assignmentList = c.getAssignments();
             Assignment[] assignmentList = c.getAssignments();
             for (Assignment a: assignmentList) {
-                asmtObList.add(new Assignment(a.getCourseCode(),a.getAssignmentName(),a.getDueDate(),a.getWeight(),a.getMark()));
+                if (a.getCourseCode().equals(courseCodes[0])) {
+                    asmtObList.add(new Assignment(a.getCourseCode(),a.getAssignmentName(),a.getDueDate(),a.getWeight(),a.getMark()));
+                }
             }
         }
         return asmtObList;
     }
-    public ObservableList<Midterm> getMidtermData() {
+    public ObservableList<Assignment> getAssignmentData1() {
+        ObservableList<Assignment> asmtObList = FXCollections.observableArrayList();
+        for (Course c: Window.courses) {
+            Assignment[] assignmentList = c.getAssignments();
+            for (Assignment a: assignmentList) {
+                if (a.getCourseCode().equals(courseCodes[1])) {
+                    asmtObList.add(new Assignment(a.getCourseCode(),a.getAssignmentName(),a.getDueDate(),a.getWeight(),a.getMark()));
+                }
+            }
+        }
+        return asmtObList;
+    }
+    public ObservableList<Assignment> getAssignmentData2() {
+        ObservableList<Assignment> asmtObList = FXCollections.observableArrayList();
+        for (Course c: Window.courses) {
+            Assignment[] assignmentList = c.getAssignments();
+            for (Assignment a: assignmentList) {
+                if (a.getCourseCode().equals(courseCodes[2])) {
+                    asmtObList.add(new Assignment(a.getCourseCode(),a.getAssignmentName(),a.getDueDate(),a.getWeight(),a.getMark()));
+                }
+            }
+        }
+        return asmtObList;
+    }
+    public ObservableList<Assignment> getAssignmentData3() {
+        ObservableList<Assignment> asmtObList = FXCollections.observableArrayList();
+        for (Course c: Window.courses) {
+            Assignment[] assignmentList = c.getAssignments();
+            for (Assignment a: assignmentList) {
+                if (a.getCourseCode().equals(courseCodes[3])) {
+                    asmtObList.add(new Assignment(a.getCourseCode(),a.getAssignmentName(),a.getDueDate(),a.getWeight(),a.getMark()));
+                }
+            }
+        }
+        return asmtObList;
+    }
+    public ObservableList<Assignment> getAssignmentData4() {
+        ObservableList<Assignment> asmtObList = FXCollections.observableArrayList();
+        for (Course c: Window.courses) {
+            Assignment[] assignmentList = c.getAssignments();
+            for (Assignment a: assignmentList) {
+                if (a.getCourseCode().equals(courseCodes[4])) {
+                    asmtObList.add(new Assignment(a.getCourseCode(),a.getAssignmentName(),a.getDueDate(),a.getWeight(),a.getMark()));
+                }
+            }
+        }
+        return asmtObList;
+    }
+    public ObservableList<Midterm> getMidtermData0() {
         ObservableList<Midterm> midObList = FXCollections.observableArrayList();
         for (Course c: Window.courses) {
-//            List<Assignment> assignmentList = c.getAssignments();
             Midterm[] midtermList = c.getMidterms();
-            for (Midterm a: midtermList) {  //String courseCode, String midterm, String date, String time, String location, double weight, double mark;
-                midObList.add(new Midterm(a.getCourseCode(),a.getMidterm(),a.getDate(),a.getTime(),a.getLocation(),a.getWeight(),a.getMark()));
+            for (Midterm m: midtermList) {
+                if (m.getCourseCode().equals(courseCodes[0]))
+                midObList.add(new Midterm(m.getCourseCode(),m.getMidterm(),m.getDate(),m.getTime(),m.getLocation(),m.getWeight(),m.getMark()));
             }
         }
         return midObList;
     }
-    public ObservableList<Exam> getExamData() {
+    public ObservableList<Midterm> getMidtermData1() {
+        ObservableList<Midterm> midObList = FXCollections.observableArrayList();
+        for (Course c: Window.courses) {
+            Midterm[] midtermList = c.getMidterms();
+            for (Midterm m: midtermList) {
+                if (m.getCourseCode().equals(courseCodes[1]))
+                    midObList.add(new Midterm(m.getCourseCode(),m.getMidterm(),m.getDate(),m.getTime(),m.getLocation(),m.getWeight(),m.getMark()));
+            }
+        }
+        return midObList;
+    }
+    public ObservableList<Midterm> getMidtermData2() {
+        ObservableList<Midterm> midObList = FXCollections.observableArrayList();
+        for (Course c: Window.courses) {
+            Midterm[] midtermList = c.getMidterms();
+            for (Midterm m: midtermList) {
+                if (m.getCourseCode().equals(courseCodes[2]))
+                    midObList.add(new Midterm(m.getCourseCode(),m.getMidterm(),m.getDate(),m.getTime(),m.getLocation(),m.getWeight(),m.getMark()));
+            }
+        }
+        return midObList;
+    }
+    public ObservableList<Midterm> getMidtermData3() {
+        ObservableList<Midterm> midObList = FXCollections.observableArrayList();
+        for (Course c: Window.courses) {
+            Midterm[] midtermList = c.getMidterms();
+            for (Midterm m: midtermList) {
+                if (m.getCourseCode().equals(courseCodes[3]))
+                    midObList.add(new Midterm(m.getCourseCode(),m.getMidterm(),m.getDate(),m.getTime(),m.getLocation(),m.getWeight(),m.getMark()));
+            }
+        }
+        return midObList;
+    }
+    public ObservableList<Midterm> getMidtermData4() {
+        ObservableList<Midterm> midObList = FXCollections.observableArrayList();
+        for (Course c: Window.courses) {
+            Midterm[] midtermList = c.getMidterms();
+            for (Midterm m: midtermList) {
+                if (m.getCourseCode().equals(courseCodes[4]))
+                    midObList.add(new Midterm(m.getCourseCode(),m.getMidterm(),m.getDate(),m.getTime(),m.getLocation(),m.getWeight(),m.getMark()));
+            }
+        }
+        return midObList;
+    }
+    public ObservableList<Exam> getExamData0() {
         ObservableList<Exam> examObList = FXCollections.observableArrayList();
         for (Course c: Window.courses) {
-//            List<Assignment> assignmentList = c.getAssignments();
             Exam[] examList = c.getExam();
-            for (Exam a: examList) {          //  Exam -  String courseCode,String exam,String date,String time,String location,double weight,double mark;
-                examObList.add(new Exam(a.getCourseCode(),a.getExam(),a.getDate(),a.getTime(),a.getLocation(),a.getWeight(),a.getMark()));
+            for (Exam e: examList) {
+                if (e.getCourseCode().equals(courseCodes[0])) {
+                    examObList.add(new Exam(e.getCourseCode(),e.getExam(),e.getDate(),e.getTime(),e.getLocation(),e.getWeight(),e.getMark()));
+                }
             }
         }
         return examObList;
     }
-    public ObservableList<Course> getCourseData() {
+    public ObservableList<Exam> getExamData1() {
+        ObservableList<Exam> examObList = FXCollections.observableArrayList();
+        for (Course c: Window.courses) {
+            Exam[] examList = c.getExam();
+            for (Exam e: examList) {
+                if (e.getCourseCode().equals(courseCodes[1])) {
+                    examObList.add(new Exam(e.getCourseCode(),e.getExam(),e.getDate(),e.getTime(),e.getLocation(),e.getWeight(),e.getMark()));
+                }
+            }
+        }
+        return examObList;
+    }
+    public ObservableList<Exam> getExamData2() {
+        ObservableList<Exam> examObList = FXCollections.observableArrayList();
+        for (Course c: Window.courses) {
+            Exam[] examList = c.getExam();
+            for (Exam e: examList) {
+                if (e.getCourseCode().equals(courseCodes[2])) {
+                    examObList.add(new Exam(e.getCourseCode(),e.getExam(),e.getDate(),e.getTime(),e.getLocation(),e.getWeight(),e.getMark()));
+                }
+            }
+        }
+        return examObList;
+    }
+    public ObservableList<Exam> getExamData3() {
+        ObservableList<Exam> examObList = FXCollections.observableArrayList();
+        for (Course c: Window.courses) {
+            Exam[] examList = c.getExam();
+            for (Exam e: examList) {
+                if (e.getCourseCode().equals(courseCodes[3])) {
+                    examObList.add(new Exam(e.getCourseCode(),e.getExam(),e.getDate(),e.getTime(),e.getLocation(),e.getWeight(),e.getMark()));
+                }
+            }
+        }
+        return examObList;
+    }
+    public ObservableList<Exam> getExamData4() {
+        ObservableList<Exam> examObList = FXCollections.observableArrayList();
+        for (Course c: Window.courses) {
+            Exam[] examList = c.getExam();
+            for (Exam e: examList) {
+                if (e.getCourseCode().equals(courseCodes[4])) {
+                    examObList.add(new Exam(e.getCourseCode(),e.getExam(),e.getDate(),e.getTime(),e.getLocation(),e.getWeight(),e.getMark()));
+                }
+            }
+        }
+        return examObList;
+    }
+    public ObservableList<Course> getCourseData0() {
         ObservableList<Course> courseObList = FXCollections.observableArrayList();
         for (Course c: Window.courses) {
-//            List<Assignment> assignmentList = c.getAssignments();
-//            ArrayList<Course> list = new ArrayList<>();
-//            for (Course a: list) {          //          //String courseName, String teacher,String courseCode,String days,String time,String location;
+            if (c.getCourseCode().equals(courseCodes[0])) {
                 courseObList.add(new Course(c.getCourseName(),c.getTeacher(),c.getCourseCode(),c.getDays(),c.getTime(),c.getLocation()));
-//            }
+            }
+        }
+        return courseObList;
+    }
+    public ObservableList<Course> getCourseData1() {
+        ObservableList<Course> courseObList = FXCollections.observableArrayList();
+        for (Course c: Window.courses) {
+            if (c.getCourseCode().equals(courseCodes[1])) {
+                courseObList.add(new Course(c.getCourseName(),c.getTeacher(),c.getCourseCode(),c.getDays(),c.getTime(),c.getLocation()));
+            }
+        }
+        return courseObList;
+    }
+    public ObservableList<Course> getCourseData2() {
+        ObservableList<Course> courseObList = FXCollections.observableArrayList();
+        for (Course c: Window.courses) {
+            if (c.getCourseCode().equals(courseCodes[2])) {
+                courseObList.add(new Course(c.getCourseName(),c.getTeacher(),c.getCourseCode(),c.getDays(),c.getTime(),c.getLocation()));
+            }
+        }
+        return courseObList;
+    }
+    public ObservableList<Course> getCourseData3() {
+        ObservableList<Course> courseObList = FXCollections.observableArrayList();
+        for (Course c: Window.courses) {
+            if (c.getCourseCode().equals(courseCodes[3])) {
+                courseObList.add(new Course(c.getCourseName(),c.getTeacher(),c.getCourseCode(),c.getDays(),c.getTime(),c.getLocation()));
+            }
+        }
+        return courseObList;
+    }
+    public ObservableList<Course> getCourseData4() {
+        ObservableList<Course> courseObList = FXCollections.observableArrayList();
+        for (Course c: Window.courses) {
+            if (c.getCourseCode().equals(courseCodes[4])) {
+                courseObList.add(new Course(c.getCourseName(),c.getTeacher(),c.getCourseCode(),c.getDays(),c.getTime(),c.getLocation()));
+            }
         }
         return courseObList;
     }
