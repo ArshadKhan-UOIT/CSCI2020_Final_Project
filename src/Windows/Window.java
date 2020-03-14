@@ -1,17 +1,14 @@
 package Windows;
 
-import DataStructures.Assignment;
 import DataStructures.Course;
-import DataStructures.Exam;
-import DataStructures.Midterm;
-import Pages.CoursesPage;
-import Pages.GradesPage;
-import Pages.HomePage;
+import Pages.*;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -23,23 +20,16 @@ import javafx.stage.Stage;
  * When a button is pressed the window its does not change but the center of the border pane is changed to the page
  * corresponding to the button
  */
-public class Window extends Application {
+public class Window extends Application implements Runnable {
     public static Course[] courses;
-//    public Assignment[] assignments;
-//    public Midterm[] midterms;
-//    public Exam[] exams;
 
     public Window(Course[] c) {
         courses = c;
-//        assignments = a;
-//        midterms = m;
-//        exams = e;
     }
 
-
-    public void makeWindow(String[] args) {
-        launch(args);
-
+    @Override
+    public void run() {
+        start(new Stage());
     }
 
     @Override
@@ -48,47 +38,59 @@ public class Window extends Application {
         Rectangle2D screen = Screen.getPrimary().getVisualBounds();
         BorderPane mainPane = new BorderPane();
         HBox topPane = new HBox();
-//        mainPane.setPadding(new Insets(screen.getHeight()*0.1,screen.getWidth()*0.05,screen.getHeight()*0.05,screen.getWidth()*0.05));
 
         Button b1 = new Button("Home");
         Button b2 = new Button("My Courses");
         Button b3 = new Button("Schedule");
-        Button b4 = new Button("To Do");
         Button b5 = new Button("My Grades");
-        Button b6 = new Button("Assignments");
-        Button b7 = new Button("Midterms");
-        Button b8 = new Button("Final Exams");
-        Button b9 = new Button("Add Info");
+        MenuButton b9 = new MenuButton("Add Info");
 
-        b1.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
+        b1.setPrefSize(screen.getWidth() / 5, screen.getHeight() * 0.05);
         b1.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Home"));
 
-        b2.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
+        b2.setPrefSize(screen.getWidth() / 5, screen.getHeight() * 0.05);
         b2.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Courses"));
 
-        b3.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
+        b3.setPrefSize(screen.getWidth() / 5, screen.getHeight() * 0.05);
         b3.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Schedule"));
 
-        b4.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
-        b4.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "ToDo"));
-
-        b5.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
+        b5.setPrefSize(screen.getWidth() / 5, screen.getHeight() * 0.05);
         b5.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Grades"));
 
-        b6.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
-        b6.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Assignments"));
+        b9.setPrefSize(screen.getWidth() / 5, screen.getHeight() * 0.05);
+        MenuItem course = new MenuItem("Add Course");
+        course.setOnAction(e -> {
+            //start new thread to open window
+            Runnable addCourse = new AddCoursePage();
+            Thread addCourseThread = new Thread(addCourse);
+            addCourseThread.run();
+        });
+        MenuItem assignment = new MenuItem("Add Assignment");
+        assignment.setOnAction(e -> {
+            //start new thread to open window
+            Runnable addAssignment = new AddAssignmentPage();
+            Thread addAssignmentThread = new Thread(addAssignment);
+            addAssignmentThread.run();
+        });
+        MenuItem midterm = new MenuItem("Add Midterm");
+        midterm.setOnAction(e -> {
+            //start new thread to open window
+            Runnable addMidterm = new AddMidtermPage();
+            Thread addMidtermThread = new Thread(addMidterm);
+            addMidtermThread.run();
+        });
+        MenuItem exam = new MenuItem("Add Exam");
+        exam.setOnAction(e -> {
+            //start new thread to open window
+            Runnable addExam = new AddExamPage();
+            Thread addExamThread = new Thread(addExam);
+            addExamThread.run();
+        });
 
-        b7.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
-        b7.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Midterms"));
-
-        b8.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
-        b8.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "FinalExams"));
-
-        b9.setPrefSize(screen.getWidth()/9, screen.getHeight()*0.05);
-        b9.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "AddInfo"));
+        b9.getItems().addAll(course, assignment, midterm, exam);
 
         //add buttons
-        topPane.getChildren().addAll(b1,b2,b3,b4,b5,b6,b7,b8,b9);
+        topPane.getChildren().addAll(b1, b2, b3, b5, b9);
         topPane.setAlignment(Pos.CENTER);
         mainPane.setTop(topPane);
         HomePage home = new HomePage();
@@ -96,65 +98,38 @@ public class Window extends Application {
 
         //final window setup
         primaryStage.setTitle("Course Content");
-        primaryStage.setMinWidth(screen.getWidth()/2);
-        primaryStage.setMinHeight(screen.getHeight()/2);
-        primaryStage.setScene(new Scene(mainPane,screen.getWidth()*0.66, screen.getHeight()*0.66));
+        primaryStage.setMinWidth(screen.getWidth() / 2);
+        primaryStage.setMinHeight(screen.getHeight() / 2);
+        primaryStage.setScene(new Scene(mainPane, screen.getWidth() * 0.66, screen.getHeight() * 0.66));
         primaryStage.show();
 
     }
+
     public void changePage(Stage stage, BorderPane pane, String page) {
+        switch (page) {
+            case "Home":
+                stage.setTitle("Home");
+                HomePage home = new HomePage();
+                pane.setCenter(home.getMainPane());
 
-        if (page.equals("Home")) {
-            stage.setTitle("Home");
-            HomePage home = new HomePage();
-            pane.setCenter(home.getMainPane());
+                break;
+            case "Courses":
+                stage.setTitle("My Courses");
+                CoursesPage cPage = new CoursesPage();
+                pane.setCenter(cPage.getMainPane());
+                break;
+            case "Schedule":
+                stage.setTitle("Schedule");
+                //
+                pane.setCenter(new TextArea());
 
-        }
-        else if (page.equals("Courses")) {
-            stage.setTitle("My Courses");
-            CoursesPage cPage = new CoursesPage();
-            pane.setCenter(cPage.getMainPane());
-        }
-        else if (page.equals("Schedule")) {
-            stage.setTitle("Schedule");
-            //
-            pane.setCenter(new TextArea());
+                break;
+            case "Grades":
+                stage.setTitle("Grades");
+                GradesPage gPage = new GradesPage();
+                pane.setCenter(gPage.getMainPane());
 
-        }
-        else if (page.equals("ToDo")) {
-            stage.setTitle("To Do");
-            //
-            pane.setCenter(new TextArea());
-
-        }
-        else if (page.equals("Grades")) {
-            stage.setTitle("Grades");
-            GradesPage gPage = new GradesPage();
-            pane.setCenter(gPage.getMainPane());
-
-        }
-        else if (page.equals("Assignments")) {
-            stage.setTitle("Assignments");
-            //
-            pane.setCenter(new TextArea());
-
-        }
-        else if (page.equals("Midterms")) {
-            stage.setTitle("Midterms");
-            //
-            pane.setCenter(new TextArea());
-
-        }
-        else if (page.equals("FinalExams")) {
-            stage.setTitle("Final Exams");
-            //
-            pane.setCenter(new TextArea());
-
-        }
-        else if (page.equals("AddInfo")) {
-            stage.setTitle("Add Info");
-            //
-            pane.setCenter(new TextArea());
+                break;
 
         }
     }

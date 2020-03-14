@@ -15,6 +15,28 @@ public class Assignment {
         this.mark = mark;
     }
 
+    public Assignment(String[] a) {
+        courseCode = a[0];
+        assignmentName = a[1];
+        dueDate = a[2];
+        this.weight = Double.parseDouble(a[3]);
+        this.mark = Double.parseDouble(a[4]);
+    }
+
+    public String getCourseCode() { return courseCode; }
+    public String getAssignmentName() { return assignmentName; }
+    public String getDueDate() { return dueDate; }
+
+
+
+    public double getMark() {
+        return mark;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
     @Override
     public String toString() {
         return "Assignment{" +
