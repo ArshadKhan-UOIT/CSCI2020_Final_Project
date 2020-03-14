@@ -128,19 +128,6 @@ public class HomePage extends Page {
         return schedulePane;
     }
 
-    //method to initialize My Courses section
-//    public Pane createMyCourses() {
-//        //My Courses pane
-//        VBox coursesPane = new VBox();
-//        Text coursesBanner = new Text("My Courses:");
-//        coursesBanner.setFont(Font.font("AnjaliOldLipi", FontWeight.BOLD, FontPosture.REGULAR, 30));
-//
-//
-//        coursesPane.getChildren().add(coursesBanner);
-//
-//        return coursesPane;
-//    }
-
     //method to initialize My Grades section
     public Pane createMyGrades() {
 

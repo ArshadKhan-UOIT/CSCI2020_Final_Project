@@ -29,6 +29,19 @@ public class Course implements Runnable {
         this.exam = makeExam();
     }
 
+    public Course(String courseName, String teacher, String courseCode, String days, String time, String location) {
+        this.courseName = courseName;
+        this.teacher = teacher;
+        this.courseCode = courseCode;
+        this.days = days;
+        this.time = time;
+        this.location = location;
+        this.assignments = makeAssignments();
+        this.midterms = makeMidterms();
+        this.exam = makeExam();
+
+    }
+
     public String getCourseName() {
         return courseName;
     }
