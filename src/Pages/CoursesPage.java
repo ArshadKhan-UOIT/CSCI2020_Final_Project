@@ -11,8 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-
 
 public class CoursesPage extends Page {
     TableView<Course> courseTableView;
@@ -20,6 +21,8 @@ public class CoursesPage extends Page {
     TableView<Midterm> midtermTableView;
     TableView<Assignment> assignmentTableView;
     String[] courseCodes = {"MATH2050", "CSCI2160", "CSCI2040", "CSCI2072", "CSCI2020"};
+    BorderPane bPane = new BorderPane();
+    GridPane centerPane = new GridPane();
 
     public CoursesPage() {
         courseTableView = new TableView();
@@ -30,7 +33,6 @@ public class CoursesPage extends Page {
         HBox buttons = new HBox();
 
         Button[] b = new Button[Window.courses.length];
-
 
         for (int i = 0; i < Window.courses.length; i++) {
             b[i] = new Button(Window.courses[i].getCourseName());
@@ -95,8 +97,12 @@ public class CoursesPage extends Page {
         });
         b[4].setOnMouseClicked(e -> {
             courseTableView.getItems().clear();
+            courseTableView.getItems().clear();
+            examTableView.getItems().clear();
             examTableView.getItems().clear();
             midtermTableView.getItems().clear();
+            midtermTableView.getItems().clear();
+            assignmentTableView.getItems().clear();
             assignmentTableView.getItems().clear();
 //            courseTableView.refresh();
 //            examTableView.refresh();
@@ -104,7 +110,10 @@ public class CoursesPage extends Page {
 //            assignmentTableView.refresh();
             getTableColumn4();
         });
-        mainPane.add(buttons, 0, 0);
+
+        bPane.setTop(buttons);
+        bPane.setCenter(centerPane);
+        mainPane.add(bPane, 0, 0);
 
     }
 
@@ -126,7 +135,7 @@ public class CoursesPage extends Page {
         courseTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
         courseLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         courseTableView.setItems(getCourseData0());
-        courseTableView.getColumns().addAll(courseCodeCol, courseProfCol, courseDaysCol, courseTimeCol, courseLocationCol);
+        courseTableView.getColumns().setAll(courseCodeCol, courseProfCol, courseDaysCol, courseTimeCol, courseLocationCol);
 
         TableColumn<Exam, String> examCol = new TableColumn("Type");
         examCol.setMinWidth(200);
@@ -147,7 +156,7 @@ public class CoursesPage extends Page {
         examWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         examMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
         examTableView.setItems(getExamData0());
-        examTableView.getColumns().addAll(examCol, examDueDateCol, examTimeCol, examLocationCol, examWightCol, examMarkCol);
+        examTableView.getColumns().setAll(examCol, examDueDateCol, examTimeCol, examLocationCol, examWightCol, examMarkCol);
 
         TableColumn<Midterm, String> midCol = new TableColumn("Type");
         midCol.setMinWidth(200);
@@ -168,7 +177,7 @@ public class CoursesPage extends Page {
         midWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         midMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
         midtermTableView.setItems(getMidtermData0());
-        midtermTableView.getColumns().addAll(midCol, midDueDateCol, midTimeCol, midLocationCol, midWightCol, midMarkCol);
+        midtermTableView.getColumns().setAll(midCol, midDueDateCol, midTimeCol, midLocationCol, midWightCol, midMarkCol);
 
         TableColumn<Assignment, String> asmtCol = new TableColumn("Type");
         asmtCol.setMinWidth(200);
@@ -182,14 +191,19 @@ public class CoursesPage extends Page {
         asmtDueDateCol.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
         asmtWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         asmtMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
+        assignmentTableView.getColumns().removeAll();
         assignmentTableView.setItems(getAssignmentData0());
-        assignmentTableView.getColumns().addAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
+        assignmentTableView.getColumns().setAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
 
-        mainPane.add(courseTableView, 0, 1);
-        mainPane.add(examTableView, 0, 2);
-        mainPane.add(midtermTableView, 0, 3);
-        mainPane.add(assignmentTableView, 0, 4);
 
+        GridPane centerPane = new GridPane();
+
+        centerPane.add(courseTableView, 0, 1);
+        centerPane.add(examTableView, 0, 2);
+        centerPane.add(midtermTableView, 0, 3);
+        centerPane.add(assignmentTableView, 0, 4);
+
+        bPane.setCenter(centerPane);
     }
 
     private void getTableColumn1() {
@@ -209,7 +223,7 @@ public class CoursesPage extends Page {
         courseTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
         courseLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         courseTableView.setItems(getCourseData1());
-        courseTableView.getColumns().addAll(courseCodeCol, courseProfCol, courseDaysCol, courseTimeCol, courseLocationCol);
+        courseTableView.getColumns().setAll(courseCodeCol, courseProfCol, courseDaysCol, courseTimeCol, courseLocationCol);
 
         TableColumn<Exam, String> examCol = new TableColumn("Type");
         examCol.setMinWidth(200);
@@ -230,7 +244,7 @@ public class CoursesPage extends Page {
         examWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         examMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
         examTableView.setItems(getExamData1());
-        examTableView.getColumns().addAll(examCol, examDueDateCol, examTimeCol, examLocationCol, examWightCol, examMarkCol);
+        examTableView.getColumns().setAll(examCol, examDueDateCol, examTimeCol, examLocationCol, examWightCol, examMarkCol);
 
         TableColumn<Midterm, String> midCol = new TableColumn("Type");
         midCol.setMinWidth(200);
@@ -251,7 +265,7 @@ public class CoursesPage extends Page {
         midWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         midMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
         midtermTableView.setItems(getMidtermData1());
-        midtermTableView.getColumns().addAll(midCol, midDueDateCol, midTimeCol, midLocationCol, midWightCol, midMarkCol);
+        midtermTableView.getColumns().setAll(midCol, midDueDateCol, midTimeCol, midLocationCol, midWightCol, midMarkCol);
 
         TableColumn<Assignment, String> asmtCol = new TableColumn("Type");
         asmtCol.setMinWidth(200);
@@ -266,12 +280,16 @@ public class CoursesPage extends Page {
         asmtWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         asmtMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
         assignmentTableView.setItems(getAssignmentData1());
-        assignmentTableView.getColumns().addAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
+        assignmentTableView.getColumns().setAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
 
-        mainPane.add(courseTableView, 0, 1);
-        mainPane.add(examTableView, 0, 2);
-        mainPane.add(midtermTableView, 0, 3);
-        mainPane.add(assignmentTableView, 0, 4);
+        GridPane centerPane = new GridPane();
+
+        centerPane.add(courseTableView, 0, 1);
+        centerPane.add(examTableView, 0, 2);
+        centerPane.add(midtermTableView, 0, 3);
+        centerPane.add(assignmentTableView, 0, 4);
+
+        bPane.setCenter(centerPane);
 
     }
 
@@ -292,7 +310,7 @@ public class CoursesPage extends Page {
         courseTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
         courseLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         courseTableView.setItems(getCourseData2());
-        courseTableView.getColumns().addAll(courseCodeCol, courseProfCol, courseDaysCol, courseTimeCol, courseLocationCol);
+        courseTableView.getColumns().setAll(courseCodeCol, courseProfCol, courseDaysCol, courseTimeCol, courseLocationCol);
 
         TableColumn<Exam, String> examCol = new TableColumn("Type");
         examCol.setMinWidth(200);
@@ -313,7 +331,7 @@ public class CoursesPage extends Page {
         examWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         examMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
         examTableView.setItems(getExamData2());
-        examTableView.getColumns().addAll(examCol, examDueDateCol, examTimeCol, examLocationCol, examWightCol, examMarkCol);
+        examTableView.getColumns().setAll(examCol, examDueDateCol, examTimeCol, examLocationCol, examWightCol, examMarkCol);
 
         TableColumn<Midterm, String> midCol = new TableColumn("Type");
         midCol.setMinWidth(200);
@@ -334,7 +352,7 @@ public class CoursesPage extends Page {
         midWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         midMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
         midtermTableView.setItems(getMidtermData2());
-        midtermTableView.getColumns().addAll(midCol, midDueDateCol, midTimeCol, midLocationCol, midWightCol, midMarkCol);
+        midtermTableView.getColumns().setAll(midCol, midDueDateCol, midTimeCol, midLocationCol, midWightCol, midMarkCol);
 
         TableColumn<Assignment, String> asmtCol = new TableColumn("Type");
         asmtCol.setMinWidth(200);
@@ -349,12 +367,16 @@ public class CoursesPage extends Page {
         asmtWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         asmtMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
         assignmentTableView.setItems(getAssignmentData2());
-        assignmentTableView.getColumns().addAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
+        assignmentTableView.getColumns().setAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
 
-        mainPane.add(courseTableView, 0, 1);
-        mainPane.add(examTableView, 0, 2);
-        mainPane.add(midtermTableView, 0, 3);
-        mainPane.add(assignmentTableView, 0, 4);
+        GridPane centerPane = new GridPane();
+
+        centerPane.add(courseTableView, 0, 1);
+        centerPane.add(examTableView, 0, 2);
+        centerPane.add(midtermTableView, 0, 3);
+        centerPane.add(assignmentTableView, 0, 4);
+
+        bPane.setCenter(centerPane);
 
     }
 
@@ -375,7 +397,7 @@ public class CoursesPage extends Page {
         courseTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
         courseLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         courseTableView.setItems(getCourseData3());
-        courseTableView.getColumns().addAll(courseCodeCol, courseProfCol, courseDaysCol, courseTimeCol, courseLocationCol);
+        courseTableView.getColumns().setAll(courseCodeCol, courseProfCol, courseDaysCol, courseTimeCol, courseLocationCol);
 
         TableColumn<Exam, String> examCol = new TableColumn("Type");
         examCol.setMinWidth(200);
@@ -396,7 +418,7 @@ public class CoursesPage extends Page {
         examWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         examMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
         examTableView.setItems(getExamData3());
-        examTableView.getColumns().addAll(examCol, examDueDateCol, examTimeCol, examLocationCol, examWightCol, examMarkCol);
+        examTableView.getColumns().setAll(examCol, examDueDateCol, examTimeCol, examLocationCol, examWightCol, examMarkCol);
 
         TableColumn<Midterm, String> midCol = new TableColumn("Type");
         midCol.setMinWidth(200);
@@ -417,7 +439,7 @@ public class CoursesPage extends Page {
         midWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         midMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
         midtermTableView.setItems(getMidtermData3());
-        midtermTableView.getColumns().addAll(midCol, midDueDateCol, midTimeCol, midLocationCol, midWightCol, midMarkCol);
+        midtermTableView.getColumns().setAll(midCol, midDueDateCol, midTimeCol, midLocationCol, midWightCol, midMarkCol);
 
         TableColumn<Assignment, String> asmtCol = new TableColumn("Type");
         asmtCol.setMinWidth(200);
@@ -432,12 +454,16 @@ public class CoursesPage extends Page {
         asmtWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         asmtMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
         assignmentTableView.setItems(getAssignmentData3());
-        assignmentTableView.getColumns().addAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
+        assignmentTableView.getColumns().setAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
 
-        mainPane.add(courseTableView, 0, 1);
-        mainPane.add(examTableView, 0, 2);
-        mainPane.add(midtermTableView, 0, 3);
-        mainPane.add(assignmentTableView, 0, 4);
+        GridPane centerPane = new GridPane();
+
+        centerPane.add(courseTableView, 0, 1);
+        centerPane.add(examTableView, 0, 2);
+        centerPane.add(midtermTableView, 0, 3);
+        centerPane.add(assignmentTableView, 0, 4);
+
+        bPane.setCenter(centerPane);
 
     }
 
@@ -458,7 +484,7 @@ public class CoursesPage extends Page {
         courseTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
         courseLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         courseTableView.setItems(getCourseData4());
-        courseTableView.getColumns().addAll(courseCodeCol, courseProfCol, courseDaysCol, courseTimeCol, courseLocationCol);
+        courseTableView.getColumns().setAll(courseCodeCol, courseProfCol, courseDaysCol, courseTimeCol, courseLocationCol);
 
         TableColumn<Exam, String> examCol = new TableColumn("Type");
         examCol.setMinWidth(200);
@@ -479,7 +505,7 @@ public class CoursesPage extends Page {
         examWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         examMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
         examTableView.setItems(getExamData4());
-        examTableView.getColumns().addAll(examCol, examDueDateCol, examTimeCol, examLocationCol, examWightCol, examMarkCol);
+        examTableView.getColumns().setAll(examCol, examDueDateCol, examTimeCol, examLocationCol, examWightCol, examMarkCol);
 
         TableColumn<Midterm, String> midCol = new TableColumn("Type");
         midCol.setMinWidth(200);
@@ -500,7 +526,7 @@ public class CoursesPage extends Page {
         midWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         midMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
         midtermTableView.setItems(getMidtermData4());
-        midtermTableView.getColumns().addAll(midCol, midDueDateCol, midTimeCol, midLocationCol, midWightCol, midMarkCol);
+        midtermTableView.getColumns().setAll(midCol, midDueDateCol, midTimeCol, midLocationCol, midWightCol, midMarkCol);
 
         TableColumn<Assignment, String> asmtCol = new TableColumn("Type");
         asmtCol.setMinWidth(200);
@@ -515,12 +541,16 @@ public class CoursesPage extends Page {
         asmtWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         asmtMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
         assignmentTableView.setItems(getAssignmentData4());
-        assignmentTableView.getColumns().addAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
+        assignmentTableView.getColumns().setAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
 
-        mainPane.add(courseTableView, 0, 1);
-        mainPane.add(examTableView, 0, 2);
-        mainPane.add(midtermTableView, 0, 3);
-        mainPane.add(assignmentTableView, 0, 4);
+        GridPane centerPane = new GridPane();
+
+        centerPane.add(courseTableView, 0, 1);
+        centerPane.add(examTableView, 0, 2);
+        centerPane.add(midtermTableView, 0, 3);
+        centerPane.add(assignmentTableView, 0, 4);
+
+        bPane.setCenter(centerPane);
 
     }
 
