@@ -39,16 +39,14 @@ public class CoursesPage extends Page {
     TableColumn<Midterm, Double> midWightCol,midMarkCol;
     TableColumn<Assignment, String> asmtCol, asmtDueDateCol;
     TableColumn<Assignment, Double> asmtWightCol,asmtMarkCol;
-    Arc[][] weights = new Arc[5][3];    //3 types of arc's per course (5)
     String[] courseCodes = {"MATH2050","CSCI2160","CSCI2040","CSCI2072","CSCI2020"};
-    Color[] pieColours = {Color.DARKORANGE,Color.YELLOW,Color.GREEN};
     String[] courseContent = {"Asmt (%)","Midterm (%)","Exam (%)"};
-    Rectangle[] lengend = new Rectangle[3];
+    PieChart pieChart = new PieChart();
     Text[] text = new Text[]{new Text(), new Text(), new Text()};
     BorderPane bPane = new BorderPane();
     GridPane centerPane = new GridPane();
     Pane rightPane = new Pane();
-    Pane rightBottomPane = new Pane();
+
     public CoursesPage() {
         courseTableView = new TableView();
         examTableView = new TableView();
@@ -74,7 +72,6 @@ public class CoursesPage extends Page {
             b[i].setOnMouseClicked(e->{
                 getTableColumn(index);
                 getPieGraph(index);
-                generateLengend();
             });
         }
         for (int i=0;i<text.length;i++) {
@@ -82,11 +79,9 @@ public class CoursesPage extends Page {
         }
         bPane.setTop(buttons);
         bPane.setCenter(centerPane);
-//        bPane.setRight(rightPane);
+        bPane.setRight(rightPane);
         mainPane.add(bPane,0,0);
-        mainPane.add(rightPane,1,0);
-        mainPane.add(rightBottomPane,1,0);
-
+//        mainPane.add(rightPane,2,0);
 
     }
 
@@ -100,17 +95,6 @@ public class CoursesPage extends Page {
         double[] overAllTotal = new double[5];
         xPosition = (mainPane.getWidth()-702)/3;
         yPosition = mainPane.getHeight()/3.0;
-//        double windowHeight, windowWidth;
-//        windowHeight = mainPane.getHeight();
-//        windowWidth = mainPane.getWidth();
-//        double tableViewHeight, tableViewWidth;
-        //H 635.0 W 1268.0 initializes right away (main window)
-        //TH 609.0 TW 702.0 initializes second time (tableview)
-//        tableViewHeight = courseTableView.getHeight() + examTableView.getHeight() + midtermTableView.getHeight() + assignmentTableView.getHeight();
-//        tableViewWidth = courseTableView.getWidth();
-
-//        System.out.println("H " + windowHeight + " W " + windowWidth);
-//        System.out.println("TH " + tableViewHeight + " TW " + tableViewWidth);
         for (int i=0;i<overAllTotal.length;i++) {
 //            asmntTotal[i] = 0;
 //            examTotal[i] = 0;
@@ -150,7 +134,7 @@ public class CoursesPage extends Page {
                 }
             }
         }
-//        System.out.println( "Index = " + index + "\teTot = " + examTotal[index] + "\tmTot = " + midTotal[index] + "\taTot = " + asmntTotal[index] + "\toTot = " + overAllTotal[index] + "\n");
+        //        System.out.println( "Index = " + index + "\teTot = " + examTotal[index] + "\tmTot = " + midTotal[index] + "\taTot = " + asmntTotal[index] + "\toTot = " + overAllTotal[index] + "\n");
 //        System.out.println();
 //        System.out.print("A\t");
 //        for (int i=0;i<overAllTotal.length;i++) {
@@ -187,61 +171,17 @@ public class CoursesPage extends Page {
         //A	0.0 	0.0 	0.0 	0.0 	35.0
         //M	0.0 	0.0 	0.0 	0.0 	20.0
         //E	0.0 	0.0 	0.0 	0.0 	25.0
-        double begin = 0,angle = 0,angleTotal =0;
         Pane rightPane = new Pane();
-        for (int contentIndex = 0; contentIndex < courseWeightArr[index].length-1; contentIndex++) {
-            angle = (courseWeightArr[index][contentIndex]/overAllTotal[index]) * 360;
-            angleTotal += angle;
-            weights[index][contentIndex] = arc(begin,angle,xPosition,yPosition,pieColours[contentIndex]);
-            rightPane.getChildren().addAll(weights[index][contentIndex]);
-            begin += angle;
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        for (int contentIndex = 0; contentIndex < courseWeightArr[index].length; contentIndex++) {
+            pieChartData.add(new PieChart.Data(courseContent[contentIndex],courseWeightArr[index][contentIndex]));
         }
-        weights[index][courseWeightArr[index].length-1] = arc(begin,360-angleTotal,xPosition,yPosition,pieColours[courseWeightArr[index].length-1]);
-        rightPane.getChildren().add(weights[index][courseWeightArr[index].length-1]);
-//        bPane.setRight(rightPane);
-        mainPane.add(rightPane,1,0);
+        pieChart.setData(pieChartData);
+        pieChart.setTitle("Weight's");
+        rightPane.getChildren().add(pieChart);
+        bPane.setRight(rightPane);
+//        mainPane.add(rightPane,2,0);
     }
-    private void generateLengend() {
-        Pane rightBottomPane = new Pane();
-        double x = ((mainPane.getWidth()-702)/3)-120;
-        double y = mainPane.getHeight()-200;
-        int recWidth = 50;
-        int recLength = 25;
-        for (int i=0;i<lengend.length;i++) {
-            lengend[i] = rect(x,y,recWidth,recLength,pieColours[i]);
-            text[i].setX(x);
-            text[i].setY(y+45);
-            x+=100;
-            rightBottomPane.getChildren().addAll(lengend[i], text[i]);
-        }
-        mainPane.add(rightBottomPane,1,0);
-    }
-
-    private Arc arc(double begin, double angle, double xPosition, double yPosition, Color color) {
-        Arc arc = new Arc();
-        arc.setCenterX(xPosition);
-        arc.setCenterY(yPosition);
-        arc.setRadiusX(150.0f);
-        arc.setRadiusY(150.0f);
-        arc.setStartAngle(begin);
-        arc.setLength(angle);
-        arc.setType(ArcType.ROUND);
-        arc.setStroke(Color.BLACK);
-        arc.setFill(color);
-        return arc;
-    }
-
-    private Rectangle rect(double xPos, double yPos, double rectWidth, double rectHeight, Color fill) {
-        Rectangle rect = new Rectangle();
-        rect.setX(xPos);
-        rect.setY(yPos);
-        rect.setWidth(rectWidth);
-        rect.setHeight(rectHeight);
-        rect.setFill(fill);
-        rect.setStroke(Color.BLACK);
-        return rect;
-    }
-
     private void getTableColumn(int index) {
         courseCodeCol = new TableColumn("Course Code");
         courseCodeCol.setMinWidth(200);
