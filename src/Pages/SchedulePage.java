@@ -15,11 +15,11 @@ import java.util.ArrayList;
 public class SchedulePage extends Page {
     public SchedulePage()
     {
-        Text[] MondayCourses = new Text[8];
-        Text[] TuesdayCourses = new Text[8];
-        Text[] WednesdayCourses = new Text[8];
-        Text[] ThursdayCourses = new Text[8];
-        Text[] FridayCourses = new Text[8];
+        String[][] MondayCourses = new String[8][8];
+        Text[][] TuesdayCourses = new Text[8][8];
+        Text[][] WednesdayCourses = new Text[8][8];
+        Text[][] ThursdayCourses = new Text[8][8];
+        Text[][] FridayCourses = new Text[8][8];
         Text[] days= new Text[8];
         days[0]=new Text("\n\t\tDays\n\n\tTime");
         days[1]=new Text("Monday");
@@ -68,27 +68,69 @@ public class SchedulePage extends Page {
             mainPane.add(row[i],0,i+1);
         }
         ArrayList<Course> list = new ArrayList<>();
+        int m=0;
+        int t=0;
+        int w=0;
+        int r=0;
+        int f=0;
         //Find courses with date equal to current day of the week
-        for (Course c : Window.courses) {
-            String courseDays = c.getDays();
+        for (Course a : Window.courses) {
+            String courseDays = a.getDays();
+            String test;
+            //System.out.println(a.getTime());
             //String[] splitter;
 
             for (int i = 0; i < courseDays.length(); i++) {
                 if (courseDays.charAt(i) == 'M') {
-                    MondayCourses[i]=new Text(c.getCourseName());
+                    //System.out.println(a.getCourseName());
+                    //System.out.println(a.getTime());
+                    MondayCourses[m][0]=(a.getCourseName());
+                    MondayCourses[m][1]=(a.getTime());
+                    //System.out.println("!");
+                    test=MondayCourses[m][1];
+                    //System.out.println(test);
+                    m++;
                 }
                 else if (courseDays.charAt(i) == 'T') {
-                    TuesdayCourses[i]=new Text(c.getCourseName());
+                    TuesdayCourses[t][0]=new Text(a.getCourseName());
+                    TuesdayCourses[t][1]=new Text(a.getCourseName());
+                    t++;
                 }
                 else if (courseDays.charAt(i) == 'W') {
-                    WednesdayCourses[i]=new Text(c.getCourseName());
+                    WednesdayCourses[w][0]=new Text(a.getCourseName());
+                    WednesdayCourses[w][1]=new Text(a.getCourseName());
+                    w++;
                 }
                 else if (courseDays.charAt(i) == 'R') {
-                    ThursdayCourses[i]=new Text(c.getCourseName());
+                    ThursdayCourses[r][0]=new Text(a.getCourseName());
+                    ThursdayCourses[r][1]=new Text(a.getCourseName());
+                    r++;
                 }
                 else if (courseDays.charAt(i) == 'F') {
-                    FridayCourses[i]=new Text(c.getCourseName());
-
+                    FridayCourses[f][0]=new Text(a.getCourseName());
+                    FridayCourses[f][1]=new Text(a.getCourseName());
+                    f++;
+                }
+                else{
+                    System.out.println("Nothing");
+                }
+            }
+        }
+        for (int i=0; i < 8; i++)
+        {
+            System.out.println("Current: " + MondayCourses[i][1] + " " + i);
+            for (int j = 0; j <8; j++)
+            {
+                if (hours[j].getText().equals(MondayCourses[i][1]))
+                {
+                    System.out.println("Yep!");
+                    //mainPane.add(row[0],1,i+1);
+                }
+                else
+                {
+                    System.out.println("Nope!");
+                    System.out.println(hours[j].getText() + " compared with " + MondayCourses[i][1]);
+                    //System.exit(0);
                 }
             }
         }

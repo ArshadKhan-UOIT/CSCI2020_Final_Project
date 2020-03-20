@@ -102,8 +102,10 @@ public class HomePage extends Page {
 
             for (int i = 0; i < courseDays.length(); i++) {
                 if (currentDay.equalsIgnoreCase("thursday") && courseDays.charAt(i) == 'R') {
+                    //System.out.println(c.getTime());
                     list.add(c);
                 } else if (currentDay.charAt(0) == courseDays.charAt(i) && !(currentDay.equalsIgnoreCase("thursday") && courseDays.charAt(i) == 'T')) {
+                    System.out.println(c.getTime());
                     list.add(c);
 
                 }
@@ -120,6 +122,7 @@ public class HomePage extends Page {
             }
         }
         for (Course c : list) {
+            System.out.println(c.getTime());
             Text entry = new Text("- " + c.getCourseName() + ", " + c.getTime() + ", " + c.getLocation());
             schedulePane.getChildren().add(entry);
 
