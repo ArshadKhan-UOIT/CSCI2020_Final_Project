@@ -17,6 +17,15 @@ public class Course implements Runnable {
     private Midterm[] midterms;
     private Exam[] exam;
 
+    public Course(String courseName,String teacher,String courseCode,String days,String time, String location) {
+        this.courseName = courseName;
+        this.teacher = teacher;
+        this.courseCode = courseCode;
+        this.days = days;
+        this.time = time;
+        this.location = location;
+    }
+
     public Course(String[] courseInfo) {
         this.courseName = courseInfo[0];
         this.teacher = courseInfo[1];
