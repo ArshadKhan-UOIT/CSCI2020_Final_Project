@@ -302,7 +302,7 @@ public class CoursesPage extends Page {
         ObservableList<Course> courseObList = FXCollections.observableArrayList();
         for (Course c : Window.courses) {
             if (c.getCourseCode().equals(courseCodes[index])) {
-                courseObList.add(new Course(c.getCourseName(), c.getTeacher(), c.getCourseCode(), c.getDays(), c.getTime(), c.getLocation()));
+                courseObList.add(new Course(c.getCourseName(),c.getTeacher(),c.getCourseCode(),c.getDays(),c.getTime(),c.getLocation()));
             }
         }
         return courseObList;
