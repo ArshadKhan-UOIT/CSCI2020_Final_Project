@@ -22,6 +22,7 @@ import org.apache.commons.lang.StringUtils;
 import java.util.List;
 
 public class GradesPage extends Page {
+    //string.format("%.2f",numbers)
     HBox hbox;
     VBox vbox;
     Canvas canvas,canvas2;

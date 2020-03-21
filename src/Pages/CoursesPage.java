@@ -190,17 +190,7 @@ public class CoursesPage extends Page {
         courseDaysCol.setCellValueFactory(new PropertyValueFactory<>("days"));
         courseTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
         courseLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
-        if (index == 0) {
-            courseTableView.setItems(getCourseData0());
-        } else if (index == 1) {
-            courseTableView.setItems(getCourseData1());
-        } else if (index == 2) {
-            courseTableView.setItems(getCourseData2());
-        } else if (index == 3) {
-            courseTableView.setItems(getCourseData3());
-        } else if (index == 4) {
-            courseTableView.setItems(getCourseData4());
-        }
+        courseTableView.setItems(getCourseData(index));
         courseTableView.getColumns().setAll(courseCodeCol, courseProfCol, courseDaysCol, courseTimeCol, courseLocationCol);
 
         examCol = new TableColumn("Type");
@@ -221,17 +211,7 @@ public class CoursesPage extends Page {
         examLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         examWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         examMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
-        if (index == 0) {
-            examTableView.setItems(getExamData0());
-        } else if (index == 1) {
-            examTableView.setItems(getExamData1());
-        } else if (index == 2) {
-            examTableView.setItems(getExamData2());
-        } else if (index == 3) {
-            examTableView.setItems(getExamData3());
-        } else if (index == 4) {
-            examTableView.setItems(getExamData4());
-        }
+        examTableView.setItems(getExamData(index));
         examTableView.getColumns().setAll(examCol, examDueDateCol, examTimeCol, examLocationCol, examWightCol, examMarkCol);
 
         midCol = new TableColumn("Type");
@@ -252,17 +232,7 @@ public class CoursesPage extends Page {
         midLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         midWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         midMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
-        if (index == 0) {
-            midtermTableView.setItems(getMidtermData0());
-        } else if (index == 1) {
-            midtermTableView.setItems(getMidtermData1());
-        } else if (index == 2) {
-            midtermTableView.setItems(getMidtermData2());
-        } else if (index == 3) {
-            midtermTableView.setItems(getMidtermData3());
-        } else if (index == 4) {
-            midtermTableView.setItems(getMidtermData4());
-        }
+        midtermTableView.setItems(getMidtermData(index));
         midtermTableView.getColumns().setAll(midCol, midDueDateCol, midTimeCol, midLocationCol, midWightCol, midMarkCol);
 
         asmtCol = new TableColumn("Type");
@@ -277,17 +247,7 @@ public class CoursesPage extends Page {
         asmtDueDateCol.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
         asmtWightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
         asmtMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
-        if (index == 0) {
-            assignmentTableView.setItems(getAssignmentData0());
-        } else if (index == 1) {
-            assignmentTableView.setItems(getAssignmentData1());
-        } else if (index == 2) {
-            assignmentTableView.setItems(getAssignmentData2());
-        } else if (index == 3) {
-            assignmentTableView.setItems(getAssignmentData3());
-        } else if (index == 4) {
-            assignmentTableView.setItems(getAssignmentData4());
-        }
+        assignmentTableView.setItems(getAssignmentData(index));
         assignmentTableView.getColumns().setAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
 
 
@@ -303,227 +263,50 @@ public class CoursesPage extends Page {
 
     }
 
-    public ObservableList<Assignment> getAssignmentData0() {
+    public ObservableList<Assignment> getAssignmentData(int index) {
         ObservableList<Assignment> asmtObList = FXCollections.observableArrayList();
         for (Course c : Window.courses) {
             Assignment[] assignmentList = c.getAssignments();
             for (Assignment a : assignmentList) {
-                if (a.getCourseCode().equals(courseCodes[0])) {
+                if (a.getCourseCode().equals(courseCodes[index])) {
                     asmtObList.add(new Assignment(a.getCourseCode(), a.getAssignmentName(), a.getDueDate(), a.getWeight(), a.getMark()));
                 }
             }
         }
         return asmtObList;
     }
-    public ObservableList<Assignment> getAssignmentData1() {
-        ObservableList<Assignment> asmtObList = FXCollections.observableArrayList();
-        for (Course c : Window.courses) {
-            Assignment[] assignmentList = c.getAssignments();
-            for (Assignment a : assignmentList) {
-                if (a.getCourseCode().equals(courseCodes[1])) {
-                    asmtObList.add(new Assignment(a.getCourseCode(), a.getAssignmentName(), a.getDueDate(), a.getWeight(), a.getMark()));
-                }
-            }
-        }
-        return asmtObList;
-    }
-    public ObservableList<Assignment> getAssignmentData2() {
-        ObservableList<Assignment> asmtObList = FXCollections.observableArrayList();
-        for (Course c : Window.courses) {
-            Assignment[] assignmentList = c.getAssignments();
-            for (Assignment a : assignmentList) {
-                if (a.getCourseCode().equals(courseCodes[2])) {
-                    asmtObList.add(new Assignment(a.getCourseCode(), a.getAssignmentName(), a.getDueDate(), a.getWeight(), a.getMark()));
-                }
-            }
-        }
-        return asmtObList;
-    }
-    public ObservableList<Assignment> getAssignmentData3() {
-        ObservableList<Assignment> asmtObList = FXCollections.observableArrayList();
-        for (Course c : Window.courses) {
-            Assignment[] assignmentList = c.getAssignments();
-            for (Assignment a : assignmentList) {
-                if (a.getCourseCode().equals(courseCodes[3])) {
-                    asmtObList.add(new Assignment(a.getCourseCode(), a.getAssignmentName(), a.getDueDate(), a.getWeight(), a.getMark()));
-                }
-            }
-        }
-        return asmtObList;
-    }
-    public ObservableList<Assignment> getAssignmentData4() {
-        ObservableList<Assignment> asmtObList = FXCollections.observableArrayList();
-        for (Course c : Window.courses) {
-            Assignment[] assignmentList = c.getAssignments();
-            for (Assignment a : assignmentList) {
-                if (a.getCourseCode().equals(courseCodes[4])) {
-                    asmtObList.add(new Assignment(a.getCourseCode(), a.getAssignmentName(), a.getDueDate(), a.getWeight(), a.getMark()));
-                }
-            }
-        }
-        return asmtObList;
-    }
-    public ObservableList<Midterm> getMidtermData0() {
+    public ObservableList<Midterm> getMidtermData(int index) {
         ObservableList<Midterm> midObList = FXCollections.observableArrayList();
         for (Course c : Window.courses) {
             Midterm[] midtermList = c.getMidterms();
             for (Midterm m : midtermList) {
-                if (m.getCourseCode().equals(courseCodes[0]))
+                if (m.getCourseCode().equals(courseCodes[index]))
                     midObList.add(new Midterm(m.getCourseCode(), m.getMidterm(), m.getDate(), m.getTime(), m.getLocation(), m.getWeight(), m.getMark()));
             }
         }
         return midObList;
     }
-    public ObservableList<Midterm> getMidtermData1() {
-        ObservableList<Midterm> midObList = FXCollections.observableArrayList();
-        for (Course c : Window.courses) {
-            Midterm[] midtermList = c.getMidterms();
-            for (Midterm m : midtermList) {
-                if (m.getCourseCode().equals(courseCodes[1]))
-                    midObList.add(new Midterm(m.getCourseCode(), m.getMidterm(), m.getDate(), m.getTime(), m.getLocation(), m.getWeight(), m.getMark()));
-            }
-        }
-        return midObList;
-    }
-    public ObservableList<Midterm> getMidtermData2() {
-        ObservableList<Midterm> midObList = FXCollections.observableArrayList();
-        for (Course c : Window.courses) {
-            Midterm[] midtermList = c.getMidterms();
-            for (Midterm m : midtermList) {
-                if (m.getCourseCode().equals(courseCodes[2]))
-                    midObList.add(new Midterm(m.getCourseCode(), m.getMidterm(), m.getDate(), m.getTime(), m.getLocation(), m.getWeight(), m.getMark()));
-            }
-        }
-        return midObList;
-    }
-    public ObservableList<Midterm> getMidtermData3() {
-        ObservableList<Midterm> midObList = FXCollections.observableArrayList();
-        for (Course c : Window.courses) {
-            Midterm[] midtermList = c.getMidterms();
-            for (Midterm m : midtermList) {
-                if (m.getCourseCode().equals(courseCodes[3]))
-                    midObList.add(new Midterm(m.getCourseCode(), m.getMidterm(), m.getDate(), m.getTime(), m.getLocation(), m.getWeight(), m.getMark()));
-            }
-        }
-        return midObList;
-    }
-    public ObservableList<Midterm> getMidtermData4() {
-        ObservableList<Midterm> midObList = FXCollections.observableArrayList();
-        for (Course c : Window.courses) {
-            Midterm[] midtermList = c.getMidterms();
-            for (Midterm m : midtermList) {
-                if (m.getCourseCode().equals(courseCodes[4]))
-                    midObList.add(new Midterm(m.getCourseCode(), m.getMidterm(), m.getDate(), m.getTime(), m.getLocation(), m.getWeight(), m.getMark()));
-            }
-        }
-        return midObList;
-    }
-    public ObservableList<Exam> getExamData0() {
+    public ObservableList<Exam> getExamData(int index) {
         ObservableList<Exam> examObList = FXCollections.observableArrayList();
         for (Course c : Window.courses) {
             Exam[] examList = c.getExam();
             for (Exam e : examList) {
-                if (e.getCourseCode().equals(courseCodes[0])) {
+                if (e.getCourseCode().equals(courseCodes[index])) {
                     examObList.add(new Exam(e.getCourseCode(), e.getExam(), e.getDate(), e.getTime(), e.getLocation(), e.getWeight(), e.getMark()));
                 }
             }
         }
         return examObList;
     }
-    public ObservableList<Exam> getExamData1() {
-        ObservableList<Exam> examObList = FXCollections.observableArrayList();
-        for (Course c : Window.courses) {
-            Exam[] examList = c.getExam();
-            for (Exam e : examList) {
-                if (e.getCourseCode().equals(courseCodes[1])) {
-                    examObList.add(new Exam(e.getCourseCode(), e.getExam(), e.getDate(), e.getTime(), e.getLocation(), e.getWeight(), e.getMark()));
-                }
-            }
-        }
-        return examObList;
-    }
-    public ObservableList<Exam> getExamData2() {
-        ObservableList<Exam> examObList = FXCollections.observableArrayList();
-        for (Course c : Window.courses) {
-            Exam[] examList = c.getExam();
-            for (Exam e : examList) {
-                if (e.getCourseCode().equals(courseCodes[2])) {
-                    examObList.add(new Exam(e.getCourseCode(), e.getExam(), e.getDate(), e.getTime(), e.getLocation(), e.getWeight(), e.getMark()));
-                }
-            }
-        }
-        return examObList;
-    }
-    public ObservableList<Exam> getExamData3() {
-        ObservableList<Exam> examObList = FXCollections.observableArrayList();
-        for (Course c : Window.courses) {
-            Exam[] examList = c.getExam();
-            for (Exam e : examList) {
-                if (e.getCourseCode().equals(courseCodes[3])) {
-                    examObList.add(new Exam(e.getCourseCode(), e.getExam(), e.getDate(), e.getTime(), e.getLocation(), e.getWeight(), e.getMark()));
-                }
-            }
-        }
-        return examObList;
-    }
-    public ObservableList<Exam> getExamData4() {
-        ObservableList<Exam> examObList = FXCollections.observableArrayList();
-        for (Course c : Window.courses) {
-            Exam[] examList = c.getExam();
-            for (Exam e : examList) {
-                if (e.getCourseCode().equals(courseCodes[4])) {
-                    examObList.add(new Exam(e.getCourseCode(), e.getExam(), e.getDate(), e.getTime(), e.getLocation(), e.getWeight(), e.getMark()));
-                }
-            }
-        }
-        return examObList;
-    }
-    public ObservableList<Course> getCourseData0() {
+    public ObservableList<Course> getCourseData(int index) {
         ObservableList<Course> courseObList = FXCollections.observableArrayList();
         for (Course c : Window.courses) {
-            if (c.getCourseCode().equals(courseCodes[0])) {
+            if (c.getCourseCode().equals(courseCodes[index])) {
                 courseObList.add(new Course(c.getCourseName(), c.getTeacher(), c.getCourseCode(), c.getDays(), c.getTime(), c.getLocation()));
             }
         }
         return courseObList;
     }
-    public ObservableList<Course> getCourseData1() {
-        ObservableList<Course> courseObList = FXCollections.observableArrayList();
-        for (Course c : Window.courses) {
-            if (c.getCourseCode().equals(courseCodes[1])) {
-                courseObList.add(new Course(c.getCourseName(), c.getTeacher(), c.getCourseCode(), c.getDays(), c.getTime(), c.getLocation()));
-            }
-        }
-        return courseObList;
-    }
-    public ObservableList<Course> getCourseData2() {
-        ObservableList<Course> courseObList = FXCollections.observableArrayList();
-        for (Course c : Window.courses) {
-            if (c.getCourseCode().equals(courseCodes[2])) {
-                courseObList.add(new Course(c.getCourseName(), c.getTeacher(), c.getCourseCode(), c.getDays(), c.getTime(), c.getLocation()));
-            }
-        }
-        return courseObList;
-    }
-    public ObservableList<Course> getCourseData3() {
-        ObservableList<Course> courseObList = FXCollections.observableArrayList();
-        for (Course c : Window.courses) {
-            if (c.getCourseCode().equals(courseCodes[3])) {
-                courseObList.add(new Course(c.getCourseName(), c.getTeacher(), c.getCourseCode(), c.getDays(), c.getTime(), c.getLocation()));
-            }
-        }
-        return courseObList;
-    }
-    public ObservableList<Course> getCourseData4() {
-        ObservableList<Course> courseObList = FXCollections.observableArrayList();
-        for (Course c : Window.courses) {
-            if (c.getCourseCode().equals(courseCodes[4])) {
-                courseObList.add(new Course(c.getCourseName(), c.getTeacher(), c.getCourseCode(), c.getDays(), c.getTime(), c.getLocation()));
-            }
-        }
-        return courseObList;
-    }
-
     public static void main(String[] args) {
     }
 
