@@ -24,8 +24,8 @@ import java.util.List;
 public class GradesPage extends Page {
     HBox hbox;
     VBox vbox;
-    Canvas canvas;
-    GraphicsContext g;
+    Canvas canvas,canvas2;
+    GraphicsContext g,g2;
     String[] typesOfGrades = {"assignments","midterms","exams"};
     Integer[] sizeOfCSV = {5,7,7};
     TableView<Row> grades;
@@ -34,6 +34,13 @@ public class GradesPage extends Page {
     TableColumn gainedCol = new TableColumn("Gained");
     TableColumn neitherCol = new TableColumn("Neither");
     TableColumn lostCol = new TableColumn("Lost");
+    TableView<Row> totalTable;
+    TableColumn totTypeCol = new TableColumn("Type");
+    TableColumn totTotalCol = new TableColumn("Total");
+    TableColumn totGainedCol = new TableColumn("Gained");
+    TableColumn totNeitherCol = new TableColumn("Neither");
+    TableColumn totLostCol = new TableColumn("Lost");
+    Label courseTotalMarks;
     Label courseMarks;
     Color[] pieColours = {Color.AQUA, Color.GOLD, Color.DARKORANGE,Color.DARKSALMON, Color.LAWNGREEN, Color.PLUM};
 
@@ -58,12 +65,29 @@ public class GradesPage extends Page {
         gainedCol.setCellValueFactory(new PropertyValueFactory<>("gained"));
         neitherCol.setCellValueFactory(new PropertyValueFactory<>("neither"));
         lostCol.setCellValueFactory(new PropertyValueFactory<>("lost"));
+
         grades.getColumns().addAll(typeCol,gainedCol,lostCol,neitherCol,totalCol);
-        canvas = new Canvas(500,500);
+        canvas = new Canvas(200,200);
         g = canvas.getGraphicsContext2D();
         makeTable(courses.get(0)[2]);
-        mainPane.add(canvas,1,2);
+        mainPane.add(canvas,2,2);
         mainPane.add(grades,0,3);
+
+        totalTable = new TableView<>();
+        totalTable.setMaxHeight(125);
+        totalTable.setMaxWidth(341);
+        totTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        totTotalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
+        totGainedCol.setCellValueFactory(new PropertyValueFactory<>("gained"));
+        totNeitherCol.setCellValueFactory(new PropertyValueFactory<>("neither"));
+        totLostCol.setCellValueFactory(new PropertyValueFactory<>("lost"));
+        totalTable.getColumns().addAll(totTypeCol,totGainedCol,totLostCol,totNeitherCol,totTotalCol);
+
+        canvas2 = new Canvas(200,200);
+        g2 = canvas2.getGraphicsContext2D();
+        makeTotalTable();
+        mainPane.add(canvas2,2,3);
+        mainPane.add(totalTable,0,4);
     }
 
     public void makeButtons(List<String[]> courses){
@@ -120,6 +144,65 @@ public class GradesPage extends Page {
         grades.setItems(data);
     }
 
+    public void makeTotalTable(){
+        ObservableList<Row> total = FXCollections.observableArrayList();
+        double studentTotal2 = 0;
+        double studentNeither2 = 0;
+        double studentGained2 = 0;
+        double studentLost2 = 0;
+
+        for (int x=0; x<typesOfGrades.length;x++){
+            List<String[]> gradesList = CSVChanger.read(typesOfGrades[x]+".csv",sizeOfCSV[x]);
+            String type = StringUtils.capitalize(typesOfGrades[x]);
+            double studentTotal = 0;
+            double studentNeither = 0;
+            double studentGained = 0;
+            double studentLost = 0;
+
+            for (int y=0; y<gradesList.size(); y++){
+                    if (gradesList.get(y)[sizeOfCSV[x]-1].equalsIgnoreCase("N/A")){
+                        studentNeither += Double.parseDouble(gradesList.get(y)[sizeOfCSV[x]-2]);
+                        studentTotal += Double.parseDouble(gradesList.get(y)[sizeOfCSV[x]-2]);
+                        studentNeither2 += Double.parseDouble(gradesList.get(y)[sizeOfCSV[x]-2]);
+                        studentTotal2 += Double.parseDouble(gradesList.get(y)[sizeOfCSV[x]-2]);
+                    } else {
+                        studentTotal += Double.parseDouble(gradesList.get(y)[sizeOfCSV[x]-2]);
+                        studentGained += Double.parseDouble((gradesList.get(y)[sizeOfCSV[x]-1]))/100.*Double.parseDouble(gradesList.get(y)[sizeOfCSV[x]-2]);
+                        studentLost += (100.-Double.parseDouble((gradesList.get(y)[sizeOfCSV[x]-1])))/100*Double.parseDouble(gradesList.get(y)[sizeOfCSV[x]-2]);
+                        studentTotal2 += Double.parseDouble(gradesList.get(y)[sizeOfCSV[x]-2]);
+                        studentGained2 += Double.parseDouble((gradesList.get(y)[sizeOfCSV[x]-1]))/100.*Double.parseDouble(gradesList.get(y)[sizeOfCSV[x]-2]);
+                        studentLost2 += (100.-Double.parseDouble((gradesList.get(y)[sizeOfCSV[x]-1])))/100*Double.parseDouble(gradesList.get(y)[sizeOfCSV[x]-2]);
+                    }
+            }
+            total.add(new Row(type,studentTotal,studentNeither,studentGained,studentLost));
+        }
+        makeTotalGraph(studentTotal2,studentNeither2,studentGained2,studentLost2);
+        total.add(new Row("Total",studentTotal2,studentNeither2,studentGained2,studentLost2));
+        totalTable.setItems(total);
+    }
+
+    public void makeTotalGraph(double studentTotal,double  studentNeither, double studentGained,double studentLost){
+        canvas2.getGraphicsContext2D().clearRect(0,0,canvas2.getWidth(),canvas2.getHeight());
+        double startAngle=0;
+        double endAngle=0;
+        double[] gradesArray = {studentNeither,studentGained,studentLost};
+
+        System.out.println(gradesArray[1]);
+
+        for(int x=0; x < typesOfGrades.length; x++) {
+            g2.setFill(pieColours[x]);
+            endAngle = ((gradesArray[x]/studentTotal)*360);
+            g2.fillArc(0,0,200,200,startAngle,endAngle, ArcType.ROUND);
+            startAngle += endAngle;
+        }
+
+        if (Double.isNaN(endAngle)){
+            g2.setFont(new Font(30));
+            g2.setTextAlign(TextAlignment.CENTER);
+            g2.fillText("Nothing to Grade",250,250);
+        }
+    }
+
     public static class Row{
 
         private final SimpleStringProperty type;
@@ -168,7 +251,7 @@ public class GradesPage extends Page {
         for(int x=0; x < typesOfGrades.length; x++) {
             g.setFill(pieColours[x]);
             endAngle = ((gradesArray[x]/total)*360);
-            g.fillArc(0,0,500,500,startAngle,endAngle, ArcType.ROUND);
+            g.fillArc(0,0,200,200,startAngle,endAngle, ArcType.ROUND);
             startAngle += endAngle;
         }
 
