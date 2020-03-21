@@ -23,7 +23,7 @@ public class AddAssignmentPage extends Application implements Runnable {
 
         List<String[]> str = new ArrayList<>();
         String[] strArr = new String[5];
-        Text[] prompts = {new Text("Course Code"), new Text("Assignment Name"), new Text("Due Date"), new Text("Weight"), new Text("Mark")};
+        Text[] prompts = {new Text("Course Code"), new Text("Assignment Name"), new Text("Due Date"), new Text("Weight"), new Text("Mark(N/A if none)")};
         TextField[] info = new TextField[5];
 
         for (int i = 0; i < info.length; i++) {
