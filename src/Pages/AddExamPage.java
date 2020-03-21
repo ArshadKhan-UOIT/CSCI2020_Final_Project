@@ -23,7 +23,7 @@ public class AddExamPage extends Application implements Runnable {
 
         List<String[]> str = new ArrayList<>();
         String[] strArr = new String[7];
-        Text[] prompts = {new Text("Course Code"), new Text("Name"), new Text("Date"), new Text("Time"), new Text("Location"), new Text("Weight"), new Text("Mark")};
+        Text[] prompts = {new Text("Course Code"), new Text("Name"), new Text("Date"), new Text("Time"), new Text("Location"), new Text("Weight"), new Text("Mark(N/A if none)")};
         TextField[] info = new TextField[7];
 
         for (int i = 0; i < info.length; i++) {
