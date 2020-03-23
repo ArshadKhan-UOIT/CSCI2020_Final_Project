@@ -120,8 +120,8 @@ public class Window extends Application implements Runnable {
                 break;
             case "Schedule":
                 stage.setTitle("Schedule");
-                //
-                pane.setCenter(new TextArea());
+                SchedulePage sPage = new SchedulePage();
+                pane.setCenter(sPage.getMainPane());
 
                 break;
             case "Grades":
