@@ -39,14 +39,23 @@ public class HomePage extends Page {
 
         //(0,0) = To do
         //(0,1) = Schedule
-        //(1,0) = My Courses
         //(1,1) = My Grades
         //add everything to the main pane
 
-        VBox left = new VBox();
-        left.setSpacing(20);
+        GridPane left = new GridPane();
+
+        column = new ColumnConstraints();
+        column.setPercentWidth(100);
+        left.getColumnConstraints().addAll(column); // each get 50% of width
+
+        row = new RowConstraints();
+        row.setPercentHeight(50);
+        left.getRowConstraints().addAll(row, row); // each get 50% of height
         left.setPadding(new Insets(10, 10, 10, 10));
-        left.getChildren().addAll(createToDo(), createSchedule());
+
+        left.add(createToDo(), 0, 0);
+        left.add(createSchedule(), 0, 1);
+//        left.setGridLinesVisible(true);
 
 //        mainPane.add(createToDo(), 0, 0);
 //        mainPane.add(createSchedule(), 0, 1);
@@ -120,7 +129,7 @@ public class HomePage extends Page {
             }
         }
         for (Course c : list) {
-            Text entry = new Text("- " + c.getCourseName() + ", " + c.getTime() + ", " + c.getLocation());
+            Text entry = new Text("- " + c.getCourseName() + "\n\t-> " + c.getTime() + ", " + c.getLocation());
             schedulePane.getChildren().add(entry);
 
         }

@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
@@ -42,8 +41,8 @@ public class Window extends Application implements Runnable {
         Button b1 = new Button("Home");
         Button b2 = new Button("My Courses");
         Button b3 = new Button("Schedule");
-        Button b5 = new Button("My Grades");
-        MenuButton b9 = new MenuButton("Add Info");
+        Button b4 = new Button("My Grades");
+        MenuButton b5 = new MenuButton("Add Info");
 
         b1.setPrefSize(screen.getWidth() / 5, screen.getHeight() * 0.05);
         b1.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Home"));
@@ -54,10 +53,10 @@ public class Window extends Application implements Runnable {
         b3.setPrefSize(screen.getWidth() / 5, screen.getHeight() * 0.05);
         b3.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Schedule"));
 
-        b5.setPrefSize(screen.getWidth() / 5, screen.getHeight() * 0.05);
-        b5.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Grades"));
+        b4.setPrefSize(screen.getWidth() / 5, screen.getHeight() * 0.05);
+        b4.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Grades"));
 
-        b9.setPrefSize(screen.getWidth() / 5, screen.getHeight() * 0.05);
+        b5.setPrefSize(screen.getWidth() / 5, screen.getHeight() * 0.05);
         MenuItem course = new MenuItem("Add Course");
         course.setOnAction(e -> {
             //start new thread to open window
@@ -87,10 +86,10 @@ public class Window extends Application implements Runnable {
             addExamThread.run();
         });
 
-        b9.getItems().addAll(course, assignment, midterm, exam);
+        b5.getItems().addAll(course, assignment, midterm, exam);
 
         //add buttons
-        topPane.getChildren().addAll(b1, b2, b3, b5, b9);
+        topPane.getChildren().addAll(b1, b2, b3, b4, b5);
         topPane.setAlignment(Pos.CENTER);
         mainPane.setTop(topPane);
         HomePage home = new HomePage();

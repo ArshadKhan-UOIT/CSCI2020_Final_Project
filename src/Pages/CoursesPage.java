@@ -47,7 +47,7 @@ public class CoursesPage extends Page {
         courseTableView.setMaxHeight(200);  //267
         examTableView.setMaxHeight(200);
         midtermTableView.setMaxHeight(200);
-        System.out.println("Pages.CoursesPage created");
+//        System.out.println("Pages.CoursesPage created");
         HBox buttons = new HBox();
 
 
