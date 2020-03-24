@@ -1,6 +1,7 @@
 package Pages;
 
 import CSV.CSVChanger;
+import Windows.Window;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -19,7 +20,6 @@ public abstract class AddInfo extends Application implements Runnable {
     Text[] prompts;
     TextField[] info;
     String file, title;
-    String[] promptText;
 
     public AddInfo(int numInputs, String f, String t) {
         strArr = new String[numInputs];
@@ -28,7 +28,6 @@ public abstract class AddInfo extends Application implements Runnable {
         file = f;
         title = t;
     }
-
 
     @Override
     public void start(Stage primaryStage) {
@@ -58,6 +57,9 @@ public abstract class AddInfo extends Application implements Runnable {
             if (!isEmpty) {
                 str.add(strArr);
                 CSVChanger.write(file, str);
+
+                Window.setCourses();
+                //TODO: somehow get the window to update whenever an entry is added to a file (update current page being displayed in the window)
 
                 primaryStage.close();
 

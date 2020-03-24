@@ -1,5 +1,6 @@
 package Windows;
 
+import CSV.CSVChanger;
 import DataStructures.Course;
 import Pages.*;
 import javafx.application.Application;
@@ -14,6 +15,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 /*
  * This class is for the main window that will be displayed on screen at all times.
  * When a button is pressed the window its does not change but the center of the border pane is changed to the page
@@ -21,9 +24,30 @@ import javafx.stage.Stage;
  */
 public class Window extends Application implements Runnable {
     public static Course[] courses;
+    public static BorderPane mainPane = new BorderPane();
+
+    public Window() {
+        courses = getCourses();
+    }
 
     public Window(Course[] c) {
         courses = c;
+    }
+
+    public static Course[] getCourses() {
+        //initialize courses from csv
+        List<String[]> data = CSVChanger.read("courses.csv", 6);
+
+        Course[] c = new Course[data.size()];
+
+        for (int i = 0; i < data.size(); i++) {
+            c[i] = new Course(data.get(i));
+        }
+        return c;
+    }
+
+    public static void setCourses() {
+        Window.courses = getCourses();
     }
 
     @Override
@@ -57,6 +81,7 @@ public class Window extends Application implements Runnable {
         b4.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Grades"));
 
         b5.setPrefSize(screen.getWidth() / 5, screen.getHeight() * 0.05);
+
         MenuItem course = new MenuItem("Add Course");
         course.setOnAction(e -> {
             //start new thread to open window
