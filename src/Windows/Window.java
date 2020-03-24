@@ -85,8 +85,22 @@ public class Window extends Application implements Runnable {
             Thread addExamThread = new Thread(addExam);
             addExamThread.run();
         });
+        MenuItem toDo = new MenuItem("Add To Do");
+        toDo.setOnAction(e -> {
+            //start new thread to open window
+            Runnable addToDo = new AddToDoPage();
+            Thread addToDoThread = new Thread(addToDo);
+            addToDoThread.run();
+        });
+        MenuItem remove = new MenuItem("Remove Item");
+        remove.setOnAction(e -> {
+            //start new thread to open window
+            Runnable removeItem = new RemoveEntry();
+            Thread removeThread = new Thread(removeItem);
+            removeThread.run();
+        });
 
-        b5.getItems().addAll(course, assignment, midterm, exam);
+        b5.getItems().addAll(course, assignment, midterm, exam, toDo, remove);
 
         //add buttons
         topPane.getChildren().addAll(b1, b2, b3, b4, b5);
