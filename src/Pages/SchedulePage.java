@@ -10,6 +10,7 @@ import javafx.scene.text.Text;
 public class SchedulePage extends Page {
     public SchedulePage()
     {
+        mainPane.setGridLinesVisible(true);
         String[][] MondayCourses = new String[8][8];
         String[][] TuesdayCourses = new String[8][8];
         String[][] WednesdayCourses = new String[8][8];
