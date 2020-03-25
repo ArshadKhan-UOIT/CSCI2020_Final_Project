@@ -64,8 +64,8 @@ public class GradesPage extends Page {
         courseMarks.setFont(new Font(30));
         mainPane.add(courseMarks,0,0);
         grades = new TableView<>();
-//        grades.setMaxHeight(125);
-        grades.setMaxWidth(351);
+        grades.setMaxHeight(125);
+        grades.setMaxWidth(349);
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         totalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
         gainedCol.setCellValueFactory(new PropertyValueFactory<>("gained"));
@@ -80,7 +80,7 @@ public class GradesPage extends Page {
         mainPane.add(grades,0,2);
 
         totalTable = new TableView<>();
-//        totalTable.setMaxHeight(125);
+        totalTable.setMaxHeight(125);
         totalTable.setMaxWidth(352);
         totTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         totTotalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
