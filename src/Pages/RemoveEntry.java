@@ -34,6 +34,8 @@ public class RemoveEntry extends Application implements Runnable {
         course.setOnAction(e -> {
             //setup window
             setPane(new String[]{"Course Code"});
+            choose.setText("Remove Course");
+            mainPane.setBottom(new Text("Warning: This will remove everything associated \nto this Course"));
             removeButton.setOnMouseClicked(a -> {
                 //call removeCourse()
                 removeCourse(info[0].getText());
@@ -43,6 +45,9 @@ public class RemoveEntry extends Application implements Runnable {
         assignment.setOnAction(e -> {
             //setup window
             setPane(new String[]{"Course Code", "Name"});
+            choose.setText("Remove Assignment");
+            mainPane.setBottom(new Text("Warning: This will remove everything associated \nto this Assignment"));
+
             removeButton.setOnMouseClicked(a -> {
                 //call removeAssignment()
                 removeAssignment(info[0].getText(), info[1].getText());
@@ -52,6 +57,9 @@ public class RemoveEntry extends Application implements Runnable {
         midterm.setOnAction(e -> {
             //setup window
             setPane(new String[]{"Course Code", "Name"});
+            choose.setText("Remove Midterm");
+            mainPane.setBottom(new Text("Warning: This will remove everything associated \nto this Midterm"));
+
             removeButton.setOnMouseClicked(a -> {
                 //call removeMidterm()
                 removeMidterm(info[0].getText(), info[1].getText());
@@ -62,6 +70,9 @@ public class RemoveEntry extends Application implements Runnable {
         exam.setOnAction(e -> {
             //setup window
             setPane(new String[]{"Course Code"});
+            choose.setText("Remove Exam");
+            mainPane.setBottom(new Text("Warning: This will remove everything associated \nto this Exam"));
+
             removeButton.setOnMouseClicked(a -> {
                 //call removeExam()
                 removeExam(info[0].getText());
@@ -72,6 +83,9 @@ public class RemoveEntry extends Application implements Runnable {
         toDo.setOnAction(e -> {
             //setup window
             setPane(new String[]{"Line Number"});
+            choose.setText("Remove To Do");
+            mainPane.setBottom(new Text("Warning: This will remove a To Do list item"));
+
             removeButton.setOnMouseClicked(a -> {
                 //call removeCourse()
                 removeToDo(info[0].getText());
@@ -97,8 +111,8 @@ public class RemoveEntry extends Application implements Runnable {
         pane.setVgap(10);
 
         ColumnConstraints column = new ColumnConstraints();
-        column.setPercentWidth(50);
-        pane.getColumnConstraints().addAll(column, column); // each get 50% of width
+        column.setPercentWidth(60);
+        pane.getColumnConstraints().addAll(column); // first column gets 60% of width
 
         pane.add(choose, 0, 0);
         pane.add(removeButton, 1, 0);
@@ -121,7 +135,7 @@ public class RemoveEntry extends Application implements Runnable {
         List<String[]> data = CSVChanger.read("midterms.csv", 7);
 
         for (int i = 0; i < data.size(); i++) {
-            if ((data.get(i)[0] == code) && (data.get(i)[1] == code)) {
+            if ((data.get(i)[0].equalsIgnoreCase(code))) {
                 data.remove(i);
             }
 
@@ -133,12 +147,22 @@ public class RemoveEntry extends Application implements Runnable {
         data = CSVChanger.read("assignments.csv", 5);
 
         for (int i = 0; i < data.size(); i++) {
-            if ((data.get(i)[0] == code) && (data.get(i)[1] == code)) {
+            if ((data.get(i)[0].equalsIgnoreCase(code))) {
                 data.remove(i);
             }
 
         }
         CSVChanger.writeOver("assignments.csv", data);
+        //remove course
+        data = CSVChanger.read("courses.csv", 6);
+
+        for (int i = 0; i < data.size(); i++) {
+            if ((data.get(i)[2].equalsIgnoreCase(code))) {
+                data.remove(i);
+            }
+
+        }
+        CSVChanger.writeOver("courses.csv", data);
         Window.courses = Window.getCourses();
 
 
@@ -149,7 +173,7 @@ public class RemoveEntry extends Application implements Runnable {
         List<String[]> data = CSVChanger.read("assignments.csv", 5);
 
         for (int i = 0; i < data.size(); i++) {
-            if ((data.get(i)[0] == code) && (data.get(i)[1] == code)) {
+            if ((data.get(i)[0].equalsIgnoreCase(code)) && (data.get(i)[1].equalsIgnoreCase(title))) {
                 data.remove(i);
             }
 
@@ -164,7 +188,7 @@ public class RemoveEntry extends Application implements Runnable {
         List<String[]> data = CSVChanger.read("midterms.csv", 7);
 
         for (int i = 0; i < data.size(); i++) {
-            if ((data.get(i)[0] == code) && (data.get(i)[1] == code)) {
+            if ((data.get(i)[0].equalsIgnoreCase(code)) && (data.get(i)[1].equalsIgnoreCase(title))) {
                 data.remove(i);
             }
 
@@ -179,7 +203,7 @@ public class RemoveEntry extends Application implements Runnable {
         List<String[]> data = CSVChanger.read("exams.csv", 7);
 
         for (int i = 0; i < data.size(); i++) {
-            if (data.get(i)[0] == code) {
+            if (data.get(i)[0].equalsIgnoreCase(code)) {
                 data.remove(i);
             }
 
