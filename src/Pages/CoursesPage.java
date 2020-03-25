@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -47,6 +48,10 @@ public class CoursesPage extends Page {
         courseTableView.setMaxHeight(200);  //267
         examTableView.setMaxHeight(200);
         midtermTableView.setMaxHeight(200);
+//        assignmentTableView.setEditable(true);
+//        midtermTableView.setEditable(true);
+//        examTableView.setEditable(true);
+//        courseTableView.setEditable(true);
         System.out.println("Pages.CoursesPage created");
         HBox buttons = new HBox();
 
@@ -249,7 +254,6 @@ public class CoursesPage extends Page {
         asmtMarkCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
         assignmentTableView.setItems(getAssignmentData(index));
         assignmentTableView.getColumns().setAll(asmtCol, asmtDueDateCol, asmtWightCol, asmtMarkCol);
-
 
         GridPane centerPane = new GridPane();
 
