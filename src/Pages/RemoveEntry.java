@@ -1,5 +1,7 @@
 package Pages;
 
+import CSV.CSVChanger;
+import Windows.Window;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -12,6 +14,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 public class RemoveEntry extends Application implements Runnable {
     private Text[] prompts;
@@ -38,23 +42,36 @@ public class RemoveEntry extends Application implements Runnable {
         assignment.setOnAction(e -> {
             //setup window
             setPane(new String[]{"Course Code", "Name"});
+            removeButton.setOnMouseClicked(a -> {
+                //call removeCourse()
+            });
         });
         MenuItem midterm = new MenuItem("Remove Midterm");
         midterm.setOnAction(e -> {
             //setup window
             setPane(new String[]{"Course Code", "Name"});
+            removeButton.setOnMouseClicked(a -> {
+                //call removeCourse()
+            });
 
         });
         MenuItem exam = new MenuItem("Remove Exam");
         exam.setOnAction(e -> {
             //setup window
             setPane(new String[]{"Course Code"});
+            removeButton.setOnMouseClicked(a -> {
+                //call removeCourse()
+            });
 
         });
         MenuItem toDo = new MenuItem("Remove To Do");
         toDo.setOnAction(e -> {
             //setup window
             setPane(new String[]{"Line Number"});
+            removeButton.setOnMouseClicked(a -> {
+                //call removeCourse()
+                removeToDo();
+            });
 
         });
 
@@ -94,22 +111,51 @@ public class RemoveEntry extends Application implements Runnable {
     }
 
     private void removeCourse() {
+        //remove exam
+        //loop through and remove midterms
+        //loop through and remove assignments
+        String code = info[0].getText();
 
     }
 
     private void removeAssignment() {
+        //remove assignment
+        String code = info[0].getText();
+        String title = info[1].getText();
+
 
     }
 
     private void removeMidterm() {
+        //remove midterm
+        String code = info[0].getText();
+        String title = info[1].getText();
 
     }
 
     private void removeExam() {
+        //remove exam
+        String code = info[0].getText();
 
+        List<String[]> data = CSVChanger.read("exams.csv", 7);
+
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i)[0] == code) {
+                data.remove(i);
+            }
+
+        }
+        CSVChanger.writeOver("exams.csv", data);
+        Window.courses = Window.getCourses();
     }
 
     private void removeToDo() {
+        //remove to do
+        int line = Integer.parseInt(info[0].getText());
+
+        List<String[]> data = CSVChanger.read("ToDoList.csv", 3);
+        data.remove(line - 1);
+        CSVChanger.writeOver("ToDoList.csv", data);
 
     }
 }
