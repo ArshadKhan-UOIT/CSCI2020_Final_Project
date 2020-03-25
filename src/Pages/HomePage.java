@@ -35,7 +35,7 @@ public class HomePage extends Page {
         mainPane.getColumnConstraints().addAll(column, column); // each get 50% of width
         RowConstraints row = new RowConstraints();
         row.setPercentHeight(100);
-        mainPane.getRowConstraints().addAll(row); // each get 50% of height
+        mainPane.getRowConstraints().addAll(row);
 
         //(0,0) = To do
         //(0,1) = Schedule
@@ -46,7 +46,7 @@ public class HomePage extends Page {
 
         column = new ColumnConstraints();
         column.setPercentWidth(100);
-        left.getColumnConstraints().addAll(column); // each get 50% of width
+        left.getColumnConstraints().addAll(column);
 
         row = new RowConstraints();
         row.setPercentHeight(50);

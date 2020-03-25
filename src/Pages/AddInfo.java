@@ -15,11 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AddInfo extends Application implements Runnable {
-    List<String[]> str = new ArrayList<>();
-    String[] strArr;
-    Text[] prompts;
-    TextField[] info;
-    String file, title;
+    protected List<String[]> str = new ArrayList<>();
+    protected String[] strArr;
+    protected Text[] prompts;
+    protected TextField[] info;
+    protected String file, title;
+    protected GridPane pane = new GridPane();
+    protected Button eventButton = new Button();
+
+    public AddInfo() {
+        strArr = new String[0];
+        prompts = new Text[0];
+        info = new TextField[0];
+    }
+
 
     public AddInfo(int numInputs, String f, String t) {
         strArr = new String[numInputs];
@@ -31,7 +40,7 @@ public abstract class AddInfo extends Application implements Runnable {
 
     @Override
     public void start(Stage primaryStage) {
-        GridPane pane = new GridPane();
+
         pane.setPadding(new Insets(20));
         pane.setHgap(10);
         pane.setVgap(10);
@@ -43,8 +52,8 @@ public abstract class AddInfo extends Application implements Runnable {
             pane.add(info[i], 1, i);
         }
 
-        Button addButton = new Button("Add");
-        addButton.setOnMouseClicked(e -> {
+        eventButton.setText("Add");
+        eventButton.setOnMouseClicked(e -> {
             //get text from text fields put it into String[], send to csvChanger.write
             boolean isEmpty = false;
             for (int i = 0; i < info.length; i++) {
@@ -59,13 +68,14 @@ public abstract class AddInfo extends Application implements Runnable {
                 CSVChanger.write(file, str);
 
                 Window.setCourses();
-                //TODO: somehow get the window to update whenever an entry is added to a file (update current page being displayed in the window)
+                //TODO: somehow get the main window to update whenever an entry is added to a file (update current page being displayed in the window)
 
                 primaryStage.close();
 
             }
         });
-        pane.add(addButton, 1, info.length);
+
+        pane.add(eventButton, 1, info.length);
 
         primaryStage.setTitle(title);
         primaryStage.setScene(new Scene(pane));
