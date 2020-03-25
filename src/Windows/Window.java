@@ -117,6 +117,13 @@ public class Window extends Application implements Runnable {
             Thread addToDoThread = new Thread(addToDo);
             addToDoThread.run();
         });
+        MenuItem change = new MenuItem("Change Grade");
+        change.setOnAction(e -> {
+            //start new thread to open window
+            Runnable addChange = new ChangeGradePage();
+            Thread addChangeThread = new Thread(addChange);
+            addChangeThread.run();
+        });
         MenuItem remove = new MenuItem("Remove Item");
         remove.setOnAction(e -> {
             //start new thread to open window
@@ -125,7 +132,7 @@ public class Window extends Application implements Runnable {
             removeThread.run();
         });
 
-        b5.getItems().addAll(course, assignment, midterm, exam, toDo, remove);
+        b5.getItems().addAll(course, assignment, midterm, exam, toDo,change, remove);
 
         //add buttons
         topPane.getChildren().addAll(b1, b2, b3, b4, b5);
