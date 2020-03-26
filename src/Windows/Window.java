@@ -1,6 +1,8 @@
 package Windows;
 
 import CSV.CSVChanger;
+import Chat.client;
+import Chat.server;
 import DataStructures.Course;
 import Pages.*;
 import javafx.application.Application;
@@ -23,6 +25,7 @@ import java.util.List;
  * corresponding to the button
  */
 public class Window extends Application implements Runnable {
+    public TextArea saveText;
     public static Course[] courses;
     public static BorderPane mainPane = new BorderPane();
     private Rectangle2D screen = Screen.getPrimary().getVisualBounds();
@@ -62,6 +65,7 @@ public class Window extends Application implements Runnable {
         //window setup
 
         BorderPane mainPane = new BorderPane();
+        saveText = new TextArea();
         HBox topPane = new HBox();
 
         Button b1 = new Button("Home");
@@ -149,7 +153,13 @@ public class Window extends Application implements Runnable {
         chatPane.setMaxSize(screen.getWidth() * 0.2, screen.getHeight() * 0.03);
         Button chatButton = new Button("Chat");
         chatButton.setPrefSize(screen.getWidth() * 0.2, screen.getHeight() * 0.03);
-        chatButton.setOnMouseClicked(e -> expandChat(chatButton, chatPane));
+        chatButton.setOnMouseClicked(e -> {
+            try {
+                expandChat(chatButton, chatPane);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
 
         chatPane.getChildren().add(chatButton);
 
@@ -166,11 +176,10 @@ public class Window extends Application implements Runnable {
 
     }
 
-    private void expandChat(Button chatButton, VBox chatPane) {
-        TextArea textPane = new TextArea();
-        textPane.setMinSize(screen.getWidth() * 0.2, screen.getHeight() * 0.4);
+    private void expandChat(Button chatButton, VBox chatPane) throws Exception {
+        saveText.setMinSize(screen.getWidth() * 0.2, screen.getHeight() * 0.4);
         //add chat text
-        chatPane.getChildren().add(textPane);
+        chatPane.getChildren().add(saveText);
 
         TextField enterText = new TextField();
         enterText.setPrefWidth(screen.getWidth() * 0.17);
@@ -182,11 +191,23 @@ public class Window extends Application implements Runnable {
         chatPane.getChildren().add(bottomPane);
         chatButton.setOnMouseClicked(e -> closeChat(chatButton, chatPane));
 
+        server s = new server();
+        s.start(new Stage());
+        client c = new client(saveText,send,enterText);
+        c.runChat();
+
     }
 
     private void closeChat(Button chatButton, VBox chatPane) {
+        saveText = (TextArea) chatPane.getChildren().get(1);
         chatPane.getChildren().removeAll(chatPane.getChildren());
-        chatButton.setOnMouseClicked(e -> expandChat(chatButton, chatPane));
+        chatButton.setOnMouseClicked(e -> {
+            try {
+                expandChat(chatButton, chatPane);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
         chatPane.getChildren().add(chatButton);
     }
 
