@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import main.java.CourseContent.CSV.CSVChanger;
 import main.java.CourseContent.Chat.client;
-import main.java.CourseContent.Chat.server;
 import main.java.CourseContent.DataStructures.Course;
 import main.java.CourseContent.Pages.*;
 
@@ -198,8 +197,6 @@ public class Window extends Application implements Runnable {
         chatPane.getChildren().add(bottomPane);
         chatButton.setOnMouseClicked(e -> closeChat(chatButton, chatPane));
 
-        server s = new server();
-        s.start(new Stage());
         client c = new client(saveText,send,enterText);
         c.runChat();
 
