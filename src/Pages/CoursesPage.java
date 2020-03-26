@@ -35,7 +35,6 @@ public class CoursesPage extends Page {
     String[] courseCodes = {"MATH2050", "CSCI2160", "CSCI2040", "CSCI2072", "CSCI2020"};
     String[] courseContent = {"Asmt (%)", "Midterm (%)", "Exam (%)"};
     PieChart pieChart = new PieChart();
-    Text[] text = new Text[]{new Text(), new Text(), new Text()};
     BorderPane bPane = new BorderPane();
     GridPane centerPane = new GridPane();
     Pane rightPane = new Pane();
@@ -58,7 +57,6 @@ public class CoursesPage extends Page {
 
         Button[] b = new Button[Window.courses.length];
 
-
         for (int i = 0; i < Window.courses.length; i++) {
             b[i] = new Button(Window.courses[i].getCourseName());
             buttons.getChildren().add(b[i]);
@@ -66,23 +64,28 @@ public class CoursesPage extends Page {
         }
         for (int i = 0; i < 5; i++) {
             final int index = i;
+            if (index==0) {
+//                System.out.println("test");
+                getTableColumn(index);
+                getPieGraph(index);
+            }
             b[i].setOnMouseClicked(e -> {
                 getTableColumn(index);
                 getPieGraph(index);
             });
-        }
-        for (int i = 0; i < text.length; i++) {
-            text[i].setText(courseContent[i]);
         }
         bPane.setTop(buttons);
         bPane.setCenter(centerPane);
         bPane.setRight(rightPane);
         mainPane.add(bPane, 0, 0);
 //        mainPane.add(rightPane,2,0);
-
+        getTableColumn(0);
+        getPieGraph(0);
     }
 
+
     private void getPieGraph(int index) {
+//        System.out.println("test1");
         //y=635/3 = ~211    x = (1268-702)/2 = 283
         double xPosition, yPosition;
 //        double[] asmntTotal = new double[5];
@@ -180,6 +183,7 @@ public class CoursesPage extends Page {
 //        mainPane.add(rightPane,2,0);
     }
     private void getTableColumn(int index) {
+//        System.out.println("test2");
         courseCodeCol = new TableColumn("Course Code");
         courseCodeCol.setMinWidth(200);
         courseProfCol = new TableColumn("Prof");

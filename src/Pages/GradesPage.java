@@ -73,7 +73,7 @@ public class GradesPage extends Page {
         lostCol.setCellValueFactory(new PropertyValueFactory<>("lost"));
 
         grades.getColumns().addAll(typeCol,gainedCol,lostCol,neitherCol,totalCol);
-        canvas = new Canvas(200,200);
+//        canvas = new Canvas(200,200);
 //        g = canvas.getGraphicsContext2D();
         makeTable(courses.get(0)[2]);
 //        mainPane.add(canvas,2,2);
