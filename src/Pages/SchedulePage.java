@@ -6,10 +6,29 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.WindowEvent;
+import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.*;
+import java.awt.event.*;
+
+import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 
 public class SchedulePage extends Page {
+    VBox buttons = new VBox();
+    Button[] col =new Button[8];
+    Button[] row = new Button[8];
+    Button[] mon = new Button[8];
+    Button[] tues = new Button[8];
+    Button[] wed = new Button[8];
+    Button[] thurs = new Button[8];
+    Button[] fri = new Button[8];
+    Button[] sat = new Button[8];
+    Button[] sun = new Button[8];
+    private JFrame secondFrame = new JFrame("Class Info");
     public SchedulePage()
     {
+        secondFrame.setDefaultCloseOperation(secondFrame.DISPOSE_ON_CLOSE);
         mainPane.setGridLinesVisible(true);
         String[][] MondayCourses = new String[8][8];
         String[][] TuesdayCourses = new String[8][8];
@@ -36,16 +55,7 @@ public class SchedulePage extends Page {
         hours[5]=new Text("15:40-17:00");
         hours[6]=new Text("17:10-18:30");
         hours[7]=new Text("18:40-20:00");
-        VBox buttons = new VBox();
-        Button[] col =new Button[8];
-        Button[] row = new Button[8];
-        Button[] mon = new Button[8];
-        Button[] tues = new Button[8];
-        Button[] wed = new Button[8];
-        Button[] thurs = new Button[8];
-        Button[] fri = new Button[8];
-        Button[] sat = new Button[8];
-        Button[] sun = new Button[8];
+
 
         for (int i=1; i<8;i++) {
             col[i] = new Button(days[i].getText());
@@ -242,9 +252,16 @@ public class SchedulePage extends Page {
                 }
             }
         }
-
+        mon[0].setOnMouseClicked(e -> {
+            secondFrame.setVisible(true);
+        });
+        mon[1].setOnMouseClicked(e -> {
+            secondFrame.setVisible(true);
+        });
     }
     public static void main(String[] args) {
 
     }
+
+
 }
