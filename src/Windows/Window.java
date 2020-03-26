@@ -7,11 +7,11 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -25,6 +25,8 @@ import java.util.List;
 public class Window extends Application implements Runnable {
     public static Course[] courses;
     public static BorderPane mainPane = new BorderPane();
+    private Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+
 
     public Window() {
         courses = getCourses();
@@ -58,7 +60,7 @@ public class Window extends Application implements Runnable {
     @Override
     public void start(Stage primaryStage) {
         //window setup
-        Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+
         BorderPane mainPane = new BorderPane();
         HBox topPane = new HBox();
 
@@ -67,6 +69,8 @@ public class Window extends Application implements Runnable {
         Button b3 = new Button("Schedule");
         Button b4 = new Button("My Grades");
         MenuButton b5 = new MenuButton("Edit Info");
+
+        System.out.println(screen.getWidth());
 
         b1.setPrefSize(screen.getWidth() / 5, screen.getHeight() * 0.05);
         b1.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Home"));
@@ -132,22 +136,58 @@ public class Window extends Application implements Runnable {
             removeThread.run();
         });
 
-        b5.getItems().addAll(course, assignment, midterm, exam, toDo,change, remove);
+        b5.getItems().addAll(course, assignment, midterm, exam, toDo, change, remove);
 
         //add buttons
         topPane.getChildren().addAll(b1, b2, b3, b4, b5);
-        topPane.setAlignment(Pos.CENTER);
         mainPane.setTop(topPane);
+
         HomePage home = new HomePage();
         mainPane.setCenter(home.getMainPane());
+
+        VBox chatPane = new VBox();
+        chatPane.setMaxSize(screen.getWidth() * 0.2, screen.getHeight() * 0.03);
+        Button chatButton = new Button("Chat");
+        chatButton.setPrefSize(screen.getWidth() * 0.2, screen.getHeight() * 0.03);
+        chatButton.setOnMouseClicked(e -> expandChat(chatButton, chatPane));
+
+        chatPane.getChildren().add(chatButton);
+
+        StackPane pane = new StackPane();
+        pane.setAlignment(Pos.BOTTOM_RIGHT);
+        pane.getChildren().addAll(mainPane, chatPane);
 
         //final window setup
         primaryStage.setTitle("Course Content");
         primaryStage.setMinWidth(screen.getWidth() / 2);
         primaryStage.setMinHeight(screen.getHeight() / 2);
-        primaryStage.setScene(new Scene(mainPane, screen.getWidth() * 0.66, screen.getHeight() * 0.66));
+        primaryStage.setScene(new Scene(pane, screen.getWidth() * 0.66, screen.getHeight() * 0.66));
         primaryStage.show();
 
+    }
+
+    private void expandChat(Button chatButton, VBox chatPane) {
+        TextArea textPane = new TextArea();
+        textPane.setMinSize(screen.getWidth() * 0.2, screen.getHeight() * 0.4);
+        //add chat text
+        chatPane.getChildren().add(textPane);
+
+        TextField enterText = new TextField();
+        enterText.setPrefWidth(screen.getWidth() * 0.17);
+        Button send = new Button("Send");
+        send.setPrefWidth(screen.getWidth() * 0.03);
+
+        HBox bottomPane = new HBox();
+        bottomPane.getChildren().addAll(enterText, send);
+        chatPane.getChildren().add(bottomPane);
+        chatButton.setOnMouseClicked(e -> closeChat(chatButton, chatPane));
+
+    }
+
+    private void closeChat(Button chatButton, VBox chatPane) {
+        chatPane.getChildren().removeAll(chatPane.getChildren());
+        chatButton.setOnMouseClicked(e -> expandChat(chatButton, chatPane));
+        chatPane.getChildren().add(chatButton);
     }
 
     public void changePage(Stage stage, BorderPane pane, String page) {
