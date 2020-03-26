@@ -173,7 +173,13 @@ public class Window extends Application implements Runnable {
         primaryStage.setMinHeight(screen.getHeight() / 2);
         primaryStage.setScene(new Scene(pane, screen.getWidth() * 0.66, screen.getHeight() * 0.66));
         primaryStage.show();
-
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
     }
 
     private void expandChat(Button chatButton, VBox chatPane) throws Exception {
