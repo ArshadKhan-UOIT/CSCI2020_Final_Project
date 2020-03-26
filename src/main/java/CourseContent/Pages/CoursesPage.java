@@ -1,10 +1,5 @@
-package Pages;
+package main.java.CourseContent.Pages;
 
-import DataStructures.Assignment;
-import DataStructures.Course;
-import DataStructures.Exam;
-import DataStructures.Midterm;
-import Windows.Window;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
@@ -12,12 +7,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
+import main.java.CourseContent.DataStructures.Assignment;
+import main.java.CourseContent.DataStructures.Course;
+import main.java.CourseContent.DataStructures.Exam;
+import main.java.CourseContent.DataStructures.Midterm;
+import main.java.CourseContent.Windows.Window;
 
 
 public class CoursesPage extends Page {

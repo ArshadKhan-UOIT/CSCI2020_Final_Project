@@ -152,7 +152,7 @@ public class Window extends Application implements Runnable {
 
         VBox chatPane = new VBox();
         chatPane.setMaxSize(screen.getWidth() * 0.2, screen.getHeight() * 0.03);
-        Button chatButton = new Button("main/java/CourseContent/Chat");
+        Button chatButton = new Button("Chat");
         chatButton.setPrefSize(screen.getWidth() * 0.2, screen.getHeight() * 0.03);
         chatButton.setOnMouseClicked(e -> {
             try {
