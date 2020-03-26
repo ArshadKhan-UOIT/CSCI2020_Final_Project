@@ -357,7 +357,6 @@ public class SchedulePage extends Page {
                     classInfo.setText("<html><p>" + SundayCourses[finalI][0] + " <br/>" + SundayProfLoc[finalI][0] + " <br/>" + SundayProfLoc[finalI][1] + "</p></html>");
                     secondFrame.add(classInfo);
                     secondFrame.setVisible(true);
-
                 });
             }
         }
