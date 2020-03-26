@@ -6,17 +6,43 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javax.swing.*;
 
 public class SchedulePage extends Page {
+    VBox buttons = new VBox();
+    Button[] col =new Button[8];
+    Button[] row = new Button[8];
+    Button[] mon = new Button[8];
+    Button[] tues = new Button[8];
+    Button[] wed = new Button[8];
+    Button[] thurs = new Button[8];
+    Button[] fri = new Button[8];
+    Button[] sat = new Button[8];
+    Button[] sun = new Button[8];
+    private JFrame secondFrame = new JFrame("Class Info");
+    private JLabel classInfo = new JLabel("");
     public SchedulePage()
     {
+        secondFrame.setDefaultCloseOperation(secondFrame.DISPOSE_ON_CLOSE);
+        secondFrame.setSize(200,200);
+        secondFrame.setLocationRelativeTo(null);
+        secondFrame.setAlwaysOnTop(true);
+        classInfo.setHorizontalAlignment(JLabel.CENTER);
+        mainPane.setGridLinesVisible(true);
         String[][] MondayCourses = new String[8][8];
         String[][] TuesdayCourses = new String[8][8];
         String[][] WednesdayCourses = new String[8][8];
         String[][] ThursdayCourses = new String[8][8];
         String[][] FridayCourses = new String[8][8];
         String[][] SaturdayCourses = new String[8][8];
-        String[][]SundayCourses = new String[8][8];
+        String[][] SundayCourses = new String[8][8];
+        String[][] MondayProfLoc = new String[8][8];
+        String[][] TuesdayProfLoc = new String[8][8];
+        String[][] WednesdayProfLoc = new String[8][8];
+        String[][] ThursdayProfLoc = new String[8][8];
+        String[][] FridayProfLoc = new String[8][8];
+        String[][] SaturdayProfLoc = new String[8][8];
+        String[][] SundayProfLoc = new String[8][8];
         Text[] days= new Text[8];
         days[0]=new Text("\n\t\tDays\n\n\tTime");
         days[1]=new Text("Monday");
@@ -35,17 +61,6 @@ public class SchedulePage extends Page {
         hours[5]=new Text("15:40-17:00");
         hours[6]=new Text("17:10-18:30");
         hours[7]=new Text("18:40-20:00");
-        VBox buttons = new VBox();
-        Button[] col =new Button[8];
-        Button[] row = new Button[8];
-        Button[] mon = new Button[8];
-        Button[] tues = new Button[8];
-        Button[] wed = new Button[8];
-        Button[] thurs = new Button[8];
-        Button[] fri = new Button[8];
-        Button[] sat = new Button[8];
-        Button[] sun = new Button[8];
-
         for (int i=1; i<8;i++) {
             col[i] = new Button(days[i].getText());
             col[i].setPrefSize(125,75);
@@ -83,41 +98,54 @@ public class SchedulePage extends Page {
                 if (courseDays.charAt(i) == 'M') {
                     MondayCourses[m][0]=(a.getCourseName());
                     MondayCourses[m][1]=(a.getTime());
+                    MondayProfLoc[m][0]=(a.getTeacher());
+                    MondayProfLoc[m][1]=(a.getLocation());
                     m++;
                 }
                 else if (courseDays.charAt(i) == 'T') {
                     TuesdayCourses[t][0]=(a.getCourseName());
                     TuesdayCourses[t][1]=(a.getTime());
+                    TuesdayProfLoc[t][0]=(a.getTeacher());
+                    TuesdayProfLoc[t][1]=(a.getLocation());
                     t++;
                 }
                 else if (courseDays.charAt(i) == 'W') {
                     System.out.println("Wednesday");
                     WednesdayCourses[w][0]=(a.getCourseName());
                     WednesdayCourses[w][1]=(a.getTime());
+                    WednesdayProfLoc[w][0]=(a.getTeacher());
+                    WednesdayProfLoc[w][1]=(a.getLocation());
                     w++;
                 }
                 else if (courseDays.charAt(i) == 'R') {
                     ThursdayCourses[r][0]=(a.getCourseName());
                     ThursdayCourses[r][1]=(a.getTime());
+                    ThursdayProfLoc[r][0]=(a.getTeacher());
+                    ThursdayProfLoc[r][1]=(a.getLocation());
                     r++;
                 }
                 else if (courseDays.charAt(i) == 'F') {
                     FridayCourses[f][0]=(a.getCourseName());
                     FridayCourses[f][1]=(a.getTime());
+                    FridayProfLoc[f][0]=(a.getTeacher());
+                    FridayProfLoc[f][1]=(a.getLocation());
                     f++;
                 }
                 else if (courseDays.charAt(i) == 'A') {
                     SaturdayCourses[sa][0]=(a.getCourseName());
                     SaturdayCourses[sa][1]=(a.getTime());
+                    SaturdayProfLoc[sa][0]=(a.getTeacher());
+                    SaturdayProfLoc[sa][1]=(a.getLocation());
                     sa++;
                 }
                 else if (courseDays.charAt(i) == 'U') {
                     SundayCourses[su][0]=(a.getCourseName());
                     SundayCourses[su][1]=(a.getTime());
+                    SundayProfLoc[su][0]=(a.getTeacher());
+                    SundayProfLoc[su][1]=(a.getLocation());
                     su++;
                 }
                 else{
-                    System.out.println("Nothing");
                 }
             }
         }
@@ -125,10 +153,8 @@ public class SchedulePage extends Page {
         {
             for (int j = 0; j <8; j++)
             {
-                System.out.println("Current: " + MondayCourses[i][1] + " " + i);
                 if (hours[j].getText().equals(MondayCourses[i][1]))
                 {
-                    System.out.println("Yep!, " +  i);
                     mon[i] = new Button(MondayCourses[i][0]);
                     mon[i].setPrefSize(125,75);
                     buttons.getChildren().add(mon[i]);
@@ -142,12 +168,10 @@ public class SchedulePage extends Page {
         }
         for (int i=0; i < 8; i++)
         {
-            System.out.println("Current: " + TuesdayCourses[i][1] + " " + i);
             for (int j = 0; j <8; j++)
             {
                 if (hours[j].getText().equals(TuesdayCourses[i][1]))
                 {
-                    System.out.println("Yep!, " +  i);
                     tues[i] = new Button(TuesdayCourses[i][0]);
                     tues[i].setPrefSize(125,75);
                     buttons.getChildren().add(tues[i]);
@@ -155,13 +179,11 @@ public class SchedulePage extends Page {
                 }
                 else
                 {
-                    System.out.println("Nope!");
                 }
             }
         }
         for (int i=0; i < 8; i++)
         {
-            System.out.println("Past Tuesday, " +  i);
             for (int j = 0; j <8; j++)
             {
                 if (hours[j].getText().equals(WednesdayCourses[i][1]))
@@ -241,9 +263,109 @@ public class SchedulePage extends Page {
                 }
             }
         }
+        for (int i=0; i<8; i++)
+        {
+            if(mon[i]!=null)
+            {
+                int finalI = i;
+                mon[i].setOnMouseClicked(e -> {
+                    secondFrame.setVisible(false);
+                    classInfo.setText("<html><p>" + MondayCourses[finalI][0] + " <br/>" + MondayProfLoc[finalI][0] + " <br/>" + MondayProfLoc[finalI][1] + "</p></html>");
+                    secondFrame.add(classInfo);
+                    secondFrame.setVisible(true);
+
+                });
+            }
+        }
+        for (int i=0; i<8; i++)
+        {
+            if(tues[i]!=null)
+            {
+                int finalI = i;
+                tues[i].setOnMouseClicked(e -> {
+                    secondFrame.setVisible(false);
+                    classInfo.setText("<html><p>" + TuesdayCourses[finalI][0] + " <br/>" + TuesdayProfLoc[finalI][0] + " <br/>" + TuesdayProfLoc[finalI][1] + "</p></html>");
+                    secondFrame.add(classInfo);
+                    secondFrame.setVisible(true);
+
+                });
+            }
+        }
+        for (int i=0; i<8; i++)
+        {
+            if(wed[i]!=null)
+            {
+                int finalI = i;
+                wed[i].setOnMouseClicked(e -> {
+                    secondFrame.setVisible(false);
+                    classInfo.setText("<html><p>" + WednesdayCourses[finalI][0] + " <br/>" + WednesdayProfLoc[finalI][0] + " <br/>" + WednesdayProfLoc[finalI][1] + "</p></html>");
+                    secondFrame.add(classInfo);
+                    secondFrame.setVisible(true);
+
+                });
+            }
+        }
+        for (int i=0; i<8; i++)
+        {
+            if(thurs[i]!=null)
+            {
+                int finalI = i;
+                thurs[i].setOnMouseClicked(e -> {
+                    secondFrame.setVisible(false);
+                    classInfo.setText("<html><p>" + ThursdayCourses[finalI][0] + " <br/>" + ThursdayProfLoc[finalI][0] + " <br/>" + ThursdayProfLoc[finalI][1] + "</p></html>");
+                    secondFrame.add(classInfo);
+                    secondFrame.setVisible(true);
+
+                });
+            }
+        }
+        for (int i=0; i<8; i++)
+        {
+            if(fri[i]!=null)
+            {
+                int finalI = i;
+                fri[i].setOnMouseClicked(e -> {
+                    secondFrame.setVisible(false);
+                    classInfo.setText("<html><p>" + FridayCourses[finalI][0] + " <br/>" + FridayProfLoc[finalI][0] + " <br/>" + FridayProfLoc[finalI][1] + "</p></html>");
+                    secondFrame.add(classInfo);
+                    secondFrame.setVisible(true);
+
+                });
+            }
+        }
+        for (int i=0; i<8; i++)
+        {
+            if(sat[i]!=null)
+            {
+                int finalI = i;
+                tues[i].setOnMouseClicked(e -> {
+                    secondFrame.setVisible(false);
+                    classInfo.setText("<html><p>" + SaturdayCourses[finalI][0] + " <br/>" + SaturdayProfLoc[finalI][0] + " <br/>" + SaturdayProfLoc[finalI][1] + "</p></html>");
+                    secondFrame.add(classInfo);
+                    secondFrame.setVisible(true);
+
+                });
+            }
+        }
+        for (int i=0; i<8; i++)
+        {
+            if(sun[i]!=null)
+            {
+                int finalI = i;
+                sun[i].setOnMouseClicked(e -> {
+                    secondFrame.setVisible(false);
+                    classInfo.setText("<html><p>" + SundayCourses[finalI][0] + " <br/>" + SundayProfLoc[finalI][0] + " <br/>" + SundayProfLoc[finalI][1] + "</p></html>");
+                    secondFrame.add(classInfo);
+                    secondFrame.setVisible(true);
+                });
+            }
+        }
+
 
     }
     public static void main(String[] args) {
 
     }
+
+
 }
