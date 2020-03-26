@@ -7,9 +7,9 @@ public class Exam {
     private String time;
     private String location;
     private double weight;
-    private double mark;
+    private String mark;
 
-    public Exam(String s, String exam, String s1, String s2, String s3, double parseDouble, double parseDouble1) {
+    public Exam(String s, String exam, String s1, String s2, String s3, double parseDouble, String parseDouble1) {
         courseCode = s;
         this.exam = exam;
         date = s1;
@@ -26,7 +26,7 @@ public class Exam {
         time = e[3];
         location = e[4];
         this.weight = Double.parseDouble(e[5]);
-        this.mark = Double.parseDouble(e[6]);
+        this.mark = (e[6]);
     }
 
     public String getCourseCode() { return courseCode; }
@@ -35,7 +35,7 @@ public class Exam {
     public String getTime() { return time; }
     public String getLocation() { return location; }
 
-    public double getMark() {
+    public String getMark() {
         return mark;
     }
 

@@ -73,6 +73,9 @@ public class CoursesPage extends Page {
         bPane.setCenter(centerPane);
         bPane.setRight(rightPane);
         mainPane.add(bPane, 0, 0);
+
+        getTableColumn(0);
+        getPieGraph(0);
 //        mainPane.add(rightPane,2,0);
 
     }

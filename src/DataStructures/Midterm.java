@@ -7,9 +7,9 @@ public class Midterm {
     private String time;
     private String location;
     private double weight;
-    private double mark;
+    private String mark;
 
-    public Midterm(String s, String midterm, String s1, String s2, String s3, double parseDouble, double parseDouble1) {
+    public Midterm(String s, String midterm, String s1, String s2, String s3, double parseDouble, String parseDouble1) {
         courseCode = s;
         this.midterm = midterm;
         date = s1;
@@ -26,7 +26,7 @@ public class Midterm {
         time = m[3];
         location = m[4];
         this.weight = Double.parseDouble(m[5]);
-        this.mark = Double.parseDouble(m[6]);
+        this.mark = m[6];
     }
 
     public String getCourseCode() { return courseCode; }
@@ -39,7 +39,7 @@ public class Midterm {
         return weight;
     }
 
-    public double getMark() {
+    public String getMark() {
         return mark;
     }
 

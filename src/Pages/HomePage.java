@@ -166,19 +166,25 @@ public class HomePage extends Page {
             Assignment[] assignmentList = c.getAssignments();
 
             for (Assignment a : assignmentList) {
-                asmnt += a.getMark() * a.getWeight() / 100;
+                if(a.getMark().equals("N/A")==false){
+                    asmnt += Double.parseDouble(a.getMark()) * a.getWeight() / 100;
+                }
                 asmntTotal += a.getWeight();
             }
             Midterm[] midtermList = c.getMidterms();
 
             for (Midterm m : midtermList) {
-                mid += m.getMark() * m.getWeight() / 100;
+                if(m.getMark().equals("N/A")==false){
+                    mid += Double.parseDouble(m.getMark()) * m.getWeight() / 100;
+                }
                 midTotal += m.getWeight();
             }
             Exam[] examList = c.getExam();
 
             for (Exam e : examList) {
-                exam += e.getMark() * e.getWeight() / 100;
+                if(e.getMark().equals("N/A")==false){
+                    exam += Double.parseDouble(e.getMark()) * e.getWeight() / 100;
+                }
                 examTotal += e.getWeight();
             }
 
