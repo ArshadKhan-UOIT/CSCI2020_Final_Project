@@ -6,6 +6,8 @@ import Pages.GradesPage;
 import Pages.HomePage;
 import Pages.SchedulePage;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -15,6 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /*
  * This class is for the main window that will be displayed on screen at all times.
@@ -39,7 +42,6 @@ public class Window extends Application implements Runnable {
         Rectangle2D screen = Screen.getPrimary().getVisualBounds();
         BorderPane mainPane = new BorderPane();
         HBox topPane = new HBox();
-
         Button b1 = new Button("Home");
         Button b2 = new Button("My Courses");
         Button b3 = new Button("Schedule");
@@ -90,6 +92,13 @@ public class Window extends Application implements Runnable {
         primaryStage.setMinHeight(screen.getHeight() / 2);
         primaryStage.setScene(new Scene(mainPane, screen.getWidth() * 0.66, screen.getHeight() * 0.66));
         primaryStage.show();
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
 
     }
 
