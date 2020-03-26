@@ -1,6 +1,5 @@
-package Pages;
+package main.java.CourseContent.Pages;
 
-import CSV.CSVChanger;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -9,31 +8,52 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import main.java.CourseContent.CSV.CSVChanger;
+import main.java.CourseContent.Windows.Window;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddCoursePage extends Application implements Runnable {
+public abstract class AddInfo extends Application implements Runnable {
+    protected List<String[]> str = new ArrayList<>();
+    protected String[] strArr;
+    protected Text[] prompts;
+    protected TextField[] info;
+    protected String file, title;
+    protected GridPane pane = new GridPane();
+    protected Button eventButton = new Button();
+
+    public AddInfo() {
+        strArr = new String[0];
+        prompts = new Text[0];
+        info = new TextField[0];
+    }
+
+
+    public AddInfo(int numInputs, String f, String t) {
+        strArr = new String[numInputs];
+        prompts = new Text[numInputs];
+        info = new TextField[numInputs];
+        file = f;
+        title = t;
+    }
+
     @Override
     public void start(Stage primaryStage) {
-        GridPane pane = new GridPane();
+
         pane.setPadding(new Insets(20));
         pane.setHgap(10);
         pane.setVgap(10);
 
-        List<String[]> str = new ArrayList<>();
-        String[] strArr = new String[6];
-        Text[] prompts = {new Text("Course Name"), new Text("Teacher"), new Text("Course Code"), new Text("Days"), new Text("Time"), new Text("Location")};
-        TextField[] info = new TextField[6];
 
         for (int i = 0; i < info.length; i++) {
             pane.add(prompts[i], 0, i);
             info[i] = new TextField();
             pane.add(info[i], 1, i);
         }
-        info[3].setPromptText("In the form \"MTWRF\"");
-        Button addButton = new Button("Add");
-        addButton.setOnMouseClicked(e -> {
+
+        eventButton.setText("Add");
+        eventButton.setOnMouseClicked(e -> {
             //get text from text fields put it into String[], send to csvChanger.write
             boolean isEmpty = false;
             for (int i = 0; i < info.length; i++) {
@@ -45,21 +65,24 @@ public class AddCoursePage extends Application implements Runnable {
             }
             if (!isEmpty) {
                 str.add(strArr);
-                CSVChanger.write("courses.csv", str);
+                CSVChanger.write(file, str);
+
+                Window.setCourses();
+                //TODO: somehow get the main window to update whenever an entry is added to a file (update current page being displayed in the window)
 
                 primaryStage.close();
 
             }
         });
-        pane.add(addButton, 1, 6);
 
-        primaryStage.setTitle("Add Course");
+        pane.add(eventButton, 1, info.length);
+
+        primaryStage.setTitle(title);
         primaryStage.setScene(new Scene(pane));
         primaryStage.show();
     }
 
     @Override
-    public void run() {
-        start(new Stage());
-    }
+    public abstract void run();
+
 }

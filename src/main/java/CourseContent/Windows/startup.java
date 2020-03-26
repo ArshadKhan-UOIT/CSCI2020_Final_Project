@@ -1,33 +1,31 @@
-package Windows;
+package main.java.CourseContent.Windows;
 
-import CSV.CSVChanger;
-import DataStructures.Course;
 import javafx.animation.FadeTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import main.java.CourseContent.CSV.CSVChanger;
+import main.java.CourseContent.DataStructures.Course;
 
 import java.util.List;
 
 /*
- * The Windows.startup class is for loading all the required information for when the window is displayed.
+ * The main.java.CourseContent.Windows.startup class is for loading all the required information for when the window is displayed.
  * This class will open a loading window and create multiple threads to retrieve each category of information
  * Then it will send the information to window where the rest of the program can use it
  */
 public class startup extends Application {
     @Override
     public void start(Stage primaryStage) {
-        //class to handle Windows.startup window before homepage window appears
+        //class to handle main.java.CourseContent.Windows.startup window before homepage window appears
         VBox titleBox = new VBox();
         Text banner = new Text("Click To\nStart");
         banner.setTextAlignment(TextAlignment.CENTER);
@@ -43,6 +41,7 @@ public class startup extends Application {
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(titleBox, 300, 300, Color.BLACK));
         primaryStage.show();
+        primaryStage.centerOnScreen();
 
         //text fade in then out
         FadeTransition ft = new FadeTransition(Duration.millis(3000), banner);

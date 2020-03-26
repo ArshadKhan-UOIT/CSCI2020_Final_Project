@@ -1,6 +1,6 @@
-package DataStructures;
+package main.java.CourseContent.DataStructures;
 
-import CSV.CSVChanger;
+import main.java.CourseContent.CSV.CSVChanger;
 
 import java.util.List;
 

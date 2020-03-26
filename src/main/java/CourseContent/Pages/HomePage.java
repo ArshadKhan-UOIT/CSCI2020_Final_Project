@@ -1,11 +1,5 @@
-package Pages;
+package main.java.CourseContent.Pages;
 
-import CSV.CSVChanger;
-import DataStructures.Assignment;
-import DataStructures.Course;
-import DataStructures.Exam;
-import DataStructures.Midterm;
-import Windows.Window;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.chart.CategoryAxis;
@@ -17,6 +11,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import main.java.CourseContent.CSV.CSVChanger;
+import main.java.CourseContent.DataStructures.Assignment;
+import main.java.CourseContent.DataStructures.Course;
+import main.java.CourseContent.DataStructures.Exam;
+import main.java.CourseContent.DataStructures.Midterm;
+import main.java.CourseContent.Windows.Window;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -35,18 +35,27 @@ public class HomePage extends Page {
         mainPane.getColumnConstraints().addAll(column, column); // each get 50% of width
         RowConstraints row = new RowConstraints();
         row.setPercentHeight(100);
-        mainPane.getRowConstraints().addAll(row); // each get 50% of height
+        mainPane.getRowConstraints().addAll(row);
 
         //(0,0) = To do
         //(0,1) = Schedule
-        //(1,0) = My Courses
         //(1,1) = My Grades
         //add everything to the main pane
 
-        VBox left = new VBox();
-        left.setSpacing(20);
+        GridPane left = new GridPane();
+
+        column = new ColumnConstraints();
+        column.setPercentWidth(100);
+        left.getColumnConstraints().addAll(column);
+
+        row = new RowConstraints();
+        row.setPercentHeight(50);
+        left.getRowConstraints().addAll(row, row); // each get 50% of height
         left.setPadding(new Insets(10, 10, 10, 10));
-        left.getChildren().addAll(createToDo(), createSchedule());
+
+        left.add(createToDo(), 0, 0);
+        left.add(createSchedule(), 0, 1);
+//        left.setGridLinesVisible(true);
 
 //        mainPane.add(createToDo(), 0, 0);
 //        mainPane.add(createSchedule(), 0, 1);
@@ -120,7 +129,7 @@ public class HomePage extends Page {
             }
         }
         for (Course c : list) {
-            Text entry = new Text("- " + c.getCourseName() + ", " + c.getTime() + ", " + c.getLocation());
+            Text entry = new Text("- " + c.getCourseName() + "\n\t-> " + c.getTime() + ", " + c.getLocation());
             schedulePane.getChildren().add(entry);
 
         }
@@ -157,19 +166,25 @@ public class HomePage extends Page {
             Assignment[] assignmentList = c.getAssignments();
 
             for (Assignment a : assignmentList) {
-                asmnt += a.getMark() * a.getWeight() / 100;
+                if(a.getMark().equals("N/A")==false){
+                    asmnt += Double.parseDouble(a.getMark()) * a.getWeight() / 100;
+                }
                 asmntTotal += a.getWeight();
             }
             Midterm[] midtermList = c.getMidterms();
 
             for (Midterm m : midtermList) {
-                mid += m.getMark() * m.getWeight() / 100;
+                if(m.getMark().equals("N/A")==false){
+                    mid += Double.parseDouble(m.getMark()) * m.getWeight() / 100;
+                }
                 midTotal += m.getWeight();
             }
             Exam[] examList = c.getExam();
 
             for (Exam e : examList) {
-                exam += e.getMark() * e.getWeight() / 100;
+                if(e.getMark().equals("N/A")==false){
+                    exam += Double.parseDouble(e.getMark()) * e.getWeight() / 100;
+                }
                 examTotal += e.getWeight();
             }
 

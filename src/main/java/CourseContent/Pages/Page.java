@@ -1,4 +1,4 @@
-package Pages;
+package main.java.CourseContent.Pages;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;

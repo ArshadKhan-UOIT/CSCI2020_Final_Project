@@ -1,13 +1,13 @@
-package DataStructures;
+package main.java.CourseContent.DataStructures;
 
 public class Assignment {
     private String courseCode;
     private String assignmentName;
     private String dueDate;
     private double weight;
-    private double mark;
+    private String mark;
 
-    public Assignment(String code, String name, String date, double weight, double mark) {
+    public Assignment(String code, String name, String date, double weight, String mark) {
         courseCode = code;
         assignmentName = name;
         dueDate = date;
@@ -20,7 +20,7 @@ public class Assignment {
         assignmentName = a[1];
         dueDate = a[2];
         this.weight = Double.parseDouble(a[3]);
-        this.mark = Double.parseDouble(a[4]);
+        this.mark = a[4];
     }
 
     public String getCourseCode() { return courseCode; }
@@ -29,7 +29,7 @@ public class Assignment {
 
 
 
-    public double getMark() {
+    public String getMark() {
         return mark;
     }
 

@@ -1,17 +1,17 @@
-package DataStructures;
+package main.java.CourseContent.DataStructures;
 
-public class Midterm {
+public class Exam {
     private String courseCode;
-    private String midterm;
+    private String exam;
     private String date;
     private String time;
     private String location;
     private double weight;
-    private double mark;
+    private String mark;
 
-    public Midterm(String s, String midterm, String s1, String s2, String s3, double parseDouble, double parseDouble1) {
+    public Exam(String s, String exam, String s1, String s2, String s3, double parseDouble, String parseDouble1) {
         courseCode = s;
-        this.midterm = midterm;
+        this.exam = exam;
         date = s1;
         time = s2;
         location = s3;
@@ -19,40 +19,39 @@ public class Midterm {
         mark = parseDouble1;
     }
 
-    public Midterm(String[] m) {
-        courseCode = m[0];
-        midterm = m[1];
-        date = m[2];
-        time = m[3];
-        location = m[4];
-        this.weight = Double.parseDouble(m[5]);
-        this.mark = Double.parseDouble(m[6]);
+    public Exam(String[] e) {
+        courseCode = e[0];
+        exam = e[1];
+        date = e[2];
+        time = e[3];
+        location = e[4];
+        this.weight = Double.parseDouble(e[5]);
+        this.mark = (e[6]);
     }
 
     public String getCourseCode() { return courseCode; }
-    public String getMidterm() { return midterm; }
+    public String getExam() { return exam; }
     public String getDate() { return date; }
     public String getTime() { return time; }
     public String getLocation() { return location; }
+
+    public String getMark() {
+        return mark;
+    }
 
     public double getWeight() {
         return weight;
     }
 
-    public double getMark() {
-        return mark;
-    }
-
     @Override
     public String toString() {
-        return "Midterm{" +
+        return "Exam{" +
                 "courseCode='" + courseCode + '\'' +
                 ", date='" + date + '\'' +
                 ", time='" + time + '\'' +
                 ", location='" + location + '\'' +
-                ", weight=" + weight +
+                ", weight='" + weight + '\'' +
                 ", mark=" + mark +
                 '}';
     }
-
 }
