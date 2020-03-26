@@ -16,6 +16,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import javafx.event.EventHandler;
+import javafx.application.Platform;
 
 import java.util.List;
 
