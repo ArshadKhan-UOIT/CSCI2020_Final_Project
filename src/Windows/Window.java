@@ -66,7 +66,7 @@ public class Window extends Application implements Runnable {
         Button b2 = new Button("My Courses");
         Button b3 = new Button("Schedule");
         Button b4 = new Button("My Grades");
-        MenuButton b5 = new MenuButton("Add Info");
+        MenuButton b5 = new MenuButton("Edit Info");
 
         b1.setPrefSize(screen.getWidth() / 5, screen.getHeight() * 0.05);
         b1.setOnMouseClicked(e -> changePage(primaryStage, mainPane, "Home"));

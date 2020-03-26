@@ -1,6 +1,7 @@
 package Pages;
 
 import CSV.CSVChanger;
+import Windows.Window;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,7 +58,7 @@ public class ChangeGradePage extends Application implements Runnable {
 
                 for (int y=0; y<gradesList.size(); y++){
                     if((gradesList.get(y)[0] + " " + gradesList.get(y)[1] + ": " + gradesList.get(y)[sizeOfCSV[x]-1] + "/100").equals(comboBox.getValue())){
-                        gradesListToChange = CSVChanger.read(typesOfGrades[x]+".csv",sizeOfCSV[x]);
+                        gradesListToChange = CSVChanger.read(typesOfGrades[y] + ".csv", sizeOfCSV[x]);
                         changeThis = gradesList.get(y);
                         sizeOfCSVForChange = sizeOfCSV[x];
                         typeForChange = typesOfGrades[y];
@@ -69,7 +70,8 @@ public class ChangeGradePage extends Application implements Runnable {
             changeThis[sizeOfCSVForChange-1] = textField.getText();
             gradesListToChange.set(yToChange,changeThis);
 
-            CSVChanger.writeOver(typeForChange+".csv",gradesListToChange);
+            CSVChanger.writeOver(typeForChange + ".csv", gradesListToChange);
+            Window.setCourses();
             primaryStage.close();
         });
 

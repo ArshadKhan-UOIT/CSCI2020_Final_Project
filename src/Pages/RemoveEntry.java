@@ -39,6 +39,7 @@ public class RemoveEntry extends Application implements Runnable {
             removeButton.setOnMouseClicked(a -> {
                 //call removeCourse()
                 removeCourse(info[0].getText());
+                Window.setCourses();
             });
         });
         MenuItem assignment = new MenuItem("Remove Assignment");
@@ -51,6 +52,7 @@ public class RemoveEntry extends Application implements Runnable {
             removeButton.setOnMouseClicked(a -> {
                 //call removeAssignment()
                 removeAssignment(info[0].getText(), info[1].getText());
+                Window.setCourses();
             });
         });
         MenuItem midterm = new MenuItem("Remove Midterm");
@@ -63,6 +65,7 @@ public class RemoveEntry extends Application implements Runnable {
             removeButton.setOnMouseClicked(a -> {
                 //call removeMidterm()
                 removeMidterm(info[0].getText(), info[1].getText());
+                Window.setCourses();
             });
 
         });
@@ -76,6 +79,7 @@ public class RemoveEntry extends Application implements Runnable {
             removeButton.setOnMouseClicked(a -> {
                 //call removeExam()
                 removeExam(info[0].getText());
+                Window.setCourses();
             });
 
         });
