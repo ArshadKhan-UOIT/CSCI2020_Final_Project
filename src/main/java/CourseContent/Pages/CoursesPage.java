@@ -49,7 +49,6 @@ public class CoursesPage extends Page {
 //        midtermTableView.setEditable(true);
 //        examTableView.setEditable(true);
 //        courseTableView.setEditable(true);
-        System.out.println("Pages.CoursesPage created");
         HBox buttons = new HBox();
 
         Button[] b = new Button[Window.courses.length];

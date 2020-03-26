@@ -2,13 +2,23 @@ package main.java.CourseContent.Pages;
 
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+/*
+ * Ryan Christopher
+ */
 
+/*
+ * AddCoursePage Class:
+ * This class is a child class of AddInfo and is used to add courses to the courses.csv file
+ */
 public class AddCoursePage extends AddInfo {
-
+    //constructor calls the super class constructor and sends the number of inputs for the window
+    // as well as the file name and window title
     public AddCoursePage() {
         super(6, "courses.csv", "Add Course");
     }
 
+    //run() function starts the new window on a separate thread than the main window and changes the prompts in the
+    //parent class to match the specific type of info being added
     public void run() {
         //set prompts
         Text[] texts = {new Text("Course Name"), new Text("Teacher"), new Text("Course Code"), new Text("Days"), new Text("Time"), new Text("Location")};

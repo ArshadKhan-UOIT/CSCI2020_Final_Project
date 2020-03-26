@@ -20,16 +20,19 @@ import main.java.CourseContent.DataStructures.Course;
 import main.java.CourseContent.Pages.*;
 
 import java.util.List;
+/*
+ * Ryan Christopher
+ */
 
 /*
+ * Window Class:
  * This class is for the main window that will be displayed on screen at all times.
- * When a button is pressed the window its does not change but the center of the border pane is changed to the page
+ * When a button is pressed the window does not change but the center of the border pane is changed to the page
  * corresponding to the button
  */
 public class Window extends Application implements Runnable {
     public TextArea saveText;
     public static Course[] courses;
-    public static BorderPane mainPane = new BorderPane();
     private Rectangle2D screen = Screen.getPrimary().getVisualBounds();
 
 
