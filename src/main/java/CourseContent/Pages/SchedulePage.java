@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import main.java.CourseContent.DataStructures.Course;
 import main.java.CourseContent.Windows.Window;
+
 import javax.swing.*;
 
 public class SchedulePage extends Page {
@@ -90,7 +91,7 @@ public class SchedulePage extends Page {
         mainPane.getColumnConstraints().addAll(column, column,column,column,column,column,column,column); // each get 50% of width
         RowConstraints rowC = new RowConstraints();
         rowC.setPercentHeight(20);
-        mainPane.getRowConstraints().addAll(rowC, rowC, rowC, rowC, rowC, rowC, rowC, rowC); // each get 50% of width
+        mainPane.getRowConstraints().addAll(rowC, rowC, rowC, rowC, rowC, rowC, rowC, rowC); // each get 50% of height
         for (int i=1; i<8; i++)
         {
             mainPane.add(col[i],i,0);
