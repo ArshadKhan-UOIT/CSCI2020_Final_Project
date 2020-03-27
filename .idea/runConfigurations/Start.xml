@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="startup" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
+  <configuration default="false" name="Start" type="Application" factoryName="Application" singleton="false">
     <option name="MAIN_CLASS_NAME" value="main.java.CourseContent.Windows.startup" />
     <module name="CSCI2020_Final_Project" />
     <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />

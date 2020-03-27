@@ -19,7 +19,7 @@ import main.java.CourseContent.Windows.Window;
 
 
 public class CoursesPage extends Page {
-    TableView<Course> courseTableView;      //initializing table view or table colums
+    TableView<Course> courseTableView;
     TableView<Exam> examTableView;
     TableView<Midterm> midtermTableView;
     TableView<Assignment> assignmentTableView;
@@ -42,63 +42,75 @@ public class CoursesPage extends Page {
         examTableView = new TableView();
         midtermTableView = new TableView();
         assignmentTableView = new TableView();
-        courseTableView.setMaxHeight(200);       //setting heights
+        courseTableView.setMaxHeight(200);  //267
         examTableView.setMaxHeight(200);
         midtermTableView.setMaxHeight(200);
-//        assignmentTableView.setEditable(true);        //was going to make it editable but i did not get enough time
+//        assignmentTableView.setEditable(true);
 //        midtermTableView.setEditable(true);
 //        examTableView.setEditable(true);
 //        courseTableView.setEditable(true);
         System.out.println("Pages.CoursesPage created");
         HBox buttons = new HBox();
 
+
         Button[] b = new Button[Window.courses.length];
 
-        for (int i = 0; i < Window.courses.length; i++) {   //for buttons
+        for (int i = 0; i < Window.courses.length; i++) {
             b[i] = new Button(Window.courses[i].getCourseName());
             buttons.getChildren().add(b[i]);
 //            System.out.println(Window.courses[i]); //test to make sure has the correct info
         }
-        for (int i = 0; i < 5; i++) {   //when the button is clicked
+        for (int i = 0; i < 5; i++) {
             final int index = i;
+            if (index == 0) {
+//                System.out.println("test");
+                getTableColumn(index);
+                getPieGraph(index);
+            }
             b[i].setOnMouseClicked(e -> {
                 getTableColumn(index);
                 getPieGraph(index);
             });
         }
-        bPane.setTop(buttons);      //adds everything
+        bPane.setTop(buttons);
         bPane.setCenter(centerPane);
         bPane.setRight(rightPane);
         mainPane.add(bPane, 0, 0);
-        getTableColumn(0);  //for the initial startup
+//        mainPane.add(rightPane,2,0);
+        getTableColumn(0);
         getPieGraph(0);
     }
 
 
-    private void getPieGraph(int index) {   //for the pie graph
+    private void getPieGraph(int index) {
+//        System.out.println("test1");
+        //y=635/3 = ~211    x = (1268-702)/2 = 283
+        double xPosition, yPosition;
 //        double[] asmntTotal = new double[5];
 //        double[] midTotal = new double[5];
 //        double[] examTotal = new double[5];
         double[][] courseWeightArr = new double[5][3]; //[index][content] -> [For each Course][Content for each Course (assignment,midterm,exam)]
-//        double[] overAllTotal = new double[5];
-        for (int i = 0; i < courseWeightArr[index].length; i++) {
+        double[] overAllTotal = new double[5];
+        xPosition = (mainPane.getWidth() - 702) / 3;
+        yPosition = mainPane.getHeight() / 3.0;
+        for (int i = 0; i < overAllTotal.length; i++) {
 //            asmntTotal[i] = 0;
 //            examTotal[i] = 0;
 //            midTotal[i] = 0;
             courseWeightArr[i][0] = 0; //initializing
             courseWeightArr[i][1] = 0; //initializing
             courseWeightArr[i][2] = 0; //initializing
-//            overAllTotal[i] = 0;
+            overAllTotal[i] = 0;
         }
-        for (Course c : Window.courses) {   //initializing the course weight 2D Array
-        // putting in all the info for assignments, midterms, and exams for each course based on which button is clicked
+        for (Course c : Window.courses) {
+
             Assignment[] assignmentList = c.getAssignments();
 
             for (Assignment a : assignmentList) {
                 if (a.getCourseCode().equals(courseCodes[index])) {
 //                    asmntTotal[index] += a.getWeight();
                     courseWeightArr[index][0] += a.getWeight();
-//                    overAllTotal[index] += a.getWeight();
+                    overAllTotal[index] += a.getWeight();
                 }
             }
             Midterm[] midtermList = c.getMidterms();
@@ -107,7 +119,7 @@ public class CoursesPage extends Page {
                 if (m.getCourseCode().equals(courseCodes[index])) {
 //                    midTotal[index] += m.getWeight();
                     courseWeightArr[index][1] += m.getWeight();
-//                    overAllTotal[index] += m.getWeight();
+                    overAllTotal[index] += m.getWeight();
                 }
             }
             Exam[] examList = c.getExam();
@@ -116,7 +128,7 @@ public class CoursesPage extends Page {
                 if (e.getCourseCode().equals(courseCodes[index])) {
 //                    examTotal[index] += e.getWeight();
                     courseWeightArr[index][2] += e.getWeight();
-//                    overAllTotal[index] += e.getWeight();
+                    overAllTotal[index] += e.getWeight();
                 }
             }
         }
@@ -158,16 +170,19 @@ public class CoursesPage extends Page {
         //M	0.0 	0.0 	0.0 	0.0 	20.0
         //E	0.0 	0.0 	0.0 	0.0 	25.0
         Pane rightPane = new Pane();
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();   //observal list for the pie chart pate
-        for (int contentIndex = 0; contentIndex < courseWeightArr[index].length; contentIndex++) {  //filling the observal list
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        for (int contentIndex = 0; contentIndex < courseWeightArr[index].length; contentIndex++) {
             pieChartData.add(new PieChart.Data(courseContent[contentIndex], courseWeightArr[index][contentIndex]));
         }
-        pieChart.setData(pieChartData); //setting it to the pei chart
+        pieChart.setData(pieChartData);
         pieChart.setTitle("Weight's");
-        rightPane.getChildren().add(pieChart);  //adding it to the pane
+        rightPane.getChildren().add(pieChart);
         bPane.setRight(rightPane);
+//        mainPane.add(rightPane,2,0);
     }
-    private void getTableColumn(int index) {        //initializes the table column for courses, midterms, assignments, and exams
+
+    private void getTableColumn(int index) {
+//        System.out.println("test2");
         courseCodeCol = new TableColumn("Course Code");
         courseCodeCol.setMinWidth(200);
         courseProfCol = new TableColumn("Prof");
@@ -245,15 +260,17 @@ public class CoursesPage extends Page {
 
         GridPane centerPane = new GridPane();
 
-        centerPane.add(courseTableView, 0, 1);      //adds them all to the pane
+        centerPane.add(courseTableView, 0, 1);
         centerPane.add(examTableView, 0, 2);
         centerPane.add(midtermTableView, 0, 3);
         centerPane.add(assignmentTableView, 0, 4);
 
-        bPane.setCenter(centerPane);    //adds the grid pane to borderpane
+        bPane.setCenter(centerPane);
+//        System.out.println(courseTableView.getHeight());
+
     }
 
-    public ObservableList<Assignment> getAssignmentData(int index) {    //observal list for assignemnt data
+    public ObservableList<Assignment> getAssignmentData(int index) {
         ObservableList<Assignment> asmtObList = FXCollections.observableArrayList();
         for (Course c : Window.courses) {
             Assignment[] assignmentList = c.getAssignments();
@@ -265,7 +282,8 @@ public class CoursesPage extends Page {
         }
         return asmtObList;
     }
-    public ObservableList<Midterm> getMidtermData(int index) {      //observal list for midterm data
+
+    public ObservableList<Midterm> getMidtermData(int index) {
         ObservableList<Midterm> midObList = FXCollections.observableArrayList();
         for (Course c : Window.courses) {
             Midterm[] midtermList = c.getMidterms();
@@ -276,7 +294,8 @@ public class CoursesPage extends Page {
         }
         return midObList;
     }
-    public ObservableList<Exam> getExamData(int index) {        //observal list for exam data
+
+    public ObservableList<Exam> getExamData(int index) {
         ObservableList<Exam> examObList = FXCollections.observableArrayList();
         for (Course c : Window.courses) {
             Exam[] examList = c.getExam();
@@ -288,13 +307,18 @@ public class CoursesPage extends Page {
         }
         return examObList;
     }
-    public ObservableList<Course> getCourseData(int index) {       //observal list for courses data
+
+    public ObservableList<Course> getCourseData(int index) {
         ObservableList<Course> courseObList = FXCollections.observableArrayList();
         for (Course c : Window.courses) {
             if (c.getCourseCode().equals(courseCodes[index])) {
-                courseObList.add(new Course(c.getCourseName(),c.getTeacher(),c.getCourseCode(),c.getDays(),c.getTime(),c.getLocation()));
+                courseObList.add(new Course(c.getCourseName(), c.getTeacher(), c.getCourseCode(), c.getDays(), c.getTime(), c.getLocation()));
             }
         }
         return courseObList;
     }
+
+    public static void main(String[] args) {
+    }
+
 }
