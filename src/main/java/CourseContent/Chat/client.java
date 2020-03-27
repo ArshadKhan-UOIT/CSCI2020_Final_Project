@@ -50,8 +50,11 @@ public class client{
     //Used so that when called with a message sent in, it will send the message to the server, using the global
     //Variables, this assumes that the server is already connected
     public void sendMessage(String message, String u) throws IOException {
-        out.writeUTF(u + ": " + message);
-        out.flush();
+        //To make sure no blank message is sent.
+        if (!(message.isBlank())){
+            out.writeUTF(u + ": " + message);
+            out.flush();
+        }
     }
 
     //This function runs in the background so that it will open a input stream with the server and wait for any
