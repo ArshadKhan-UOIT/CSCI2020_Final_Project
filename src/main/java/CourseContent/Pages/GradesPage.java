@@ -36,7 +36,7 @@ public class GradesPage extends Page {
     TableColumn totGainedCol = new TableColumn("Gained");
     TableColumn totNeitherCol = new TableColumn("Neither");
     TableColumn totLostCol = new TableColumn("Lost");
-    Text courseMarks;
+    Text courseMarks, courseOVMarks;
 
     public GradesPage() {
 
@@ -45,10 +45,13 @@ public class GradesPage extends Page {
 
         List<String[]> courses = CSVChanger.read("courses.csv",6);  //reads the courses csv thats in CSV/CSVChanger.java
         makeButtons(courses);   //makes the buttons at the top of the screen
-        mainPane.add(hbox,0,1);
+        mainPane.add(hbox,0,0);
         courseMarks = new Text(StringUtils.capitalize(courses.get(0)[0]) + " Current Grades:");
+        courseOVMarks = new Text(StringUtils.capitalize("All Courses Overall Grades:"));
         courseMarks.setFont(new Font(30));
-        mainPane.add(courseMarks,0,0);
+        courseOVMarks.setFont(new Font(30));
+        mainPane.add(courseMarks,0,1);
+        mainPane.add(courseOVMarks,0,3);
         grades = new TableView<>();
         grades.setMaxHeight(125);
         grades.setMaxWidth(349);
@@ -72,9 +75,9 @@ public class GradesPage extends Page {
         totLostCol.setCellValueFactory(new PropertyValueFactory<>("lost"));
         totalTable.getColumns().addAll(totTypeCol,totGainedCol,totLostCol,totNeitherCol,totTotalCol);   //adding in all of the columns
         makeTotalTable();   //calls this function which initializes the table columns and pie chart based on the over total
-        mainPane.add(p1,2,2);
-        mainPane.add(p2,2,3);
-        mainPane.add(totalTable,0,3);
+        mainPane.add(p1,1,2);
+        mainPane.add(p2,1,4);
+        mainPane.add(totalTable,0,4);
     }
 
     public void makeButtons(List<String[]> courses){    //makes the buttons
@@ -95,6 +98,8 @@ public class GradesPage extends Page {
         List<String[]> courses = CSVChanger.read("courses.csv",6);
         courseMarks.setText(StringUtils.capitalize(courses.get(index)[0]) + " Current Grades:");
         courseMarks.setFont(new Font(30));
+        courseOVMarks.setText(StringUtils.capitalize("All Courses Overall Grades:"));
+        courseOVMarks.setFont(new Font(30));
     }
 
     public void makeTable(String courseName){       //initializes the grades table view, and gets the pie chart

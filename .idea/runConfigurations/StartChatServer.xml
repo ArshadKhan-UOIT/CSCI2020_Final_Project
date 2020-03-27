@@ -2,6 +2,7 @@
   <configuration default="false" name="StartChatServer" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="main.java.CourseContent.Chat.serverStart" />
     <module name="CSCI2020_Final_Project" />
+    <option name="VM_PARAMETERS" value="--module-path ${PATH_TO_FX} --add-modules javafx.controls,javafx.fxml " />
     <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
     <method v="2">
       <option name="Make" enabled="true" />
