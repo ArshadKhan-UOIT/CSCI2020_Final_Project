@@ -27,9 +27,9 @@ import java.util.List;
  * corresponding to the button
  */
 public class Window extends Application implements Runnable {
+    public static Course[] courses;
     public TextArea saveText;
     private String username;
-    public static Course[] courses;
     private Rectangle2D screen = Screen.getPrimary().getVisualBounds();
 
     //default constructor calls getCourses() to populate 'courses' variable
@@ -211,6 +211,7 @@ public class Window extends Application implements Runnable {
      */
     private void expandChat(Button chatButton, VBox chatPane) throws Exception {
         saveText.setMinSize(screen.getWidth() * 0.2, screen.getHeight() * 0.4);
+        saveText.setEditable(false);
         //add chat text
         chatPane.getChildren().add(saveText);
         //create text field to hold the text being sent to the chat
