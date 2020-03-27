@@ -51,7 +51,7 @@ public class client{
     //Variables, this assumes that the server is already connected
     public void sendMessage(String message, String u) throws IOException {
         //To make sure no blank message is sent.
-        if (!(message.equals(""))){
+        if (!(message.isBlank())){
             out.writeUTF(u + ": " + message);
             out.flush();
         }
