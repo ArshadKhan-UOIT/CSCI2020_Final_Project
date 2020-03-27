@@ -3,8 +3,6 @@ package main.java.CourseContent.Pages;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -21,7 +19,7 @@ import java.util.List;
 
 public class GradesPage extends Page {
     //string.format("%.2f",numbers)
-    PieChart p1 = new PieChart(), p2 = new PieChart();  //declearing the pie chart stuff
+    PieChart p1 = new PieChart(), p2 = new PieChart();  //declaring the pie chart stuff
     HBox hbox;
     VBox vbox;
     String[] typesOfGrades = {"assignments","midterms","exams"};
