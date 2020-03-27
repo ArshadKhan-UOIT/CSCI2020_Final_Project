@@ -8,7 +8,7 @@ Tashdiq Ahmed(tashahmed): Wrote the SchedulePage java file, and wrote parts of t
 
 Arshad Khan(ArshadKhan-UOIT): Wrote the CoursesPage java file, as well as half of MyGradesPage.java and implemented Gradle.
 
-Ryan Christopher(Ryan-7926): Wrote Window.java, half of StartUp.java, created the main.java.CourseContent.DataStructures package, implemented AddInfo.java and its child classes, wrote RemoveEntry.java, Page Class.java, HomePage.java and laid the groundwork for Gradle implementation.
+Ryan Christopher(Ryan-7926): Wrote Window.java, half of StartUp.java, created and implemented the main.java.CourseContent.DataStructures package, implemented AddInfo.java and its child classes, wrote RemoveEntry.java, Page.java, HomePage.java and laid the groundwork for Gradle implementation.
 
 Repository URL: https://github.com/Ryan-7926/CSCI2020_Final_Project
 
