@@ -28,15 +28,15 @@ public class client{
 
     //This is called when to set up the chat/client it will start the connection to the server, and then call the
     //receiveMessages function
-    public void runChat() throws IOException {
+    public void runChat(String u) throws IOException {
         //Attempts to connect to the localHost server.
-        socket = new Socket(InetAddress.getLocalHost(),4000);
+        socket = new Socket(InetAddress.getLocalHost(), 4000);
         out = new DataOutputStream(socket.getOutputStream());
 
         //Sets button sent in, to start sendMessage if clicked on
-        send.setOnAction(e-> {
+        send.setOnAction(e -> {
             try {
-                sendMessage(message.getText());
+                sendMessage(message.getText(), u);
                 message.clear();
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -49,8 +49,8 @@ public class client{
 
     //Used so that when called with a message sent in, it will send the message to the server, using the global
     //Variables, this assumes that the server is already connected
-    public void sendMessage(String message) throws IOException {
-        out.writeUTF(message);
+    public void sendMessage(String message, String u) throws IOException {
+        out.writeUTF(u + ": " + message);
         out.flush();
     }
 

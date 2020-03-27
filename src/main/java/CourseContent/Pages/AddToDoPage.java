@@ -2,9 +2,7 @@ package main.java.CourseContent.Pages;
 
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-/*
- * Ryan Christopher
- */
+
 
 /*
  * AddCoursePage Class:

@@ -13,9 +13,7 @@ import main.java.CourseContent.Windows.Window;
 
 import java.util.ArrayList;
 import java.util.List;
-/*
- * Ryan Christopher
- */
+
 
 /*
  * AddInfo Class:

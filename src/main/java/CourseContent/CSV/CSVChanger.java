@@ -11,9 +11,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+ * CSVChanger Class:
+ * This class is used for accessing the csv files that hold the data.
+ */
 public class CSVChanger {
-
+    /*
+     * read() function takes in a filename and int for the number of columns in the csv, then reads in all the data
+     */
     public static List<String[]> read(String fileName, int size) {
         List<String[]> data = null;
         try {
@@ -24,6 +29,7 @@ public class CSVChanger {
 
             Iterable<CSVRecord> info = CSVFormat.DEFAULT.parse(read);
 
+            //put data into string arrays
             for (CSVRecord record : info) {
                 str = new String[size];
                 for (int i = 0; i < size; i++) {
@@ -39,11 +45,13 @@ public class CSVChanger {
         return data;
     }
 
+    /*
+     * write() function takes in a filename and list of string arrays, that it then appends to the csv file specified
+     */
     public static void write(String fileName, List<String[]> data) {
         try {
             FileWriter write = new FileWriter(String.valueOf(Paths.get("DataFiles/" + fileName)), true);
             CSVPrinter printer = CSVFormat.DEFAULT.withRecordSeparator("\r\n").print(write);
-//            printer.println();
             printer.printRecords(data);
 
             printer.close(true);
@@ -54,6 +62,9 @@ public class CSVChanger {
         }
     }
 
+    /*
+     * writeOver() function takes in a filename and list of string arrays, that it then writes over the csv file specified
+     */
     public static void writeOver(String fileName, List<String[]> data) {
         try {
             FileWriter write = new FileWriter(String.valueOf(Paths.get("DataFiles/" + fileName)));

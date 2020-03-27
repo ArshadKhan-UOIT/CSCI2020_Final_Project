@@ -16,9 +16,6 @@ import main.java.CourseContent.CSV.CSVChanger;
 import main.java.CourseContent.Windows.Window;
 
 import java.util.List;
-/*
- * Ryan Christopher
- */
 
 /*
  * RemoveEntry Class:

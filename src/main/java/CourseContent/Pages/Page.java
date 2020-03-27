@@ -2,9 +2,7 @@ package main.java.CourseContent.Pages;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-/*
- * Ryan Christopher
- */
+
 
 /*
  * Page Class:
