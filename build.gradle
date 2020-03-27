@@ -1,0 +1,58 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'maven-publish'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+javafx {
+    // Points to JDK and its JavaFX libraries, also declares target runtime JDK
+//    javaRuntime = '/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk'
+
+    version = '13' // Specify javafx sdk version
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.swing', 'javafx.media', 'javafx.graphics']
+    sdk = "/home/arshad/Downloads/javafx-sdk-11.0.2"
+    if (sdk == null || sdk.isBlank()) {
+        throw new InvalidUserDataException("JAVAFX_HOME environment variable is not set. It must be set to root folder where JAVAFX SDK is located")
+    }
+    application {
+        def javafxHome = "/usr/lib/jvm/default-java"
+        mainClassName = 'Windows/startup'
+        applicationName = 'CourseContent'
+        applicationDefaultJvmArgs = [
+            "--module-path=${javafxHome}" + File.separator + 'lib',
+            '--add-modules=javafx.controls,javafx.fxml']
+        println("applicationDefaultJvmArgs:" + applicationDefaultJvmArgs)
+    }
+}
+
+dependencies {
+    compile group: 'org.apache.commons', name: 'commons-csv', version: '1.7'
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+}
+// plugins {
+//     id 'java'
+//     id 'application'
+//     id 'org.openjfx.javafxplugin' version '0.0.8'
+// }
+
+
+// apply plugin: 'java'
+
+// javafx {
+//     version = "11.0.2"
+//     modules = [ 'javafx.controls']
+// }
+
+// repositories {
+//     mavenCentral()
+// }
+
+// dependencies {
+//     compile group: 'org.apache.commons', name: 'commons-csv', version: '1.7'
+//     compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+// }
+
+// task application {
+//     mainClassName = 'Window/startup'
+// }
