@@ -2,7 +2,7 @@
 
 Contributers and their Contributions:
 
-Mario Velazquez(Mvtj22): main.java.CourseContent.Chat Client/Server, Half of MyGradesPage, CsvChanger, Logo and Half of StartUp , Change Grade, READ.ME
+Mario Velazquez(Mvtj22): Chat Client/Server, Half of MyGradesPage, CsvChanger, Logo and Half of StartUp , Change Grade, READ.ME
 
 Tashdiq Ahmed(tashahmed): SchedulePage
 
