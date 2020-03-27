@@ -15,19 +15,25 @@ public class server{
     //Will go up by one each time a message is sent, by any client.
     int messageCounter = 0;
 
+    int clientNm;
+
+    ServerSocket serverSocket;
+
     //Called to start the server. It will start by making a connection to the client, after which it will make a new
     //thread making a new HandleClient when a connection is made, so that it can keep looking for new clients.
     public void startServer(){
         new Thread(()->{
             try{
-                ServerSocket serverSocket = new ServerSocket(4000);
+                serverSocket = new ServerSocket(4000);
 
                 //Will keep looking for connections, and when one is made will send it to it's own thread
                 while(true){
                     Socket socket = serverSocket.accept();
                     new Thread(new HandleAClient(socket)).start();
+                    clientNm++;
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
+                System.out.println("Connection Failed");
             }
         }).start();
     }
@@ -68,6 +74,7 @@ public class server{
                             }
                         }
                     } catch (IOException | InterruptedException e) {
+                        System.out.println("Message failed to be sent");
                     }
                 }).start();
 
@@ -89,7 +96,15 @@ public class server{
                     });
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Message Failed to be sent");
+
+                //This code is here so that if a user closes the window, and there are no users left
+                //it will stop the server from running
+                if(clientNm-1==0){
+                    System.exit(1);
+                } else {
+                    clientNm--;
+                }
             }
         }
     }
