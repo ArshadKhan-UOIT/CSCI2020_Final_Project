@@ -19,7 +19,7 @@ import main.java.CourseContent.Windows.Window;
 
 
 public class CoursesPage extends Page {
-    TableView<Course> courseTableView;      //initializing table view or table colums
+    TableView<Course> courseTableView;      //initializing table view or table columns
     TableView<Exam> examTableView;
     TableView<Midterm> midtermTableView;
     TableView<Assignment> assignmentTableView;
@@ -45,10 +45,6 @@ public class CoursesPage extends Page {
         courseTableView.setMaxHeight(200);       //setting heights
         examTableView.setMaxHeight(200);
         midtermTableView.setMaxHeight(200);
-//        assignmentTableView.setEditable(true);        //was going to make it editable but i did not get enough time
-//        midtermTableView.setEditable(true);
-//        examTableView.setEditable(true);
-//        courseTableView.setEditable(true);
         HBox buttons = new HBox();
 
         Button[] b = new Button[Window.courses.length];
@@ -56,9 +52,8 @@ public class CoursesPage extends Page {
         for (int i = 0; i < Window.courses.length; i++) {   //for buttons
             b[i] = new Button(Window.courses[i].getCourseName());
             buttons.getChildren().add(b[i]);
-//            System.out.println(Window.courses[i]); //test to make sure has the correct info
         }
-        for (int i = 0; i < 5; i++) {   //when the button is clicked
+        for (int i = 0; i < Window.courses.length; i++) {   //when the button is clicked
             final int index = i;
             b[i].setOnMouseClicked(e -> {
                 getTableColumn(index);
@@ -75,87 +70,28 @@ public class CoursesPage extends Page {
 
 
     private void getPieGraph(int index) {   //for the pie graph
-//        double[] asmntTotal = new double[5];
-//        double[] midTotal = new double[5];
-//        double[] examTotal = new double[5];
-        double[][] courseWeightArr = new double[5][3]; //[index][content] -> [For each Course][Content for each Course (assignment,midterm,exam)]
-//        double[] overAllTotal = new double[5];
+        double[][] courseWeightArr = new double[Window.courses.length][3]; //[index][content] -> [For each Course][Content for each Course (assignment,midterm,exam)]
         for (int i = 0; i < courseWeightArr[index].length; i++) {
-//            asmntTotal[i] = 0;
-//            examTotal[i] = 0;
-//            midTotal[i] = 0;
             courseWeightArr[i][0] = 0; //initializing
             courseWeightArr[i][1] = 0; //initializing
             courseWeightArr[i][2] = 0; //initializing
-//            overAllTotal[i] = 0;
         }
         for (Course c : Window.courses) {   //initializing the course weight 2D Array
-        // putting in all the info for assignments, midterms, and exams for each course based on which button is clicked
-            Assignment[] assignmentList = c.getAssignments();
+            // putting in all the info for assignments, midterms, and exams for each course based on which button is clicked
 
-            for (Assignment a : assignmentList) {
-                if (a.getCourseCode().equals(courseCodes[index])) {
-//                    asmntTotal[index] += a.getWeight();
-                    courseWeightArr[index][0] += a.getWeight();
-//                    overAllTotal[index] += a.getWeight();
-                }
+            for (Assignment a : c.getAssignments()) {
+                courseWeightArr[index][0] += a.getWeight();
             }
-            Midterm[] midtermList = c.getMidterms();
 
-            for (Midterm m : midtermList) {
-                if (m.getCourseCode().equals(courseCodes[index])) {
-//                    midTotal[index] += m.getWeight();
-                    courseWeightArr[index][1] += m.getWeight();
-//                    overAllTotal[index] += m.getWeight();
-                }
+            for (Midterm m : c.getMidterms()) {
+                courseWeightArr[index][1] += m.getWeight();
             }
-            Exam[] examList = c.getExam();
 
-            for (Exam e : examList) {
-                if (e.getCourseCode().equals(courseCodes[index])) {
-//                    examTotal[index] += e.getWeight();
-                    courseWeightArr[index][2] += e.getWeight();
-//                    overAllTotal[index] += e.getWeight();
-                }
+            for (Exam e : c.getExam()) {
+                courseWeightArr[index][2] += e.getWeight();
             }
         }
-        //        System.out.println( "Index = " + index + "\teTot = " + examTotal[index] + "\tmTot = " + midTotal[index] + "\taTot = " + asmntTotal[index] + "\toTot = " + overAllTotal[index] + "\n");
-//        System.out.println();
-//        System.out.print("A\t");
-//        for (int i=0;i<overAllTotal.length;i++) {
-//            System.out.print(courseWeightArr[i][0] + " \t");
-//        }
-//        System.out.println();
-//        System.out.print("M\t");
-//        for (int i=0;i<overAllTotal.length;i++) {
-//            System.out.print(courseWeightArr[i][1] + " \t");
-//        }
-//        System.out.println();
-//        System.out.print("E\t");
-//        for (int i=0;i<overAllTotal.length;i++) {
-//            System.out.print(courseWeightArr[i][2] + " \t");
-//        }
-//        System.out.println();
-//        output:
-        //A	3.0 	0.0 	0.0 	0.0 	0.0
-        //M	40.0 	0.0 	0.0 	0.0 	0.0
-        //E	40.0 	0.0 	0.0 	0.0 	0.0
-        //
-        //A	0.0 	35.0 	0.0 	0.0 	0.0
-        //M	0.0 	20.0 	0.0 	0.0 	0.0
-        //E	0.0 	20.0 	0.0 	0.0 	0.0
-        //
-        //A	0.0 	0.0 	30.0 	0.0 	0.0
-        //M	0.0 	0.0 	20.0 	0.0 	0.0
-        //E	0.0 	0.0 	40.0 	0.0 	0.0
-        //
-        //A	0.0 	0.0 	0.0 	25.0 	0.0
-        //M	0.0 	0.0 	0.0 	15.0 	0.0
-        //E	0.0 	0.0 	0.0 	50.0 	0.0
-        //
-        //A	0.0 	0.0 	0.0 	0.0 	35.0
-        //M	0.0 	0.0 	0.0 	0.0 	20.0
-        //E	0.0 	0.0 	0.0 	0.0 	25.0
+
         Pane rightPane = new Pane();
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();   //observal list for the pie chart pate
         for (int contentIndex = 0; contentIndex < courseWeightArr[index].length; contentIndex++) {  //filling the observal list
